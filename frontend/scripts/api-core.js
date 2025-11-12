@@ -20,7 +20,7 @@ class ApiService {
             return 'http://localhost:5000/api';
         }
         // Netlify preview deployments
-        if (hostname.includes('netlify.app') || hostname.includes('velvetquillstories.netlify.app')) {
+        if (hostname.includes('github.io') || hostname.includes('velvetquill.github.io')) {
             return 'https://velvetquill-com.onrender.com/api';
         }
         // Production - replace with your actual Render backend URL
