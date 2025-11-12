@@ -193,7 +193,7 @@ const startServer = async () => {
     });
 
     // Handle API 404
-    app.use('/api/*', (req, res) => {
+    app.get('/{*splat}', (req, res) => {
       res.status(404).json({
         success: false,
         message: 'API endpoint not found',
