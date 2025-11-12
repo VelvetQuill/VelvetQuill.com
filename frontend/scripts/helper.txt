@@ -1,0 +1,263 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Romance Stories - Read & Discover Love Stories | VelvetQuill</title>
+    <meta name="description" content="Read and discover romance stories across all genres on VelvetQuill. Browse contemporary, historical, fantasy romance stories from talented writers worldwide.">
+    <meta name="keywords" content="romance stories, love stories, read romance, contemporary romance, historical romance, romance fiction, love stories online">
+    <meta name="author" content="Fatherly P. Titus">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://velvetquill.com/category-stories.html">
+    <meta property="og:title" content="Romance Stories - Read & Discover Love Stories | VelvetQuill">
+    <meta property="og:description" content="Read and discover romance stories across all genres on VelvetQuill. Browse thousands of love stories from talented writers.">
+    <meta property="og:image" content="https://velvetquill.com/images/stories-og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://velvetquill.com/category-stories.html">
+    <meta property="twitter:title" content="Romance Stories - Read & Discover Love Stories">
+    <meta property="twitter:description" content="Browse thousands of romance stories across all genres on VelvetQuill. Discover your next favorite love story.">
+    <meta property="twitter:image" content="https://velvetquill.com/images/stories-twitter.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://velvetquill.com/category-stories.html">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/w3css.css">
+    <link rel="stylesheet" href="styles/category-stories.css">
+    <link rel="stylesheet" href="styles/materialize.min.css">
+    <link rel="stylesheet" href="scripts/Slick/slick.css">
+    <link rel="stylesheet" href="scripts/Slick/slick-theme.css">
+    <link href="styles/font/micons.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="styles/Playfair/VQFonts.css" rel="stylesheet">
+    <link href="styles/font/micons.css" rel="stylesheet">
+    
+
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar sticky">
+        <div class="nav-wrapper red darken-4">
+            <a href="index.html" class="brand-logo">VelvetQuill</a>
+            <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            
+            <ul class="right hide-on-med-and-down">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="category-list.html">Categories</a></li>
+                <li><a href="category-stories.html" class="active">Stories</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="FAQ.html">FAQ</a></li>
+                
+                <!-- User Actions -->
+                <li class="user-actions">
+                    <!-- Logged Out State -->
+                    <div id="guest-actions" class="nav-state">
+                        <a class="waves-effect waves-light btn modal-trigger" href="signin.html" id="login-btn">Login</a>
+                        <a class="waves-effect waves-light btn modal-trigger" href="signup.html" id="register-btn">Sign Up</a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <ul class="sidenav" id="mobile-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="category-list.html">Categories</a></li>
+        <li><a href="category-stories.html" class="active">Stories</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="FAQ.html">FAQ</a></li>
+        
+        <!-- Mobile User Actions -->
+        <li id="mobile-guest-actions" class="nav-state">
+            <a class="modal-trigger" href="signin.html">Login</a>
+            <a class="modal-trigger" href="signup.html">Sign Up</a>
+        </li>
+    </ul>
+
+    <!-- Category Header -->
+    <section class="category-header" id="category-header">
+        <div class="container">
+            <div class="breadcrumb">
+                <a href="index.html">Home</a>
+                <span class="separator">/</span>
+                <a id="categories-list-breadcrumb" href="category-list.html">Categories</a>
+                <span class="separator">/</span>
+                <span id="current-category-breadcrumb" class="bold">Category Name</span>
+            </div>
+            <h1 class="category-title bold" id="category-title">Category Name</h1>
+            <p class="category-description" id="category-description">Discover captivating stories in this genre</p>
+            <div class="stories-count" id="stories-count">Loading stories...</div>
+        </div>
+    </section>
+
+    <!-- Filter Options -->
+    <section class="filter-section">
+        <div class="container">
+            <div class="filter-options">
+                <div class="view-options">
+                    <div class="view-option active" data-view="grid">
+                        <i class="material-icons">view_module</i> Grid View
+                    </div>
+                    <div class="view-option" data-view="list">
+                        <i class="material-icons">view_list</i> List View
+                    </div>
+                </div>
+                
+                <div class="filter-row">
+                    <div class="filter-group">
+                        <label>Sort By</label>
+                        <select id="sort-stories">
+                            <option value="newest">Newest First</option>
+                            <option value="oldest">Oldest First</option>
+                            <option value="rating">Highest Rated</option>
+                            <option value="popular">Most Popular</option>
+                            <option value="title">Title A-Z</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Filter by Rating</label>
+                        <select id="rating-filter">
+                            <option value="all">All Ratings</option>
+                            <option value="4.5">4.5+ Stars</option>
+                            <option value="4.0">4.0+ Stars</option>
+                            <option value="3.5">3.5+ Stars</option>
+                            <option value="3.0">3.0+ Stars</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label>Time Period</label>
+                        <select id="time-filter">
+                            <option value="all">All Time</option>
+                            <option value="week">This Week</option>
+                            <option value="month">This Month</option>
+                            <option value="year">This Year</option>
+                        </select>
+                    </div>
+                    
+                    <div class="stories-per-page">
+                        <label>Stories per page:</label>
+                        <select id="stories-per-page">
+                            <option value="12">12</option>
+                            <option value="24" selected>24</option>
+                            <option value="36">36</option>
+                            <option value="48">48</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stories Section -->
+    <section id="stories" class="category-stories">
+        <div class="container">
+            <!-- Stories Container -->
+            <div class="row" id="stories-container">
+                <!-- Stories will be rendered here by JavaScript -->
+            </div>
+            
+            <!-- Loading Indicator -->
+            <div id="loading-indicator" class="center-align" style="display: none;">
+                <div class="preloader-wrapper big active">
+                    <div class="spinner-layer spinner-red-only">
+                        <div class="circle-clipper left">
+                            <div class="circle"></div>
+                        </div><div class="gap-patch">
+                            <div class="circle"></div>
+                        </div><div class="circle-clipper right">
+                            <div class="circle"></div>
+                        </div>
+                    </div>
+                </div>
+                <p>Loading stories...</p>
+            </div>
+            
+            <!-- No Stories Message -->
+            <div id="no-stories-message" class="center-align" style="display: none;">
+                <div class="card-panel">
+                    <i class="material-icons large">book</i>
+                    <h5>No stories found</h5>
+                    <p>There are no stories in this category yet.</p>
+                    <a href="index.html" class="btn waves-effect waves-light">Browse All Categories</a>
+                </div>
+            </div>
+            
+            <!-- Pagination Container -->
+            <div class="row">
+                <div class="col s12 center-align" id="pagination-container">
+                    <!-- Pagination will be rendered here by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Categories -->
+    <section class="related-categories section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 center-align">
+                    <h3 class="section-title">Explore More Categories</h3>
+                </div>
+            </div>
+            <div class="row" id="related-categories">
+                <!-- Related categories will be loaded here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="page-footer red darken-4">
+        <div class="container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">VelvetQuill</h5>
+                    <p class="grey-text text-lighten-4">Home of Romance & Erotica.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="community-bulletin.html">Community Bulletin</a></li>
+                        <li><a class="grey-text text-lighten-3" href="about.html">About Us</a></li>
+                        <li><a class="grey-text text-lighten-3" href="legal-compliance.html#content-guidelines">Guidelines</a></li>
+                        <li><a class="grey-text text-lighten-3" href="FAQ.html">FAQ</a></li>
+                        <li><a class="grey-text text-lighten-3" href="legal-compliance.html#privacy-policy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="container">
+                © 2025 VelvetQuill
+                <a class="grey-text text-lighten-4 right" href="#!"></a>
+            </div>
+        </div>
+    </footer>
+
+       <!-- Scripts -->
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/materialize.min.js"></script>
+    <script src="scripts/Slick/slick.min.js"></script>
+  
+    <script src="scripts/mock/mockData.js"></script>
+    <script src="scripts/api-service.js"></script>
+    <script src="scripts/page-nav.js"></script>
+    <script src="scripts/pagination.js"></script>
+    <script src="scripts/category-stories.js"></script>
+</body>
+</html>

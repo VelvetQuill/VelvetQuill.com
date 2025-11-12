@@ -1,0 +1,20 @@
+VQFonts.css:1  GET http://localhost:5000/styles/Playfair/PlayfairDisplay-SemiBoldItalic.woff2 net::ERR_ABORTED 404 (Not Found)
+api-service.js:19 API Service initialized with base URL: http://localhost:5000/api
+api-service.js:25 REQUEST ENDPOINT URL: http://localhost:5000/api/stories?page=1&limit=20&sort=newest
+vq.js:464 User not authenticated
+vq.js:42 Loading featured stories from backend...
+api-service.js:25 REQUEST ENDPOINT URL: http://localhost:5000/api/stories?status=published&limit=6&sortBy=stats.views&sortOrder=desc
+api-service.js:25 REQUEST ENDPOINT URL: http://localhost:5000/api/stories?status=published&limit=8&sortBy=createdAt&sortOrder=desc
+vq.js:470 Updating UI for user: null
+vq.js:533 UI update complete
+vq.js:402 ALL READ STORY BUTTONS PREPPED !
+slick-theme.css:1  GET http://localhost:5000/scripts/Slick/ajax-loader.gif 404 (Not Found)
+slick-theme.css:1  GET http://localhost:5000/scripts/Slick/fonts/slick.woff 404 (Not Found)
+vq.js:55 No stories from backend, using backup stories
+vq.js:70 STORIES REPO SET! SIZE: 12
+
+vq.js:77 Loading backup featured stories...
+vq.js:81 Backup stories found: 12
+vq.js:122 Featured stories after filtering: 3
+vq.js:145 Featured stories carousel updated successfully
+slick-theme.css:1  GET http://localhost:5000/scripts/Slick/fonts/slick.ttf net::ERR_ABORTED 404 (Not Found)
