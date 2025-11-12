@@ -19,13 +19,12 @@ class ApiService {
         if (hostname === 'localhost' || hostname === '127.0.0.1') {
             return 'http://localhost:5000/api';
         }
-        
         // Netlify preview deployments
         if (hostname.includes('netlify.app') || hostname.includes('velvetquillstories.netlify.app')) {
             return 'https://velvetquill-com.onrender.com/api';
         }
         // Production - replace with your actual Render backend URL
-        return 'https://velvetquill-com.onrender.com/api';
+        return 'https://velvetquill-com.onrender.com/api'; 
     }
 
     // Setup request/response interceptors
