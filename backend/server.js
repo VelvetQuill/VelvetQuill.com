@@ -31,7 +31,7 @@ const app = express();
 app.use(cors({
   origin: [
     'https://velvetquillstories.netlify.app',
-    'https://velvetquill-backend.onrender.com',
+    'https://velvetquill-com.onrender.com',
     'http://localhost:3000',
     'http://localhost:5000'
   ],
