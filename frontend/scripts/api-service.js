@@ -21,12 +21,12 @@ class ApiService {
         }
         
         // Netlify preview deployments
-        if (hostname.includes('netlify.app') && !hostname.includes('velvetquill')) {
-            return 'https://velvetquill-backend.onrender.com/api';
+        if (hostname.includes('netlify.app') || hostname.includes('velvetquillstories.netlify.app')) {
+            return 'https://velvetquill-com.onrender.com/api';
         }
         
         // Production - replace with your actual Render backend URL
-        return 'https://velvetquill-backend.onrender.com/api';
+        return 'https://velvetquill-com.onrender.com/api';
     }
 
     // Setup request/response interceptors
