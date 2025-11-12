@@ -1,0 +1,316 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Multi-Page Story - VelvetQuill</title>
+    
+    <!-- External Dependencies -->
+    <link rel="stylesheet" href="styles/materialize.min.css">
+    <link href="styles/font/micons.css" rel="stylesheet">
+    <link href="styles/style.css" rel="stylesheet">
+    <link href="styles/w3css.css" rel="stylesheet">
+    
+    <!-- Application Styles -->
+    <link rel="stylesheet" href="styles/create-post.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="velvetquill-nav">
+        <div class="nav-wrapper">
+            <a href="index.html" class="brand-logo">VelvetQuill</a>
+            <ul id="nav-mobile" class="right">
+                <li><a href="author-dashboard.html"><i class="material-icons">dashboard</i></a></li>
+                <li><a href="author-room.html"><i class="material-icons">person</i></a></li>
+                <li><a href="index.html"><i class="material-icons">exit_to_app</i></a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="create-post-container">
+        <div class="row">
+            <div class="col s12">
+                <div class="create-post-header">
+                    <h1>Create Multi-Page Story</h1>
+                    <p class="subtitle">Build your romantic tale page by page</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Story Form -->
+            <div class="col s12 m8">
+                <div class="card velvetquill-card">
+                    <div class="card-content">
+                        <form id="story-form">
+                            <!-- Story Title -->
+                            <div class="input-field">
+                                <input type="text" id="story-title" required maxlength="200">
+                                <label for="story-title">Story Title *</label>
+                                <span class="helper-text">Catchy titles attract more readers!</span>
+                            </div>
+
+                            <!-- Story Excerpt -->
+                            <div class="input-field">
+                                <textarea id="story-excerpt" class="materialize-textarea" maxlength="300"></textarea>
+                                <label for="story-excerpt">Story Excerpt (Optional)</label>
+                                <span class="helper-text">A short preview that appears in story listings</span>
+                            </div>
+
+                            <!-- Category Selection -->
+                            <div class="input-field">
+                                <select id="story-category" required>
+                                    <option value="" disabled selected>Choose your category</option>
+                                    <option value="contemporary">Contemporary Romance</option>
+                                    <option value="historical">Historical Romance</option>
+                                    <option value="fantasy">Fantasy Romance</option>
+                                    <option value="lgbtq">LGBTQ+ Romance</option>
+                                    <option value="sweet">Sweet Romance</option>
+                                    <option value="forbidden">Forbidden Love</option>
+                                    <option value="second-chance">Second Chance Romance</option>
+                                </select>
+                                <label>Category *</label>
+                            </div>
+
+                            <!-- Content Rating -->
+                            <div class="input-field">
+                                <select id="content-rating" required>
+                                    <option value="" disabled selected>Choose content rating</option>
+                                    <option value="general">General (All Ages)</option>
+                                    <option value="mature">Mature (18+)</option>
+                                    <option value="explicit">Explicit (21+)</option>
+                                </select>
+                                <label>Content Rating *</label>
+                            </div>
+
+                            <!-- Tags -->
+                            <div class="input-field">
+                                <input type="text" id="story-tags">
+                                <label for="story-tags">Tags</label>
+                                <span class="helper-text">Separate tags with commas</span>
+                                <div id="tags-container" class="tags-container"></div>
+                            </div>
+
+                            <!-- Content Warning -->
+                            <div class="input-field">
+                                <textarea id="content-warnings" class="materialize-textarea"></textarea>
+                                <label for="content-warnings">Content Warnings (Optional)</label>
+                                <span class="helper-text">List any potentially sensitive content</span>
+                            </div>
+
+                            <!-- Page Management -->
+                            <div class="page-management-section">
+                                <div class="section-header">
+                                    <h5>Story Pages</h5>
+                                    <div class="page-stats">
+                                        <span id="total-pages">Pages: 0</span>
+                                        <span id="total-words">Total Words: 0</span>
+                                    </div>
+                                </div>
+
+                                <!-- Page Navigation -->
+                                <div id="page-navigation" class="page-navigation">
+                                    <!-- Pages will be dynamically added here -->
+                                </div>
+
+                                <!-- Current Page Editor -->
+                                <div id="current-page-editor" class="page-editor">
+                                    <div class="page-header">
+                                        <h6 id="current-page-title">Page 1</h6>
+                                        <div class="page-word-count">
+                                            <span id="current-page-words">0 words</span>
+                                            <span class="word-requirements">(1000-2000 words)</span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="input-field">
+                                        <textarea id="page-content" class="materialize-textarea page-content-textarea" 
+                                                  placeholder="Write your story content for this page..."></textarea>
+                                        <div class="content-stats">
+                                            <span id="page-word-count">0 words</span>
+                                            <span id="page-char-count">0 characters</span>
+                                        </div>
+                                    </div>
+
+                                    <!-- Page Actions -->
+                                    <div class="page-actions">
+                                        <button type="button" id="save-page-btn" class="btn velvetquill-btn-outline" disabled>
+                                            <i class="material-icons left">save</i>Save Page
+                                        </button>
+                                        <button type="button" id="add-page-btn" class="btn velvetquill-btn-primary" disabled>
+                                            <i class="material-icons left">add</i>Add New Page
+                                        </button>
+                                        <button type="button" id="delete-page-btn" class="btn velvetquill-btn-danger" style="display: none;">
+                                            <i class="material-icons left">delete</i>Delete Page
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Submission Options -->
+                            <div class="submission-options">
+                                <label>
+                                    <input type="checkbox" id="agree-guidelines" required />
+                                    <span>I agree to the <a href="legal-compliance.html#content-guidelines" target="_blank">Content Guidelines</a> *</span>
+                                </label>
+                                <br>
+                                <label>
+                                    <input type="checkbox" id="allow-comments" checked />
+                                    <span>Allow comments on this story</span>
+                                </label>
+                            </div>
+
+                            <!-- Action Buttons -->
+                            <div class="action-buttons">
+                                <button type="button" id="preview-btn" class="btn velvetquill-btn-outline">
+                                    <i class="material-icons left">visibility</i>Preview
+                                </button>
+                                <!-- button type="button" id="save-draft-btn" class="btn velvetquill-btn-outline">
+                                    <i class="material-icons left">save</i>Save Draft
+                                </button -->
+                                <button type="submit" id="submit-story-btn" class="btn velvetquill-btn-primary">
+                                    <i class="material-icons left">send</i>Submit for Review
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar Guidelines -->
+            <div class="col s12 m4">
+                <div class="guidelines-sidebar">
+                    <!-- Page Requirements -->
+                    <div class="card velvetquill-card">
+                        <div class="card-content">
+                            <span class="card-title">Page Requirements</span>
+                            <ul class="tips-list">
+                                <li><i class="material-icons">check</i> Minimum: 1,000 words per page</li>
+                                <li><i class="material-icons">check</i> Maximum: 2,000 words per page</li>
+                                <li><i class="material-icons">check</i> Save page before adding new one</li>
+                                <li><i class="material-icons">check</i> Click page tabs to edit content</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Writing Tips -->
+                    <div class="card velvetquill-card">
+                        <div class="card-content">
+                            <span class="card-title">Writing Tips</span>
+                            <ul class="tips-list">
+                                <li><i class="material-icons">check</i> Start with a strong hook</li>
+                                <li><i class="material-icons">check</i> Show, don't tell emotions</li>
+                                <li><i class="material-icons">check</i> Develop character chemistry</li>
+                                <li><i class="material-icons">check</i> Build romantic tension</li>
+                                <li><i class="material-icons">check</i> Create satisfying resolution</li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <!-- Content Guidelines -->
+                    <div class="card velvetquill-card">
+                        <div class="card-content">
+                            <span class="card-title">Content Guidelines</span>
+                            <div class="guidelines-list">
+                                <div class="guideline-item allowed">
+                                    <i class="material-icons">check_circle</i>
+                                    <span>Consensual romantic relationships</span>
+                                </div>
+                                <div class="guideline-item allowed">
+                                    <i class="material-icons">check_circle</i>
+                                    <span>Tasteful sensual content</span>
+                                </div>
+                                <div class="guideline-item prohibited">
+                                    <i class="material-icons">cancel</i>
+                                    <span>Non-consensual acts</span>
+                                </div>
+                                <div class="guideline-item prohibited">
+                                    <i class="material-icons">cancel</i>
+                                    <span>Underage characters</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Secondary Editor Page -->
+    <div id="secondary-editor-page" class="secondary-editor-container" style="display: none;">
+        <div class="secondary-editor-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12">
+                        <h4>Write Your Story - Page <span id="secondary-page-number">1</span></h4>
+                        <p class="word-stats">Words: <span id="secondary-word-count">0</span> | Characters: <span id="secondary-char-count">0</span></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="secondary-editor-content">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12">
+                        <textarea id="secondary-textarea" class="materialize-textarea" 
+                                  placeholder="Write your story content for this page..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="secondary-editor-footer">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 center-align">
+                        <button id="push-content-btn" class="btn velvetquill-btn-primary large-btn">
+                            <i class="material-icons left">save</i>Push Content to Main Editor
+                        </button>
+                        <button id="close-secondary-editor" class="btn velvetquill-btn-outline large-btn">
+                            <i class="material-icons left">close</i>Close Without Saving
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Preview Modal -->
+    <div id="preview-modal" class="modal modal-large">
+        <div class="modal-content">
+            <h4>Story Preview</h4>
+            <div id="story-preview-content" class="preview-content"></div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close btn velvetquill-btn-outline">Close</a>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content center-align">
+            <div class="success-icon">
+                <i class="material-icons">check_circle</i>
+            </div>
+            <h4>Story Submitted Successfully!</h4>
+            <p>Your story has been sent to our moderators for review.</p>
+            <p><strong>Review Time:</strong> 24-48 hours</p>
+        </div>
+        <div class="modal-footer">
+            <a href="author-dashboard.html" class="btn velvetquill-btn-primary">Go to Dashboard</a>
+            <a href="#!" class="modal-close btn velvetquill-btn-outline">Create Another</a>
+        </div>
+    </div>
+
+    <!-- External Scripts -->
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/materialize.min.js"></script>
+    
+    <!-- Application Scripts -->
+    <script src="scripts/api-service.js"></script>
+    <script src="scripts/create-post.js"></script>
+</body>
+</html>

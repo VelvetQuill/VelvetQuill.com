@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - VelvetQuill</title>
+    
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/w3css.css">
+    <link rel="stylesheet" href="styles/materialize.min.css">
+    <link href="styles/font/micons.css" rel="stylesheet">
+    <link href="styles/Playfair/VQFonts.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="styles/auth.css">
+</head>
+<body>
+    
+    
+    
+    <div class="w3-container auth-container">
+        <div class="auth-background"></div>
+        
+        <div class="auth-card">
+            <!-- Header -->
+            <div class="auth-header">
+                <a href="/" class="brand-logo">VelvetQuill</a>
+                <h2>Welcome Back</h2>
+                <p>Continue your romance storytelling journey</p>
+            </div>
+
+            <!-- Sign In Form -->
+            <form id="signin-form" class="auth-form">
+                <div class="row">
+                    <!-- Email or Username -->
+                    <div class="input-field col s12">
+                        <input type="text" id="login-identifier" name="login-identifier" required>
+                        <label for="login-identifier">Email or Username *</label>
+                        <span class="helper-text" data-error="Please enter your email or username"></span>
+                        <div class="error-message" id="login-identifier-error"></div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="input-field col s12">
+                        <input type="password" id="login-password" name="login-password" required>
+                        <label for="login-password">Password *</label>
+                        <div class="error-message" id="login-password-error"></div>
+                    </div>
+
+                    <!-- Remember Me & Forgot Password -->
+                    <div class="col s12 auth-options">
+                        <label class="remember-checkbox">
+                            <input type="checkbox" id="remember-me" />
+                            <span>Remember me</span>
+                        </label>
+                        <a href="forgot-password.html" class="forgot-password">Forgot Password?</a>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="col s12">
+                        <button type="submit" class="w3-btn btn auth-btn waves-effect waves-light w3-padding" id="signin-btn">
+                            <span class="btn-text ">Sign In</span>
+                            <div class="btn-loading" style="display: none;">
+                                <div class="preloader-wrapper small active">
+                                    <div class="spinner-layer">
+                                        <div class="circle-clipper left">
+                                            <div class="circle"></div>
+                                        </div><div class="gap-patch">
+                                            <div class="circle"></div>
+                                        </div><div class="circle-clipper right">
+                                            <div class="circle"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                Signing In...
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Divider -->
+            <div class="auth-divider">
+                <span>New to VelvetQuill?</span>
+            </div>
+
+            <!-- Sign Up Link -->
+            <div class="auth-footer">
+                <a href="signup.html" class="btn-flat auth-link">Create New Account</a>
+            </div>
+
+            <!-- Security Badges -->
+            <div class="security-badges">
+                <div class="badge-item">
+                    <i class="material-icons">lock</i>
+                    <span>Secure Login</span>
+                </div>
+                <div class="badge-item">
+                    <i class="material-icons">encryption</i>
+                    <span>Data Protected</span>
+                </div>
+                <div class="badge-item">
+                    <i class="material-icons">watch_later</i>
+                    <span>Session Timeout</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Failed Attempts Warning -->
+        <div id="security-warning" class="modal">
+            <div class="w3-white modal-content center-align">
+                <div class="warning-icon">
+                    <i class="material-icons">security</i>
+                </div>
+                <h4>Security Notice</h4>
+                <p>Multiple failed login attempts detected.</p>
+                <p>Try Calming Down And Then Input The String Character by Character.</p>
+                <div class="captcha-container">
+                    <!-- CAPTCHA would go here in production -->
+                    <div class="fake-captcha">
+                        <p>🔒 CAPTCHA verification would appear here</p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a href="#!" class="btn auth-btn modal-close">I Understand</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/materialize.min.js"></script>
+    <script src="scripts/crypto-js.min.js"></script>
+
+    <script src="scripts/mock/mockData.js"></script>
+    <script src="scripts/api-service.js"></script>
+    <script src="scripts/auth/auth-validation.js"></script>
+
+    <script src="scripts/auth/signin.js"></script> 
+    <!-- or signup.js -->
+    
+    
+</body>
+</html>
+
+
+

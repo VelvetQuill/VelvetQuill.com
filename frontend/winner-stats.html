@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Winner Statistics - VelvetQuill</title>
+    
+    <!-- Primary Meta Tags -->
+    <meta name="description" content="View detailed statistics, badges, and achievements of VelvetQuill contest winners.">
+    <meta name="keywords" content="contest winners, author statistics, badges, achievements, romance writers">
+    <meta name="author" content="Fatherly P. Titus">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Winner Statistics - VelvetQuill">
+    <meta property="og:description" content="View detailed statistics, badges, and achievements of VelvetQuill contest winners.">
+    <meta property="og:image" content="https://velvetquill.com/images/winner-stats.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Winner Statistics - VelvetQuill">
+    <meta property="twitter:description" content="View detailed statistics, badges, and achievements of VelvetQuill contest winners.">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/materialize.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/w3css.css">
+    <link href="styles/font/micons.css" rel="stylesheet">
+    <link href="styles/Playfair/VQFonts.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/winner-stats.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="w3-container navbar sticky">
+        <div class="nav-wrapper">
+            <a href="index.html" class="brand-logo">VelvetQuill</a>
+            <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            
+            <a id="user-avatar-link" class="w3-right" href="index.html" data-target="">
+                <div class="user-avatar" id="user-avatar-header">U</div>
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <ul class="right hide-on-med-and-down">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="category-list.htm">Categories</a></li>
+                <li><a href="category-stories.html">Stories</a></li>
+                <li><a href="community-bulletin.html">Community</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="FAQ.html">FAQ</a></li>
+                
+                <!-- User Actions -->
+                <li class="user-actions" style="display: none !important;">
+                    <div id="guest-actions" class="nav-state">
+                        <a class="waves-effect waves-light btn modal-trigger" href="signin.html" id="login-btn">Login</a>
+                        <a class="waves-effect waves-light btn modal-trigger" href="signup.html" id="register-btn">Sign Up</a>
+                    </div>
+                    
+                    <div id="user-menu" class="nav-state" style="display: none !important;">
+                        <a id="desktop-author-register-btn" class="waves-effect waves-light btn modal-trigger" href="author-register.html" style="margin-right: 10px; background-color: #C71585;">
+                            <i class="material-icons left">user-plus</i>Become An Author
+                        </a>
+                        
+                        <a class="dropdown-trigger" href="#" data-target="user-dropdown">
+                            <div class="user-avatar" id="user-avatar">U</div>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <ul class="sidenav" id="mobile-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="category-list.htm">Categories</a></li>
+        <li><a href="category-stories.html">Stories</a></li>
+        <li><a href="community-bulletin.html">Community</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="FAQ.html">FAQ</a></li>
+        
+        <!-- Mobile User Actions -->
+        <li id="mobile-guest-actions" class="nav-state">
+            <a class="modal-trigger" href="signin.html">Login</a>
+            <a class="modal-trigger" href="signup.html">Sign Up</a>
+        </li>
+        <li id="mobile-user-actions" class="nav-state" style="display: none !important;">
+            <a href="author-register.html" id="mobile-author-register-btn">Become An Author</a>
+        </li>
+    </ul>
+
+    <!-- Main Content -->
+    <main class="winner-stats-page">
+        <!-- Header -->
+        <section class="stats-header">
+            <div class="w3-container">
+                <a href="community-bulletin.html" class="back-btn waves-effect waves-light btn-flat">
+                    <i class="material-icons left">arrow_back</i>
+                    Back to Community
+                </a>
+                <h1 class="w3-text-white stats-title">Winner Statistics</h1>
+                <p class="stats-subtitle">Celebrating the achievements of our talented contest winners</p>
+            </div>
+        </section>
+
+        <div class="w3-container">
+            <!-- Winner Selection -->
+            <div class="row">
+                <div class="col s12">
+                    <div class="selection-card">
+                        <div class="section-header">
+                            <h2 class="w3-text-white section-title">
+                                <i class="material-icons">person_search</i>
+                                Select Winner
+                            </h2>
+                        </div>
+                        <div class="section-content">
+                            <div class="input-field">
+                                <select id="winner-select">
+                                    <option value="" disabled selected>Choose a contest winner</option>
+                                    <!-- Options will be populated by JavaScript -->
+                                </select>
+                                <label>Select Author Winner</label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Winner Profile Section -->
+            <div class="row" id="winner-profile-container" style="display: none;">
+                <div class="col s12 m4">
+                    <!-- Profile Card -->
+                    <div class="profile-card">
+                        <div class="profile-header">
+                            <div class="profile-avatar-large" id="winner-avatar">
+                                U
+                            </div>
+                            <h3 class="profile-name" id="winner-name">Author Name</h3>
+                            <p class="profile-username" id="winner-username">@username</p>
+                            <div class="winner-badge">
+                                <i class="material-icons">military_tech</i>
+                                Contest Winner
+                            </div>
+                        </div>
+                        <div class="profile-stats">
+                            <div class="stat-item">
+                                <div class="stat-number" id="stats-followers">0</div>
+                                <div class="stat-label">Followers</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="stats-stories">0</div>
+                                <div class="stat-label">Stories</div>
+                            </div>
+                            <div class="stat-item">
+                                <div class="stat-number" id="stats-wins">0</div>
+                                <div class="stat-label">Wins</div>
+                            </div>
+                        </div>
+                        <div class="profile-bio" id="winner-bio">
+                            No biography available.
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col s12 m8">
+                    <!-- Contest Wins -->
+                    <div class="stats-card">
+                        <div class="section-header">
+                            <h2 class="section-title">
+                                <i class="material-icons">emoji_events</i>
+                                Contest Victories
+                            </h2>
+                        </div>
+                        <div class="section-content" id="contest-wins-container">
+                            <div class="empty-state">
+                                <i class="material-icons">celebration</i>
+                                <p>Loading contest victories...</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Badges & Achievements -->
+                    <div class="stats-card">
+                        <div class="section-header">
+                            <h2 class="section-title">
+                                <i class="material-icons">workspace_premium</i>
+                                Badges & Achievements
+                            </h2>
+                        </div>
+                        <div class="section-content">
+                            <div class="badges-grid" id="badges-container">
+                                <div class="empty-state">
+                                    <i class="material-icons">workspace_premium</i>
+                                    <p>Loading badges and achievements...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Writing Statistics -->
+                    <div class="stats-card">
+                        <div class="section-header">
+                            <h2 class="section-title">
+                                <i class="material-icons">trending_up</i>
+                                Writing Statistics
+                            </h2>
+                        </div>
+                        <div class="section-content">
+                            <div class="stats-grid" id="writing-stats-container">
+                                <div class="empty-state">
+                                    <i class="material-icons">auto_stories</i>
+                                    <p>Loading writing statistics...</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Top Performing Stories -->
+                    <div class="stats-card">
+                        <div class="section-header">
+                            <h2 class="section-title">
+                                <i class="material-icons">star</i>
+                                Top Performing Stories
+                            </h2>
+                        </div>
+                        <div class="section-content" id="top-stories-container">
+                            <div class="empty-state">
+                                <i class="material-icons">auto_stories</i>
+                                <p>Loading top stories...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- No Selection State -->
+            <div class="row" id="no-selection-container">
+                <div class="col s12">
+                    <div class="empty-state-large">
+                        <i class="material-icons">military_tech</i>
+                        <h3>Select a Winner</h3>
+                        <p>Choose a contest winner from the dropdown above to view their detailed statistics, badges, and achievements.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w3-container page-footer">
+        <div class="w3-container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">VelvetQuill</h5>
+                    <p class="grey-text text-lighten-4">Home of Romance & Erotica.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Community</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="community-bulletin.html">Bulletin Board</a></li>
+                        <li><a class="grey-text text-lighten-3" href="winner-stats.html">Winner Statistics</a></li>
+                        <li><a class="grey-text text-lighten-3" href="contests.html">Writing Contests</a></li>
+                        <li><a class="grey-text text-lighten-3" href="guidelines.html">Community Guidelines</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="w3-container">
+                © 2025 VelvetQuill
+                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/materialize.min.js"></script>
+    <script src="scripts/api-service.js"></script>
+    <script src="scripts/winner-stats.js"></script>
+</body>
+</html>
+
+

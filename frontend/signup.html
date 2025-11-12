@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Join VelvetQuill - Romance Stories Platform</title>
+    
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/w3css.css">
+    <link rel="stylesheet" href="styles/materialize.min.css">
+    <link href="styles/font/micons.css" rel="stylesheet">
+    <link href="styles/Playfair/VQFonts.css" rel="stylesheet">
+    
+     <link rel="stylesheet" href="styles/auth.css">
+</head>
+<body>
+    
+    <div class="auth-container">
+        <div class="auth-background"></div>
+        
+        <div class="auth-card">
+            <!-- Header -->
+            <div class="auth-header">
+                <a href="/" class="brand-logo">VelvetQuill</a>
+                <h2>Begin Your Romance Journey</h2>
+                <p>Join our community of romance lovers and storytellers</p>
+            </div>
+
+            <!-- Sign Up Form -->
+            <form id="signup-form" class="auth-form">
+                <div class="row">
+                    <!-- Username -->
+                    <div class="input-field col s12">
+                        <input type="text" id="username" name="username" required maxlength="50">
+                        <label for="username">Username *</label>
+                        <span class="helper-text" data-error="Please choose a username"></span>
+                        <div class="error-message" id="username-error"></div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="input-field col s12">
+                        <input type="email" id="email" name="email" required>
+                        <label for="email">Email Address *</label>
+                        <span class="helper-text" data-error="Please enter a valid email"></span>
+                        <div class="error-message" id="email-error"></div>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="input-field col s12">
+                        <input type="password" id="password" name="password" required minlength="8">
+                        <label for="password">Password *</label>
+                        <span class="helper-text">Minimum 8 characters with letters and numbers</span>
+                        <div class="error-message" id="password-error"></div>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="input-field col s12">
+                        <input type="password" id="confirm-password" name="confirm-password" required>
+                        <label for="confirm-password">Confirm Password *</label>
+                        <div class="error-message" id="confirm-password-error"></div>
+                    </div>
+
+                    <!-- Date of Birth -->
+                    <div class="input-field col s12">
+                        <input type="date" id="date-of-birth" name="date-of-birth" required>
+                        <label for="date-of-birth">Date of Birth *</label>
+                        <span class="helper-text">You must be 18+ to join VelvetQuill</span>
+                        <div class="error-message" id="date-of-birth-error"></div>
+                    </div>
+
+                    <!-- Terms Agreement -->
+                    <div class="col s12">
+                        <label class="terms-checkbox">
+                            <input type="checkbox" id="agree-terms" required />
+                            <span>I agree to the <a href="legal-compliance.html" target="_blank">Terms of Service</a> and <a href="legal-compliance.html" target="_blank">Privacy Policy</a> *</span>
+                        </label>
+                        <div class="error-message" id="terms-error"></div>
+                    </div>
+
+                    <!-- Age Verification -->
+                    <div class="col s12">
+                        <label class="terms-checkbox">
+                            <input type="checkbox" id="age-verify" required />
+                            <span>I confirm I am 18 years of age or older *</span>
+                        </label>
+                        <div class="error-message" id="age-error"></div>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <div class="col s12">
+                        <button type="submit" class="btn auth-btn waves-effect waves-light" id="signup-btn">
+                            <span class="btn-text">Create Account</span>
+                            <div class="btn-loading" style="display: none;">
+                                <div class="preloader-wrapper small active">
+                                    <div class="spinner-layer">
+                                        <div class="circle-clipper left">
+                                            <div class="circle"></div>
+                                        </div><div class="gap-patch">
+                                            <div class="circle"></div>
+                                        </div><div class="circle-clipper right">
+                                            <div class="circle"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                Creating Account...
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </form>
+
+            <!-- Divider -->
+            <div class="auth-divider">
+                <span>Already have an account?</span>
+            </div>
+
+            <!-- Sign In Link -->
+            <div class="auth-footer">
+                <a href="signin.html" class="btn-flat auth-link">Sign In to Your Account</a>
+            </div>
+
+            <!-- Security Badges -->
+            <div class="security-badges">
+                <div class="badge-item">
+                    <i class="material-icons">lock</i>
+                    <span>SSL Encrypted</span>
+                </div>
+                <div class="badge-item">
+                    <i class="material-icons">security</i>
+                    <span>Secure Storage</span>
+                </div>
+                <div class="badge-item">
+                    <i class="material-icons">privacy_tip</i>
+                    <span>Privacy First</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Success Modal -->
+        <div id="success-modal" class="w3-modal modal">
+            <div class="w3-white modal-content center-align">
+                <div class="success-icon">
+                    <i class="material-icons">check_circle</i>
+                </div>
+                <h4>Welcome to VelvetQuill!</h4>
+                <p>Your account has been created successfully.</p>
+                <p>We've sent a verification email to <strong id="user-email"></strong></p>
+                <p>Please check your inbox to verify your email address.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="signin.html" class="btn auth-btn">Sign In Now</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/materialize.min.js"></script>
+    <script src="scripts/crypto-js.min.js"></script>
+   <!-- Include in this order -->
+    <script src="scripts/auth/auth-validation.js"></script>
+    
+    <script src="scripts/api-service.js"></script>
+    <script src="scripts/auth/signup.js"></script>  
+    <!-- or signup.js -->
+</body>
+</html>

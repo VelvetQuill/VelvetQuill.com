@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Products - VelvetQuill</title>
+    
+    <!-- Primary Meta Tags -->
+    <meta name="description" content="Discover premium romance literature products, writing tools, and exclusive merchandise from VelvetQuill.">
+    <meta name="keywords" content="romance books, writing tools, author merchandise, romance literature, writing resources">
+    <meta name="author" content="Fatherly P. Titus">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Products - VelvetQuill">
+    <meta property="og:description" content="Discover premium romance literature products, writing tools, and exclusive merchandise from VelvetQuill.">
+    <meta property="og:image" content="https://velvetquill.com/images/products-page.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Products - VelvetQuill">
+    <meta property="twitter:description" content="Discover premium romance literature products, writing tools, and exclusive merchandise from VelvetQuill.">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/materialize.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/w3css.css">
+    <link href="styles/font/micons.css" rel="stylesheet">
+    <link href="styles/Playfair/VQFonts.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/products.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="w3-container navbar sticky">
+        <div class="nav-wrapper">
+            <a href="index.html" class="brand-logo">VelvetQuill</a>
+            <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            
+            <a id="user-avatar-link" class="w3-right" href="index.html" data-target="">
+                <div class="user-avatar" id="user-avatar-header">U</div>
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <ul class="right hide-on-med-and-down">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="category-list.htm">Categories</a></li>
+                <li><a href="category-stories.html">Stories</a></li>
+                <li><a href="community-bulletin.html">Community</a></li>
+                <li><a href="products.html" style="color: var(--secondary-color);">Products</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="FAQ.html">FAQ</a></li>
+                
+                <!-- User Actions -->
+                <li class="user-actions" style="display: none !important;">
+                    <div id="guest-actions" class="nav-state">
+                        <a class="waves-effect waves-light btn modal-trigger" href="signin.html" id="login-btn">Login</a>
+                        <a class="waves-effect waves-light btn modal-trigger" href="signup.html" id="register-btn">Sign Up</a>
+                    </div>
+                    
+                    <div id="user-menu" class="nav-state" style="display: none !important;">
+                        <a id="desktop-author-register-btn" class="waves-effect waves-light btn modal-trigger" href="author-register.html" style="margin-right: 10px; background-color: #C71585;">
+                            <i class="material-icons left">user-plus</i>Become An Author
+                        </a>
+                        
+                        <a class="dropdown-trigger" href="#" data-target="user-dropdown">
+                            <div class="user-avatar" id="user-avatar">U</div>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <ul class="sidenav" id="mobile-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="category-list.htm">Categories</a></li>
+        <li><a href="category-stories.html">Stories</a></li>
+        <li><a href="community-bulletin.html">Community</a></li>
+        <li><a href="products.html" style="color: var(--primary-color); font-weight: bold;">Products</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="FAQ.html">FAQ</a></li>
+        
+        <!-- Mobile User Actions -->
+        <li id="mobile-guest-actions" class="nav-state">
+            <a class="modal-trigger" href="signin.html">Login</a>
+            <a class="modal-trigger" href="signup.html">Sign Up</a>
+        </li>
+        <li id="mobile-user-actions" class="nav-state" style="display: none !important;">
+            <a href="author-register.html" id="mobile-author-register-btn">Become An Author</a>
+        </li>
+    </ul>
+
+    <!-- Main Content -->
+    <main class="products-page">
+        <!-- Header -->
+        <section class="products-header">
+            <div class="w3-container">
+                <h1 class="products-title">VelvetQuill Products</h1>
+                <p class="products-subtitle">Discover premium romance literature, writing tools, and exclusive merchandise crafted for romance enthusiasts and writers.</p>
+            </div>
+        </section>
+
+        <div class="w3-container">
+            <!-- Products Filter Section -->
+            <div class="row">
+                <div class="col s12">
+                    <div class="filter-section">
+                        <div class="filter-controls">
+                            <div class="input-field">
+                                <select id="category-filter">
+                                    <option value="all" selected>All Categories</option>
+                                    <option value="books">Books & Collections</option>
+                                    <option value="writing">Writing Tools</option>
+                                    <option value="merchandise">Merchandise</option>
+                                    <option value="digital">Digital Products</option>
+                                </select>
+                                <label>Filter by Category</label>
+                            </div>
+                            <div class="input-field">
+                                <select id="sort-filter">
+                                    <option value="featured" selected>Featured</option>
+                                    <option value="price-low">Price: Low to High</option>
+                                    <option value="price-high">Price: High to Low</option>
+                                    <option value="name">Name: A to Z</option>
+                                </select>
+                                <label>Sort By</label>
+                            </div>
+                        </div>
+                        <div class="search-box">
+                            <div class="input-field">
+                                <input type="text" id="product-search" placeholder="Search products...">
+                                <i class="material-icons search-icon">search</i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="row">
+                <div class="col s12">
+                    <div id="products-container" class="products-grid">
+                        <!-- Products will be rendered here by JavaScript -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div class="row">
+                <div class="col s12">
+                    <div id="loading-state" class="loading-state">
+                        <div class="preloader-wrapper big active">
+                            <div class="spinner-layer spinner-primary">
+                                <div class="circle-clipper left">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="gap-patch">
+                                    <div class="circle"></div>
+                                </div>
+                                <div class="circle-clipper right">
+                                    <div class="circle"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <p>Loading products...</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Empty State -->
+            <div class="row">
+                <div class="col s12">
+                    <div id="empty-state" class="empty-state" style="display: none;">
+                        <i class="material-icons">inventory_2</i>
+                        <h3>No Products Found</h3>
+                        <p>We couldn't find any products matching your criteria.</p>
+                        <button class="btn waves-effect waves-light" onclick="productsPage.clearFilters()">
+                            <i class="material-icons left">clear</i>Clear Filters
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w3-container page-footer">
+        <div class="w3-container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">VelvetQuill</h5>
+                    <p class="grey-text text-lighten-4">Home of Romance & Erotica.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Shop</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="products.html">All Products</a></li>
+                        <li><a class="grey-text text-lighten-3" href="products.html?category=books">Books</a></li>
+                        <li><a class="grey-text text-lighten-3" href="products.html?category=writing">Writing Tools</a></li>
+                        <li><a class="grey-text text-lighten-3" href="products.html?category=merchandise">Merchandise</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="w3-container">
+                © 2025 VelvetQuill
+                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/materialize.min.js"></script>
+    <script src="scripts/products.js"></script>
+</body>
+</html>

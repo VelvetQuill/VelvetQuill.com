@@ -1,0 +1,315 @@
+<!-- author-room.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author Room - VelvetQuill</title>
+    
+    <!-- Include all necessary stylesheets -->
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/w3css.css">
+    <link rel="stylesheet" href="styles/materialize.min.css">
+    <link rel="stylesheet" href="styles/Playfair/VQFonts.css">
+
+    
+    <link rel="stylesheet" href="scripts/Slick/slick.css">
+    <link rel="stylesheet" href="scripts/Slick/slick-theme.css">
+    <link href="styles/font/micons.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/author-room.css">
+</head>
+<body>
+    
+    
+<!-- Navigation -->
+<nav class="w3-container navbar sticky">
+    <div class="nav-wrapper">
+        <a href="index.html" class="brand-logo">VelvetQuill</a>
+        <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        
+        <a id="user-avatar-link" class="w3-right" href="index.html" data-target="">
+            <div class="user-avatar" id="user-avatar-header">U</div>
+        </a>
+        
+        <!-- Desktop Navigation -->
+        <ul class="right hide-on-med-and-down">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="category-list.html">Categories</a></li>
+            <li><a href="category-stories.html">Stories</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="FAQ.html">FAQ</a></li>
+            
+            <!-- User Actions - Changes based on login state -->
+            <li class="user-actions">
+                <!-- Logged Out State - Initially visible -->
+                <div id="guest-actions" class="nav-state">
+                    <a class="waves-effect waves-light btn modal-trigger" href="signin.html" id="login-btn">Login</a>
+                    <a class="waves-effect waves-light btn modal-trigger" href="signup.html" id="register-btn">Sign Up</a>
+                </div>
+                
+                <!-- Logged In State - Initially hidden -->
+                <div id="user-menu" class="nav-state" style="display: none !important;">
+                    <!-- Write Story Button -->
+                    <a id="desktop-author-register-btn" class="waves-effect waves-light btn modal-trigger" href="author-register.html" style="margin-right: 10px; background-color: #C71585;">
+                        <i class="material-icons left">user-plus</i>Become An Author
+                    </a>
+                    
+                    <!-- User Dropdown -->
+                    <a class="dropdown-trigger" href="#" data-target="user-dropdown">
+                        <div class="user-avatar" id="user-avatar">U</div>
+                    </a>
+                    <ul id="user-dropdown" class="dropdown-content">
+                        <ul id="desktop-user-actions">
+                            
+                        </ul>
+                        <ul class="" id="desktop-author-actions" style="display: none !important;">
+                            <li><a id="desktop-author-create-story" class="" href="create-post.html">Create a Story</a> </li>
+                            <li><a id="desktop-author-dashboard" class="" href="author-dashboard.html">Go to Dashboard</a> </li>
+                            <li><a id="desktop-author-" class="" href=""></a> </li>
+                        </ul>
+                        <li class="divider"></li>
+                        <li id="desktop-logout" class="" style="display:none !important;">
+                            <a href="index.html" id="logout-btn">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Mobile Navigation -->
+<ul class="sidenav" id="mobile-nav">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="category-list.html">Categories</a></li>
+    <li><a href="category-stories.html">Stories</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="FAQ.html">FAQ</a></li>
+    
+    <!-- Mobile User Actions -->
+    <li id="mobile-guest-actions" class="nav-state" style="display: none !important;">
+        <a class="modal-trigger" href="signin.html">Login</a>
+        <a class="modal-trigger" href="signup.html">Sign Up</a>
+    </li>
+    <li id="mobile-user-actions" class="nav-state" style="display: none !important;">
+        <a href="author-register.html" id="mobile-author-register-btn">Become An Author</a>
+    </li>
+    <li id="mobile-author-actions" class="nav-state" style="display: none !important;">
+        <a id="mobile-author-create-story-btn" href="create-post.html">Write a Story</a>
+        <a href="author-dashboard.html" id="mobile-author-dashboard-btn">My Dashboard</a>
+    </li>
+    <li id="mobile-logout" style="display: none !important;">
+        <a href="#" id="mobile-logout-btn" class="primary-text">Logout</a> 
+    </li>
+</ul>
+    
+
+
+
+
+
+    
+
+    <!-- Author Room Content -->
+    <div class="author-room-container">
+        <!-- Author Header -->
+        <div class="author-header" id="author-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col s12 m3 center-align">
+
+                        <div class="author-avatar">
+                            <img id="author-avatar-img" src="/assets/landscape3.jpg" alt="Author Avatar" class="circle responsive-img">
+                        </div>
+                        
+                    </div>
+                    <div class="col s12 m9">
+                        <div class="author-info">
+                            <h1 id="author-display-name">Author Name</h1>
+                            <p class="author-username" id="author-username">@username</p>
+                            <p class="author-bio" id="author-bio">This is where the author's bio will appear. A brief description about themselves, their writing style, and what readers can expect from their stories.</p>
+                            
+                            <div class="author-stats">
+                                <div class="stat">
+                                    <span class="stat-number" id="stories-count">0</span>
+                                    <span class="stat-label">Stories</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-number" id="followers-count">0</span>
+                                    <span class="stat-label">Followers</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-number" id="total-views">0</span>
+                                    <span class="stat-label">Total Views</span>
+                                </div>
+                                <div class="stat">
+                                    <span class="stat-number" id="avg-rating">0.0</span>
+                                    <span class="stat-label">Avg Rating</span>
+                                </div>
+                            </div>
+                            
+                            <div class="author-actions">
+                                <button id="follow-btn" class="btn waves-effect waves-light bold">
+                                    <i class="material-icons left">person_add</i>
+                                    Follow
+                                </button>
+                                <button id="unfollow-btn" class="btn waves-effect waves-light red" style="display: none;">
+                                    <i class="material-icons left">person_remove</i>
+                                    Unfollow
+                                </button>
+                                <button id="message-btn" class="btn waves-effect waves-light white black-text">
+                                    <i class="material-icons left">mail</i>
+                                    Message
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Author Stories -->
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <div class="section">
+                        <h3 class="bold">Stories by <span id="author-name-stories">Author Name</span></h3>
+                        
+                        <!-- Stories Filter and Search -->
+                        <div class="row stories-filter">
+                            <div class="col s12 m6">
+                                <div class="input-field">
+                                    <input type="text" id="stories-search" placeholder="Search stories...">
+                                    <label for="stories-search">Search Stories</label>
+                                </div>
+                            </div>
+                            <div class="col s12 m6">
+                                <div class="input-field">
+                                    <select id="stories-sort">
+                                        <option value="newest">Newest First</option>
+                                        <option value="oldest">Oldest First</option>
+                                        <option value="popular">Most Popular</option>
+                                        <option value="rating">Highest Rated</option>
+                                    </select>
+                                    <label>Sort Stories</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Stories Grid -->
+                        <div class="row" id="author-stories-grid">
+                            <!-- Stories will be loaded here by JavaScript -->
+                        </div>
+                        
+                        <!-- Loading Indicator -->
+                        <div id="loading-indicator" class="center-align" style="display: none;">
+                            <div class="preloader-wrapper big active">
+                                <div class="spinner-layer spinner-red-only">
+                                    <div class="circle-clipper left">
+                                        <div class="circle"></div>
+                                    </div><div class="gap-patch">
+                                        <div class="circle"></div>
+                                    </div><div class="circle-clipper right">
+                                        <div class="circle"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <p>Loading stories...</p>
+                        </div>
+                        
+                        <!-- No Stories Message -->
+                        <div id="no-stories-message" class="center-align" style="display: none;">
+                            <h5>No stories found</h5>
+                            <p>This author hasn't published any stories yet.</p>
+                        </div>
+                        
+                        <!-- Pagination -->
+                        <div class="center-align" id="author-pagination">
+                            <!-- Pagination will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Story Detail Modal (same as main page) -->
+    <div id="story-modal" class="w3-modal modal modal-fixed-footer">
+        <div class="w3-container modal-content">
+            <h4 id="story-modal-title"></h4>
+            <div class="row">
+                <div class="col s12">
+                    <div id="story-modal-content" class="story-content"></div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col s12">
+                    <div class="reactions">
+                        <button class="reaction-btn" data-reaction="like"><i class="material-icons">favorite_border</i> <span id="like-count">0</span></button>
+                        <button class="reaction-btn" data-reaction="love"><i class="material-icons">favorite</i> <span id="love-count">0</span></button>
+                        <button class="reaction-btn" data-reaction="wow"><i class="material-icons">sentiment_very_satisfied</i> <span id="wow-count">0</span></button>
+                    </div>
+                </div>
+            </div>
+            <div class="row comment-section">
+                <div class="col s12">
+                    <h5>Comments</h5>
+                    <div id="comments-container">
+                        <!-- Comments will be dynamically loaded here -->
+                    </div>
+                    <form id="comment-form">
+                        <div class="input-field">
+                            <textarea id="comment-text" class="materialize-textarea" placeholder="Add a comment..."></textarea>
+                        </div>
+                        <button class="btn waves-effect waves-light" type="submit">Post Comment</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close waves-effect waves-red btn-flat">Close</a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="w3-container page-footer">
+        <div class="w3-container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">VelvetQuill</h5>
+                    <p class="grey-text text-lighten-4">Home of Romance & Erotica.</p>
+                    
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3 bold" href="community-bulletin.html">Community Bulletin</a></li>
+                        <li><a class="grey-text text-lighten-3" href="about.html">About Us</a></li>
+                        <li><a class="grey-text text-lighten-3" href="legal-compliance.html#content-guidelines">Guidelines</a></li>
+                        <li><a class="grey-text text-lighten-3" href="FAQ.html">FAQ</a></li>
+                        <li><a class="grey-text text-lighten-3" href="legal-compiance.html#privacy-policy">Privacy Policy</a></li>
+                        <li><a class="grey-text text-lighten-3" href="sponsors.html">Sponsorship & Partnership</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="w3-container">
+                © 2025 VelvetQuill
+                <a class="grey-text text-lighten-4 right" href="#!"></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/materialize.min.js"></script>
+    <script src="scripts/Slick/slick.min.js"></script>
+    
+    <script src="scripts/api-service.js"></script>
+    <script src="scripts/page-nav.js"></script>
+    <script src="scripts/author-room.js"></script>
+</body>
+</html>
+

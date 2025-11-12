@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Contest - VelvetQuill Admin</title>
+    
+    <link rel="stylesheet" href="styles/w3css.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/admin-dashboard.css">
+    <link rel="stylesheet" href="styles/materialize.min.css">
+    <link href="styles/font/micons.css" rel="stylesheet">
+    <link href="styles/Playfair/fonts.css" rel="stylesheet">
+</head>
+<body>
+    
+    <!-- Navigation Header -->
+    <div class="admin-header">
+        <div class="header-content">
+            <a href="admin-dashboard.html" class="back-btn">
+                <i class="material-icons">arrow_back</i>
+                Back to Dashboard
+            </a>
+            <h4>Create New Contest</h4>
+            <div class="user-info">
+                <div class="user-avatar">A</div>
+                <span>Admin User</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="admin-main-content">
+        <div class="contest-creation-container">
+            <div class="contest-form-card">
+                <h5>Contest Details</h5>
+                <form id="contest-creation-form">
+                    <!-- Basic Information -->
+                    <div class="form-section">
+                        <h6>Basic Information</h6>
+                        <div class="input-field">
+                            <input id="contest-name" type="text" required maxlength="100">
+                            <label for="contest-name">Contest Name *</label>
+                            <span class="helper-text" data-error="Please enter a contest name"></span>
+                        </div>
+                        
+                        <div class="input-field">
+                            <textarea id="contest-description" class="materialize-textarea" required></textarea>
+                            <label for="contest-description">Description *</label>
+                            <span class="helper-text" data-error="Please enter a description"></span>
+                        </div>
+                        
+                        <div class="input-field">
+                            <input id="contest-theme" type="text" required>
+                            <label for="contest-theme">Theme *</label>
+                            <span class="helper-text" data-error="Please enter a theme"></span>
+                        </div>
+                    </div>
+
+                    <!-- Timeline -->
+                    <div class="form-section">
+                        <h6>Timeline</h6>
+                        <div class="row">
+                            <div class="input-field col s6">
+                                <input type="date" id="contest-start-date" required>
+                                <label for="contest-start-date">Start Date *</label>
+                            </div>
+                            <div class="input-field col s6">
+                                <input type="date" id="contest-end-date" required>
+                                <label for="contest-end-date">End Date *</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Objectives -->
+                    <div class="form-section">
+                        <h6>Contest Objectives</h6>
+                        <div id="objectives-container">
+                            <div class="objective-item">
+                                <div class="row">
+                                    <div class="input-field col s10">
+                                        <input type="text" class="objective-input" placeholder="e.g., Create 5 new short stories of at least 2000+ words each" required>
+                                        <label>Objective</label>
+                                    </div>
+                                    <div class="col s2">
+                                        <button type="button" class="btn-floating btn-small red remove-objective">
+                                            <i class="material-icons">remove</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="add-objective" class="btn-admin-outline">
+                            <i class="material-icons left">add</i>Add Objective
+                        </button>
+                    </div>
+
+                    <!-- Prizes -->
+                    <div class="form-section">
+                        <h6>Prizes</h6>
+                        <div id="prizes-container">
+                            <div class="prize-item">
+                                <div class="row">
+                                    <div class="input-field col s5">
+                                        <select class="prize-type">
+                                            <option value="cash">Cash</option>
+                                            <option value="achievement">Achievement</option>
+                                            <option value="badge">Badge</option>
+                                            <option value="featured">Featured Placement</option>
+                                            <option value="other">Other</option>
+                                        </select>
+                                        <label>Prize Type</label>
+                                    </div>
+                                    <div class="input-field col s5">
+                                        <input type="text" class="prize-value" placeholder="e.g., $100 or Winter Quiller 2025" required>
+                                        <label>Prize Value</label>
+                                    </div>
+                                    <div class="col s2">
+                                        <button type="button" class="btn-floating btn-small red remove-prize">
+                                            <i class="material-icons">remove</i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" id="add-prize" class="btn-admin-outline">
+                            <i class="material-icons left">add</i>Add Prize
+                        </button>
+                    </div>
+
+                    <!-- Eligibility & Rules -->
+                    <div class="form-section">
+                        <h6>Eligibility & Rules</h6>
+                        <div class="input-field">
+                            <select id="contest-category" multiple>
+                                <option value="all" selected>All Categories</option>
+                                <option value="contemporary">Contemporary</option>
+                                <option value="historical">Historical</option>
+                                <option value="fantasy">Fantasy</option>
+                                <option value="lgbtq">LGBTQ+</option>
+                                <option value="erotic">Erotic</option>
+                                <option value="first-love">First Love</option>
+                                <option value="second-chance">Second Chance</option>
+                                <option value="forbidden">Forbidden Love</option>
+                                <option value="sweet">Sweet Romance</option>
+                            </select>
+                            <label>Eligible Categories</label>
+                        </div>
+                        
+                        <div class="input-field">
+                            <select id="author-level">
+                                <option value="all" selected>All Authors</option>
+                                <option value="new">New Authors (0-5 stories)</option>
+                                <option value="intermediate">Intermediate (6-20 stories)</option>
+                                <option value="experienced">Experienced (21+ stories)</option>
+                            </select>
+                            <label>Author Level</label>
+                        </div>
+                        
+                        <div class="input-field">
+                            <textarea id="contest-rules" class="materialize-textarea"></textarea>
+                            <label for="contest-rules">Additional Rules (Optional)</label>
+                        </div>
+                    </div>
+
+                    <!-- Submission -->
+                    <div class="form-actions">
+                        <button type="button" id="save-draft" class="btn-admin-outline">
+                            Save as Draft
+                        </button>
+                        <button type="submit" id="create-contest" class="btn-admin">
+                            Create Contest
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Preview Section -->
+            <div class="contest-preview-card">
+                <h5>Contest Preview</h5>
+                <div id="contest-preview">
+                    <div class="preview-placeholder">
+                        <i class="material-icons large">emoji_events</i>
+                        <p>Contest preview will appear here</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div id="success-modal" class="modal">
+        <div class="modal-content">
+            <div class="center-align">
+                <i class="material-icons large green-text">check_circle</i>
+                <h4>Contest Created Successfully!</h4>
+                <p>Your contest has been created and is now live on the platform.</p>
+            </div>
+            <div class="modal-footer">
+                <a href="admin-dashboard.html" class="btn-admin">Go to Dashboard</a>
+                <a href="#!" class="modal-close btn-admin-outline">Create Another</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/materialize.min.js"></script>
+    <script src="scripts/api-service.js"></script>
+    <script src="scripts/create-contest.js"></script>
+</body>
+</html>

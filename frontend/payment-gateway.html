@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Gateway - VelvetQuill</title>
+
+
+     <link rel="stylesheet" href="styles/payment-gateway.css">
+
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/w3css.css">
+    <link rel="stylesheet" href="styles/materialize.min.css">
+    <link rel="stylesheet" href="styles/Playfair/fonts.css">
+    <link rel="stylesheet" href="styles/Playfair/VQFonts.css">
+    <link rel="stylesheet" href="styles/font/micons.css">
+
+        
+</head>
+<body>
+    <div class="w3-container payment-container">
+        <!-- Payment Header -->
+        <div class="w3-container payment-header">
+            <h1 class="w3-xxxlarge bold">Complete Your Payment</h1>
+            <p class="w3-section bold">Join VelvetQuill as a Founding Sponsor</p>
+            
+            <div class="payment-steps">
+                <div class="step completed w3-tiny bold">
+                    <div class="step-number w3-small">1</div>
+                    <div class="step-label">Select Plan</div>
+                </div>
+                <div class="step active w3-tiny bold">
+                    <div class="step-number w3-small">2</div>
+                    <div class="step-label">Payment</div>
+                </div>
+                <div class="step w3-tiny bold">
+                    <div class="step-number w3-small">3</div>
+                    <div class="step-label">Confirmation</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Payment Content -->
+        <div class="w3-container payment-content" style="padding:0;">
+            <!-- Payment Methods -->
+            <div class="w3-container payment-methods w3-border">
+                <h3 class="bold">Select Payment Method</h3>
+                
+                <!-- Credit Card -->
+                <div class="payment-method selected" data-method="credit-card">
+                    <div class="payment-method-header">
+                        <div class="payment-method-icon">
+                            <i class="material-icons">credit_card</i>
+                        </div>
+                        <div>
+                            <h4>Credit/Debit Card</h4>
+                            <p>Pay with Visa, Mastercard, or American Express</p>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-form active" id="credit-card-form">
+                        <div class="form-row">
+                            <div class="input-field">
+                                <label for="card-number">Card Number</label>
+                                <input type="text" id="card-number" placeholder="1234 5678 9012 3456" maxlength="19">
+                                <div class="error-message" id="card-number-error">Please enter a valid card number</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="input-field">
+                                <label for="card-name">Name on Card</label>
+                                <input type="text" id="card-name" placeholder="John Doe">
+                                <div class="error-message" id="card-name-error">Please enter the name on your card</div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-row">
+                            <div class="input-field">
+                                <label for="expiry-date">Expiry Date</label>
+                                <input type="text" id="expiry-date" placeholder="MM/YY" maxlength="5">
+                                <div class="error-message" id="expiry-error">Please enter a valid expiry date</div>
+                            </div>
+                            <div class="input-field">
+                                <label for="cvv">CVV</label>
+                                <input type="text" id="cvv" placeholder="123" maxlength="4">
+                                <div class="error-message" id="cvv-error">Please enter a valid CVV</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- PayPal -->
+                <div class="payment-method" data-method="paypal">
+                    <div class="payment-method-header">
+                        <div class="payment-method-icon">
+                            <i class="material-icons">account_balance</i>
+                        </div>
+                        <div>
+                            <h4>PayPal</h4>
+                            <p>Pay with your PayPal account</p>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-form" id="paypal-form">
+                        <p>You will be redirected to PayPal to complete your payment securely.</p>
+                        <button class="btn btn-outline" style="width: 100%; margin-top: 15px;">
+                            Continue to PayPal
+                        </button>
+                    </div>
+                </div>
+                
+                <!-- Cryptocurrency -->
+                <div class="payment-method" data-method="crypto">
+                    <div class="payment-method-header">
+                        <div class="payment-method-icon">
+                            <i class="material-icons">currency_bitcoin</i>
+                        </div>
+                        <div>
+                            <h4>Cryptocurrency</h4>
+                            <p>Pay with Bitcoin, Ethereum, or USDT</p>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-form" id="crypto-form">
+                        <div class="input-field">
+                            <label>Select Cryptocurrency</label>
+                            <select id="crypto-currency">
+                                <option value="bitcoin">Bitcoin (BTC)</option>
+                                <option value="ethereum">Ethereum (ETH)</option>
+                                <option value="usdt">USDT (ERC-20)</option>
+                            </select>
+                        </div>
+                        
+                        <div class="crypto-wallet-address" id="wallet-address">
+                            1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa
+                        </div>
+                        
+                        <div class="qr-code">
+                            <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa" alt="Bitcoin QR Code">
+                        </div>
+                        
+                        <p class="center-align">Send exactly <strong id="crypto-amount">0.00234 BTC</strong> to the address above</p>
+                    </div>
+                </div>
+                
+                <!-- Bank Transfer -->
+                <div class="payment-method" data-method="bank-transfer">
+                    <div class="payment-method-header">
+                        <div class="payment-method-icon">
+                            <i class="material-icons">account_balance</i>
+                        </div>
+                        <div>
+                            <h4>Bank Transfer</h4>
+                            <p>Transfer directly from your bank account</p>
+                        </div>
+                    </div>
+                    
+                    <div class="payment-form" id="bank-transfer-form">
+                        <div class="input-field">
+                            <label>Bank Name</label>
+                            <input type="text" value="VelvetQuill Holdings" readonly>
+                        </div>
+                        
+                        <div class="input-field">
+                            <label>Account Number</label>
+                            <input type="text" value="123456789" readonly>
+                        </div>
+                        
+                        <div class="input-field">
+                            <label>Routing Number</label>
+                            <input type="text" value="021000021" readonly>
+                        </div>
+                        
+                        <div class="input-field">
+                            <label>Reference</label>
+                            <input type="text" value="VQFOUNDER100" readonly>
+                        </div>
+                        
+                        <p>Please include the reference code in your transfer. Processing may take 2-3 business days.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Payment Summary -->
+            <div class="w3-container w3-border payment-summary">
+                <h3 class="bold">Order Summary</h3>
+                
+                <div class="payment-plan">
+                    <div class="plan-header">
+                        <div class="plan-name">Founding Sponsor</div>
+                        <div class="plan-price">$100.00</div>
+                    </div>
+                    <p>Become a founding sponsor of VelvetQuill with permanent recognition and exclusive benefits.</p>
+                    
+                    <ul class="plan-features">
+                        <li><i class="material-icons">check</i> Permanent "Founding Sponsor" badge</li>
+                        <li><i class="material-icons">check</i> Featured placement on platform</li>
+                        <li><i class="material-icons">check</i> Early access to new features</li>
+                        <li><i class="material-icons">check</i> Social media recognition</li>
+                        <li><i class="material-icons">check</i> Priority support</li>
+                    </ul>
+                </div>
+                
+                <div class="summary-item">
+                    <div>Subtotal</div>
+                    <div>$100.00</div>
+                </div>
+                
+                <div class="summary-item">
+                    <div>Platform Fee</div>
+                    <div>$0.00</div>
+                </div>
+                
+                <div class="summary-item">
+                    <div>Tax</div>
+                    <div>$0.00</div>
+                </div>
+                
+                <div class="summary-total">
+                    <div>Total</div>
+                    <div>$100.00</div>
+                </div>
+                
+                <div class="security-badges">
+                    <div class="security-badge">
+                        <i class="material-icons">lock</i>
+                        <div>Secure Payment</div>
+                    </div>
+                    <div class="security-badge">
+                        <i class="material-icons">https</i>
+                        <div>SSL Encrypted</div>
+                    </div>
+                    <div class="security-badge">
+                        <i class="material-icons">privacy_tip</i>
+                        <div>Privacy Protected</div>
+                    </div>
+                </div>
+                
+                <div class="w3-panel payment-actions   w3-small">
+                    <button class="w3-margin  btn btn-outline w3-small" id="back-btn">
+                        <i class="material-icons left">arrow_back</i> Back
+                    </button>
+                    <button class="w3-margin  btn w3-small" id="pay-now-btn">
+                        Pay Now <i class="material-icons right">lock</i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Payment Success Message -->
+        <div class="payment-success" id="payment-success">
+            <div class="success-icon">
+                <i class="material-icons">check</i>
+            </div>
+            <h2>Payment Successful!</h2>
+            <p>Thank you for becoming a VelvetQuill Founding Sponsor.</p>
+            <p>Your payment has been processed successfully.</p>
+            <div style="margin-top: 30px;">
+                <button class="btn btn-success" id="continue-btn">
+                    Continue to VelvetQuill
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/materialize.min.js"></script>
+    <script src="scripts/payment-gateway.js"> </script>
+</body>
+</html>

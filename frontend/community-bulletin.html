@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Bulletin - VelvetQuill</title>
+    
+    <!-- Primary Meta Tags -->
+    <meta name="description" content="VelvetQuill Community Bulletin - Discover active contests, top stories, popular authors, and contest winners in our romance literature community.">
+    <meta name="keywords" content="writing contests, romance stories, top authors, contest winners, community, romance writers">
+    <meta name="author" content="Fatherly P. Titus">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Community Bulletin - VelvetQuill">
+    <meta property="og:description" content="Discover active contests, top stories, and popular authors in our romance literature community.">
+    <meta property="og:image" content="https://velvetquill.com/images/community-bulletin.jpg">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Community Bulletin - VelvetQuill">
+    <meta property="twitter:description" content="Discover active contests, top stories, and popular authors in our romance literature community.">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles/materialize.min.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/w3css.css">
+    <link href="styles/font/micons.css" rel="stylesheet">
+    <link href="styles/Playfair/VQFonts.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/community-bulletin.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="w3-container navbar sticky">
+        <div class="nav-wrapper">
+            <a href="index.html" class="brand-logo">VelvetQuill</a>
+            <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+            
+            <a id="user-avatar-link" class="w3-right" href="index.html" data-target="">
+                <div class="user-avatar" id="user-avatar-header">U</div>
+            </a>
+            
+            <!-- Desktop Navigation -->
+            <ul class="right hide-on-med-and-down">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="category-list.htm">Categories</a></li>
+                <li><a href="category-stories.html">Stories</a></li>
+                <li><a href="community-bulletin.html" style="color: var(--secondary-color);">Community</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="FAQ.html">FAQ</a></li>
+                
+                <!-- User Actions -->
+                <li class="user-actions" style="display: none !important;">
+                    <div id="guest-actions" class="nav-state">
+                        <a class="waves-effect waves-light btn modal-trigger" href="signin.html" id="login-btn">Login</a>
+                        <a class="waves-effect waves-light btn modal-trigger" href="signup.html" id="register-btn">Sign Up</a>
+                    </div>
+                    
+                    <div id="user-menu" class="nav-state" style="display: none !important;">
+                        <a id="desktop-author-register-btn" class="waves-effect waves-light btn modal-trigger" href="author-register.html" style="margin-right: 10px; background-color: #C71585;">
+                            <i class="material-icons left">user-plus</i>Become An Author
+                        </a>
+                        
+                        <a class="dropdown-trigger" href="#" data-target="user-dropdown">
+                            <div class="user-avatar" id="user-avatar">U</div>
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <ul class="sidenav" id="mobile-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="category-list.htm">Categories</a></li>
+        <li><a href="category-stories.html">Stories</a></li>
+        <li><a href="community-bulletin.html" style="color: var(--primary-color); font-weight: bold;">Community</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="FAQ.html">FAQ</a></li>
+        
+        <!-- Mobile User Actions -->
+        <li id="mobile-guest-actions" class="nav-state">
+            <a class="modal-trigger" href="signin.html">Login</a>
+            <a class="modal-trigger" href="signup.html">Sign Up</a>
+        </li>
+        <li id="mobile-user-actions" class="nav-state" style="display: none !important;">
+            <a href="author-register.html" id="mobile-author-register-btn">Become An Author</a>
+        </li>
+    </ul>
+
+    <!-- Main Content -->
+    <main class="community-bulletin">
+        <!-- Header -->
+        <section class="bulletin-header">
+            <div class="w3-container">
+                <h1 class="underline w3-text-white bulletin-title">Community Bulletin</h1>
+                <p class="bulletin-subtitle">Discover active contests, top stories, popular authors, and celebrate our contest winners in the VelvetQuill romance community.</p>
+            </div>
+        </section>
+        
+        
+        <!-- search bar -->
+<section class="search-section">
+    <div class="w3-container">
+        <div class="search-container">
+            <form id="author-search-form" class="search-form">
+                <div class="input-field">
+                    <i class="material-icons prefix">search</i>
+                    <input type="text" id="author-search-input" placeholder="Search authors by name...">
+                    <label for="author-search-input">Find Authors</label>
+                </div>
+                <button type="submit" class="btn waves-effect waves-light search-btn">
+                    <i class="material-icons">search</i> Search
+                </button>
+            </form>
+        </div>
+    </div>
+</section>
+        
+
+        <div class="w3-container">
+            <div class="row">
+                <!-- Active Contests Section -->
+                <div class="col s12 l6">
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h2 class="w3-text-white section-title">
+                                <i class="material-icons">emoji_events</i>
+                                Active Contests
+                            </h2>
+                        </div>
+                        <div class="section-content" id="active-contests-container">
+                            <div class="empty-state">
+                                <i class="material-icons">hourglass_empty</i>
+                                <p>Loading active contests...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contest Winners Section -->
+                <div class="col s12 l6">
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h2 class="w3-text-white section-title">
+                                <i class="material-icons">military_tech</i>
+                                Contest Winners
+                            </h2>
+                        </div>
+                        <div class="section-content" id="contest-winners-container">
+                            <div class="empty-state">
+                                <i class="material-icons">celebration</i>
+                                <p>Loading contest winners...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Stories Section -->
+                <div class="col s12">
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h2 class="w3-text-white section-title">
+                                <i class="material-icons">trending_up</i>
+                                Top 20 Stories
+                            </h2>
+                        </div>
+                        <div class="section-content" id="top-stories-container">
+                            <div class="empty-state">
+                                <i class="material-icons">auto_stories</i>
+                                <p>Loading top stories...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Top Authors Section -->
+                <div class="col s12">
+                    <div class="section-card">
+                        <div class="section-header">
+                            <h2 class="w3-text-white section-title">
+                                <i class="material-icons">people</i>
+                                Top 20 Authors
+                            </h2>
+                        </div>
+                        <div class="section-content" id="top-authors-container">
+                            <div class="empty-state">
+                                <i class="material-icons">person_search</i>
+                                <p>Loading top authors...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="w3-container page-footer">
+        <div class="w3-container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="w3-large bold white-text">VelvetQuill</h5>
+                    <p class="grey-text text-lighten-4">Home of Romance & Erotica.</p>
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Community</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3" href="community-bulletin.html">Bulletin Board</a></li>
+                        <li><a class="grey-text text-lighten-3" href="winner-stats.html">Winner Statistics</a></li>
+                        <li><a class="grey-text text-lighten-3" href="contests.html">Writing Contests</a></li>
+                        <li><a class="grey-text text-lighten-3" href="community.html">Forums</a></li>
+                        <li><a class="grey-text text-lighten-3" href="guidelines.html">Community Guidelines</a></li>
+                        <li><a class="grey-text text-lighten-3" href="products.html">Products</a></li>
+                        <li><a class="grey-text text-lighten-3" href="sponsors.html">Sponsor & Partnership</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="w3-container">
+                © 2025 VelvetQuill
+                <a class="grey-text text-lighten-4 right" href="#!"></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/materialize.min.js"></script>
+    <script src="scripts/api-service.js"></script>
+    <script src="scripts/community-bulletin.js"></script>
+</body>
+</html>
+

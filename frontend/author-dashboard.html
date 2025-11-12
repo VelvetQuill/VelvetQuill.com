@@ -1,0 +1,293 @@
+<!-- author-dashboard.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Author Dashboard - VelvetQuill</title>
+    
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/w3css.css">
+    <link rel="stylesheet" href="styles/materialize.min.css">
+    <link href="styles/font/micons.css" rel="stylesheet">
+    <link href="styles/Playfair/VQFonts.css" rel="stylesheet">
+    
+    <!-- Dashboard CSS -->
+    <link href="styles/author-dashboard.css" rel="stylesheet">
+    
+    
+</head>
+<body>
+    
+   <!-- Navigation -->
+<nav class="w3-container navbar sticky">
+    <div class="nav-wrapper">
+        <a href="index.html" class="brand-logo">VelvetQuill</a>
+        <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        
+        <a id="user-avatar-link" class="w3-right" href="index.html" data-target="">
+            <div class="user-avatar" id="user-avatar-header">U</div>
+        </a>
+        
+        <!-- Desktop Navigation -->
+        <ul class="right hide-on-med-and-down">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="category-list.html">Categories</a></li>
+            <li><a href="category-stories.html">Stories</a></li>
+            <li><a href="about.html">About</a></li>
+            
+            <!-- User Actions - Changes based on login state -->
+            <li class="user-actions">
+                <!-- Logged Out State - Initially visible -->
+                <div id="guest-actions" class="nav-state">
+                    <a class="waves-effect waves-light btn modal-trigger" href="signin.html" id="login-btn">Login</a>
+                    <a class="waves-effect waves-light btn modal-trigger" href="signup.html" id="register-btn">Sign Up</a>
+                </div>
+                
+                <!-- Logged In State - Initially hidden -->
+                <div id="user-menu" class="nav-state" style="display: none !important;">
+                    <!-- Write Story Button -->
+                    <a id="desktop-author-register-btn" class="waves-effect waves-light btn modal-trigger" href="author-register.html" style="margin-right: 10px; background-color: #C71585;">
+                        <i class="material-icons left">user-plus</i>Become An Author
+                    </a>
+                    
+                    <!-- User Dropdown -->
+                    <a class="dropdown-trigger" href="#" data-target="user-dropdown">
+                        <div class="user-avatar" id="user-avatar">U</div>
+                    </a>
+                    <ul id="user-dropdown" class="dropdown-content">
+                        <ul id="desktop-user-actions">
+                            
+                        </ul>
+                        <ul class="" id="desktop-author-actions" style="display: none !important;">
+                            <li><a id="desktop-author-create-story" class="" href="create-post.html">Creae a Story</a> </li>
+                            <li><a id="desktop-author-room" class="" href="author-room.html">Go to Author Room</a> </li>
+                            <li><a id="desktop-author-" class="" href=""></a> </li>
+                        </ul>
+                        <li class="divider"></li>
+                        <li id="desktop-logout" class="" style="display:none !important;">
+                            <a href="index.html" id="logout-btn">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Mobile Navigation -->
+<ul class="sidenav" id="mobile-nav">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="category-list.html">Categories</a></li>
+    <li><a href="category-stories.html">Stories</a></li>
+    <li><a href="about.html">About</a></li>
+    
+    <!-- Mobile User Actions -->
+    <li id="mobile-guest-actions" class="nav-state" style="display: none !important;">
+        <a class="modal-trigger" href="signin.html">Login</a>
+        <a class="modal-trigger" href="signup.html">Sign Up</a>
+    </li>
+    <li id="mobile-user-actions" class="nav-state" style="display: none !important;">
+        <a href="author-register.html" id="mobile-author-register-btn">Become An Author</a>
+    </li>
+    <li id="mobile-author-actions" class="nav-state" style="display: none !important;">
+        <a id="mobile-author-create-story-btn" href="create-post.html">Write a Story</a>
+        <a href="author-room.html" id="mobile-author-room-btn">My Author Room</a>
+    </li>
+    <li id="mobile-logout" style="display: none !important;">
+        <a href="#" id="mobile-logout-btn" class="primary-text">Logout</a> 
+    </li>
+</ul>
+    
+    
+    <div class="author-dashboard-container">
+        <!-- Dashboard Header -->
+        <div class="dashboard-header">
+            <div class="container">
+                <div class="row valign-wrapper">
+                    <div class="col s8">
+                        <h1 class="w3-xxlarge vq-bold">Author Dashboard</h1>
+                        <p class="dashboard-subtitle w3-small bold">Monitor your stories and reader engagement</p>
+                    </div>
+                    <div class="col s4 right-align">
+                        <div class="author-profile-summary">
+                            <div class="chip">
+                                <img src="assets/avatars/avatar-eagle.jpg" alt="Author Avatar" id="author-avatar">
+                                <span id="author-name">Author</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <div class="dashboard-stats" id="dashboard-stats">
+                        <!-- Stats will be loaded dynamically -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Published Stories Stats Section -->
+            <div class="w3-container row" style="padding:0;margin:0;">
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <div class="card-title-wrapper">
+                                <span class="card-title">Published Stories Performance</span>
+                                <div class="story-stats-filters">
+                                    <select id="stats-period-filter" class="browser-default">
+                                        <option value="all-time">All Time</option>
+                                        <option value="last-30-days">Last 30 Days</option>
+                                        <option value="last-7-days">Last 7 Days</option>
+                                    </select>
+                                    <select id="stats-sort" class="browser-default">
+                                        <option value="likes">Most Likes</option>
+                                        <option value="comments">Most Comments</option>
+                                        <option value="rating">Highest Rating</option>
+                                        <option value="recent">Most Recent</option>
+                                    </select>
+                                </div>
+                            </div>
+                            
+                            <div class="w3-container w3-section w3-center published-stats-table-container">
+                                <table class="published-stats-table">
+                                    <thead>
+                                        <tr>
+                                            <th>Story Title</th>
+                                            <th>Total Likes</th>
+                                            <th>Total Comments</th>
+                                            <th>Rating</th>
+                                            <th>Performance</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="published-stats-body">
+                                        <!-- Published stories stats will be loaded here -->
+                                    </tbody>
+                                </table>
+                            </div>
+                            
+                            <div class="center-align" id="stats-pagination">
+                                <!-- Pagination for stats table -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Dashboard Content -->
+            <div class="row">
+                <!-- Left Column - Analytics -->
+                <div class="col s12 m8">
+                    <!-- Engagement Chart -->
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title">Reader Engagement (Last 30 Days)</span>
+                            <div class="chart-container">
+                                <canvas id="engagement-chart"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Comments -->
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title">Recent Comments</span>
+                            <div id="recent-comments">
+                                <!-- Comments will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Right Column - Quick Actions & Insights -->
+                <div class="col s12 m4">
+                    <!-- Quick Actions -->
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title">Quick Actions</span>
+                            <div class="quick-actions">
+                                <a href="create-post.html" class="btn waves-effect waves-light full-width action-btn">
+                                    <i class="material-icons left">add</i>New Story
+                                </a>
+                                <a href="author-room.html" class="btn waves-effect waves-light full-width action-btn">
+                                    <i class="material-icons left">person</i>My Author Room
+                                </a>
+                                <a href="community-bulletin.html" class="btn waves-effect waves-light full-width action-btn">
+                                    <i class="material-icons left">groups</i>Community Bulletin
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Followers Summary -->
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title">Followers</span>
+                            <div class="followers-section">
+                                <div class="followers-count">
+                                    <i class="material-icons">people</i>
+                                    <span id="followers-count">0</span> Followers
+                                </div>
+                                <div class="follower-growth">
+                                    <span id="follower-growth" class="growth-positive">+12 this week</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Top Stories -->
+                    <div class="card">
+                        <div class="card-content">
+                            <span class="card-title">Top Performing Stories</span>
+                            <div id="top-stories">
+                                <!-- Top stories will be loaded here -->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Story Analytics Modal -->
+    <div id="story-analytics-modal" class="modal modal-fixed-footer">
+        <div class="modal-content">
+            <h4 id="analytics-modal-title">Story Analytics</h4>
+            <div class="row">
+                <div class="col s12 m6">
+                    <div class="analytics-card">
+                        <h5>Views Over Time</h5>
+                        <div class="chart-container">
+                            <canvas id="story-views-chart"></canvas>
+                        </div>
+                    </div>
+                </div>
+                <div class="col s12 m6">
+                    <div class="analytics-card">
+                        <h5>Reader Engagement</h5>
+                        <div id="engagement-metrics"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <a href="#!" class="modal-close btn-flat">Close</a>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/materialize.min.js"></script>
+    <!-- Chart.js -->
+    <script src="scripts/chart.js"></script>
+    
+    <!-- Dashboard JS -->
+    <script src="scripts/api-service.js"></script>
+    <script src="scripts/page-nav.js"></script>
+    <script src="scripts/author-dashboard.js"></script>
+</body>
+</html>

@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>FAQ - Frequently Asked Questions | VelvetQuill Help Center</title>
+    <meta name="description" content="Find answers to common questions about VelvetQuill. Learn how to publish stories, join contests, and use our romance literature platform.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Georgia', serif;
+        }
+        
+        body {
+            background-color: #fdf6f8;
+            color: #333;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #8b0000, #b22222);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+        
+        .logo {
+            font-size: 3rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            letter-spacing: 2px;
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            font-style: italic;
+            opacity: 0.9;
+        }
+        
+        nav {
+            background-color: #5a0f1c;
+            padding: 1rem 0;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            flex-wrap: wrap;
+        }
+        
+        nav li {
+            margin: 0 1.5rem;
+        }
+        
+        nav a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        nav a:hover {
+            color: #ffd1dc;
+        }
+        
+        .faq-hero {
+            background: url('https://images.unsplash.com/photo-1455390582262-044cdead277a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+            background-size: cover;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+        }
+        
+        .faq-hero::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+        }
+        
+        .faq-hero-content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        .faq-hero h1 {
+            font-size: 2.8rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+        
+        .faq-hero p {
+            font-size: 1.2rem;
+        }
+        
+        .faq-section {
+            padding: 4rem 0;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #8b0000;
+            font-size: 2.2rem;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 3px;
+            background: #8b0000;
+            margin: 10px auto;
+        }
+        
+        .faq-categories {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        
+        .category-btn {
+            background: white;
+            border: 2px solid #8b0000;
+            color: #8b0000;
+            padding: 10px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.3s;
+        }
+        
+        .category-btn.active, .category-btn:hover {
+            background: #8b0000;
+            color: white;
+        }
+        
+        .faq-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .faq-item {
+            background: white;
+            margin-bottom: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        .faq-question {
+            padding: 1.5rem;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            color: #5a0f1c;
+        }
+        
+        .faq-question::after {
+            content: '+';
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+        
+        .faq-item.active .faq-question::after {
+            transform: rotate(45deg);
+        }
+        
+        .faq-answer {
+            padding: 0 1.5rem;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s, padding 0.3s;
+        }
+        
+        .faq-item.active .faq-answer {
+            padding: 0 1.5rem 1.5rem;
+            max-height: 500px;
+        }
+        
+        .faq-answer p {
+            margin-bottom: 1rem;
+        }
+        
+        .faq-answer ul, .faq-answer ol {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .contact-cta {
+            text-align: center;
+            padding: 3rem 0;
+            background: linear-gradient(135deg, #fdf6f8, #f8e8ec);
+            margin-top: 2rem;
+            border-radius: 10px;
+        }
+        
+        .contact-cta h2 {
+            color: #8b0000;
+            margin-bottom: 1rem;
+        }
+        
+        .btn {
+            display: inline-block;
+            background-color: #8b0000;
+            color: white;
+            padding: 12px 30px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            margin-top: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: #a52a2a;
+            transform: translateY(-3px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+        
+        footer {
+            background-color: #2c070e;
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+        
+        .footer-column h3 {
+            margin-bottom: 1.5rem;
+            color: #ffd1dc;
+            font-size: 1.2rem;
+        }
+        
+        .footer-column ul {
+            list-style: none;
+        }
+        
+        .footer-column ul li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-column a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+        
+        .footer-column a:hover {
+            color: #ffd1dc;
+        }
+        
+        .copyright {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid #444;
+            color: #aaa;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            .faq-hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            nav ul {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            nav li {
+                margin: 0.5rem 0;
+            }
+            
+            .faq-question {
+                padding: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">VelvetQuill</div>
+            <p class="tagline">Home of Romance & Erotica</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="container">
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="category-stories.html">Stories</a></li>
+                <li><a href="category-list.html">Categories</a></li>
+                <li><a href="community-bulletin.html">Community</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="FAQ.html" style="color: #ffd1dc;">FAQ</a></li>
+                <li><a href="index.html">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <section class="faq-hero">
+        <div class="faq-hero-content">
+            <h1>Frequently Asked Questions</h1>
+            <p>Find answers to common questions about VelvetQuill</p>
+        </div>
+    </section>
+    
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">How Can We Help You?</h2>
+            
+            <div class="faq-categories">
+                <button class="category-btn active" data-category="all">All Questions</button>
+                <button class="category-btn" data-category="writers">For Writers</button>
+                <button class="category-btn" data-category="readers">For Readers</button>
+                <button class="category-btn" data-category="account">Account & Technical</button>
+                <button class="category-btn" data-category="content">Content Guidelines</button>
+            </div>
+            
+            <div class="faq-container">
+                <!-- For Writers FAQ -->
+                <div class="faq-item" data-category="writers">
+                    <div class="faq-question">How do I publish my stories on VelvetQuill?</div>
+                    <div class="faq-answer">
+                        <p>To publish your stories:</p>
+                        <ol>
+                            <li>Create a free account or log in to your existing account</li>
+                            <li>Navigate to your Dashboard and click "Create New Story"</li>
+                            <li>Fill in your story details (title, summary, tags, etc.)</li>
+                            <li>Add your content using our easy-to-use editor</li>
+                            <li>Select appropriate content warnings and ratings</li>
+                            <li>Preview your story and click "Publish"</li>
+                        </ol>
+                        <p>Your story will be immediately available to our community of readers!</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="writers">
+                    <div class="faq-question">What are the benefits for writers on VelvetQuill?</div>
+                    <div class="faq-answer">
+                        <p>Writers on VelvetQuill enjoy numerous benefits:</p>
+                        <ul>
+                            <li><strong>Global Exposure:</strong> Reach readers worldwide</li>
+                            <li><strong>Portfolio Building:</strong> Showcase your work professionally</li>
+                            <li><strong>Follower Base:</strong> Grow your dedicated reader community</li>
+                            <li><strong>Writing Contests:</strong> Participate in regular competitions with prizes</li>
+                            <li><strong>Reader Feedback:</strong> Receive comments and engagement on your stories</li>
+                            <li><strong>Community:</strong> Connect with other romance writers</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="writers">
+                    <div class="faq-question">Are there any restrictions on story length or format?</div>
+                    <div class="faq-answer">
+                        <p>We welcome stories of all lengths, from flash fiction to novel-length works. You can publish:</p>
+                        <ul>
+                            <li>Short stories (1,000-7,500 words)</li>
+                            <li>Novellas (7,500-40,000 words)</li>
+                            <li>Novels (40,000+ words)</li>
+                            <li>Serialized works (published in chapters)</li>
+                        </ul>
+                        <p>For longer works, we recommend publishing in chapters to keep readers engaged. There are no specific formatting requirements beyond using our built-in editor or pasting properly formatted text.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="writers">
+                    <div class="faq-question">How do writing contests work?</div>
+                    <div class="faq-answer">
+                        <p>VelvetQuill hosts regular writing contests with different themes, genres, and requirements. Here's how they work:</p>
+                        <ol>
+                            <li>Contests are announced on our Contests page and through community notifications</li>
+                            <li>Each contest has specific guidelines, word counts, and deadlines</li>
+                            <li>You submit your entry through the contest submission form</li>
+                            <li>Entries are judged by our panel or through community voting</li>
+                            <li>Winners receive prizes, recognition, and featured placement on the platform</li>
+                        </ol>
+                        <p>Contest participation is free for all registered members.</p>
+                    </div>
+                </div>
+                
+                <!-- For Readers FAQ -->
+                <div class="faq-item" data-category="readers">
+                    <div class="faq-question">How do I find stories I'll enjoy?</div>
+                    <div class="faq-answer">
+                        <p>There are several ways to discover great stories on VelvetQuill:</p>
+                        <ul>
+                            <li><strong>Browse by Category:</strong> Filter by romance sub-genres like contemporary, historical, paranormal, etc.</li>
+                            <li><strong>Use Tags:</strong> Search for specific tropes or themes using our tag system</li>
+                            <li><strong>Collections:</strong> Explore curated collections by our editors</li>
+                            <li><strong>Follow Authors:</strong> Follow your favorite writers to see their new works</li>
+                            <li><strong>Recommendations:</strong> Get personalized recommendations based on your reading history</li>
+                            <li><strong>Community Lists:</strong> Check out reading lists created by other members</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="readers">
+                    <div class="faq-question">Can I interact with writers on the platform?</div>
+                    <div class="faq-answer">
+                        <p>Absolutely! We encourage reader-writer interaction through:</p>
+                        <ul>
+                            <li><strong>Comments:</strong> Leave comments on stories you enjoy</li>
+                            <li><strong>Direct Messages:</strong> Send private messages to writers (if they have this feature enabled)</li>
+                            <li><strong>Reviews:</strong> Provide constructive feedback on stories</li>
+                            <li><strong>Community Forums:</strong> Participate in discussions with writers and other readers</li>
+                            <li><strong>Following:</strong> Follow your favorite writers to get updates on their new works</li>
+                        </ul>
+                        <p>We ask that all interactions remain respectful and constructive.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="readers">
+                    <div class="faq-question">Is there a mobile app for reading?</div>
+                    <div class="faq-answer">
+                        <p>Currently, VelvetQuill is a web-based platform that is fully optimized for mobile browsers. You can access all features through your phone's browser with the same functionality as the desktop version.</p>
+                        <p>We are developing a dedicated mobile app, which will be released in the future. In the meantime, you can add our website to your home screen for an app-like experience:</p>
+                        <ul>
+                            <li>On iOS: Use the "Share" button and select "Add to Home Screen"</li>
+                            <li>On Android: Use the menu button and select "Add to Home Screen"</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <!-- Account & Technical FAQ -->
+                <div class="faq-item" data-category="account">
+                    <div class="faq-question">Is VelvetQuill free to use?</div>
+                    <div class="faq-answer">
+                        <p>Yes! VelvetQuill is completely free for both readers and writers. There are no subscription fees, reading fees, or publishing fees.</p>
+                        <p>We may introduce optional premium features in the future, but the core platform will always remain free to use.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="account">
+                    <div class="faq-question">How do I reset my password?</div>
+                    <div class="faq-answer">
+                        <p>If you've forgotten your password:</p>
+                        <ol>
+                            <li>Go to the login page</li>
+                            <li>Click on "Forgot Password"</li>
+                            <li>Enter the email address associated with your account</li>
+                            <li>Check your email for a password reset link</li>
+                            <li>Click the link and follow the instructions to create a new password</li>
+                        </ol>
+                        <p>If you don't receive the email within 15 minutes, check your spam folder or contact our support team.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="account">
+                    <div class="faq-question">Can I delete my account?</div>
+                    <div class="faq-answer">
+                        <p>Yes, you can delete your account at any time. However, please note:</p>
+                        <ul>
+                            <li>Account deletion is permanent and cannot be undone</li>
+                            <li>Your published stories will be removed from the platform</li>
+                            <li>Your comments and interactions will be anonymized</li>
+                        </ul>
+                        <p>To delete your account:</p>
+                        <ol>
+                            <li>Go to your Account Settings</li>
+                            <li>Scroll to the "Account Management" section</li>
+                            <li>Click "Delete Account" and confirm your choice</li>
+                        </ol>
+                    </div>
+                </div>
+                
+                <!-- Content Guidelines FAQ -->
+                <div class="faq-item" data-category="content">
+                    <div class="faq-question">What content is not allowed on VelvetQuill?</div>
+                    <div class="faq-answer">
+                        <p>To maintain a safe and inclusive community, we prohibit:</p>
+                        <ul>
+                            <li>Sexually explicit depictions involving minors (under 18 years)</li>
+                            <li>Racism and racist content</li>
+                            <li>Hate speech targeting protected characteristics</li>
+                            <li>Plagiarism or copyright infringement</li>
+                            <li>Spam, scams, or malicious content</li>
+                        </ul>
+                        <p>Beyond these restrictions, we encourage creative freedom across all romance sub-genres. Please review our complete <a href="legal-compliance.html#Content-guidelines">Content Guidelines</a> for detailed information.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="content">
+                    <div class="faq-question">How do content warnings work?</div>
+                    <div class="faq-answer">
+                        <p>We use a content warning system to help readers make informed choices:</p>
+                        <ul>
+                            <li>When publishing, writers must select appropriate content warnings</li>
+                            <li>Common warnings include: explicit sexual content, violence, abuse, self-harm, etc.</li>
+                            <li>Stories with certain warnings are filtered and tagged appropriately</li>
+                            <li>Readers can filter out content with specific warnings if desired</li>
+                        </ul>
+                        <p>This system ensures that readers can find content that matches their preferences while allowing writers creative freedom.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item" data-category="content">
+                    <div class="faq-question">Who owns the copyright to my stories?</div>
+                    <div class="faq-answer">
+                        <p>You retain full copyright to all original stories you publish on VelvetQuill. By posting your work here, you grant VelvetQuill a license to display and distribute your content on our platform, but you maintain all ownership rights.</p>
+                        <p>You are free to remove your stories at any time, and you can publish your work elsewhere (unless you've entered into exclusive publishing agreements through contests or other programs).</p>
+                        <p>For complete details, please see our <a href="legal-compliance.html#Terms-of-use">Terms of Use</a>.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-cta">
+                <h2>Still Have Questions?</h2>
+                <p>Can't find the answer you're looking for? Our support team is here to help.</p>
+                <a href="contact.html" class="btn">Contact Us</a>
+            </div>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>VelvetQuill</h3>
+                    <p>Your premier destination for romance literature, community, and creativity.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="category-stories.html">Browse Stories</a></li>
+                        <li><a href="community-bulletin.html">Writing Contests</a></li>
+                        <li><a href="community-bulletin.html">Community Forums</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Legal</h3>
+                    <ul>
+                        <li><a href="legal-compliance.html#terms-of-use">Terms of Use</a></li>
+                        <li><a href="legal-compliance.html#content-guidelines">Content Guidelines</a></li>
+                        <li><a href="legal-compliance.html#privacy-policy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact</h3>
+                    <ul>
+                        <li>Email: <a href="mailto:fatherlytitus69@gmail.com">fatherlytitus69@gmail.com</a></li>
+                        <li><a href="index.html">Contact Form</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>&copy; 2025 VelvetQuill. Created by Fatherly P. Titus. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // FAQ toggle functionality
+            const faqItems = document.querySelectorAll('.faq-item');
+            
+            faqItems.forEach(item => {
+                const question = item.querySelector('.faq-question');
+                
+                question.addEventListener('click', () => {
+                    // Close all other items
+                    faqItems.forEach(otherItem => {
+                        if (otherItem !== item) {
+                            otherItem.classList.remove('active');
+                        }
+                    });
+                    
+                    // Toggle current item
+                    item.classList.toggle('active');
+                });
+            });
+            
+            // Category filter functionality
+            const categoryBtns = document.querySelectorAll('.category-btn');
+            
+            categoryBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update active button
+                    categoryBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    
+                    const category = btn.getAttribute('data-category');
+                    
+                    // Show/hide FAQ items based on category
+                    faqItems.forEach(item => {
+                        if (category === 'all' || item.getAttribute('data-category') === category) {
+                            item.style.display = 'block';
+                        } else {
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>
+</body>
+</html>

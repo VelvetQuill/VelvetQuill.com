@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary Meta Tags -->
+    <title>Romance Story Categories - Explore Genres & Themes | VelvetQuill</title>
+    <meta name="description" content="Browse all romance story categories on VelvetQuill. Discover contemporary, historical, fantasy, paranormal romance and more. Find your perfect love story genre.">
+    <meta name="keywords" content="romance categories, love story genres, contemporary romance, historical romance, fantasy romance, romance themes, romance subgenres">
+    <meta name="author" content="Fatherly P. Titus">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://velvetquill.com/category-list.html">
+    <meta property="og:title" content="Romance Story Categories - Explore Genres & Themes | VelvetQuill">
+    <meta property="og:description" content="Browse all romance story categories on VelvetQuill. Discover contemporary, historical, fantasy romance and more subgenres.">
+    <meta property="og:image" content="https://velvetquill.com/images/categories-og.jpg">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://velvetquill.com/category-list.html">
+    <meta property="twitter:title" content="Romance Story Categories - Explore Genres & Themes">
+    <meta property="twitter:description" content="Discover all romance story categories on VelvetQuill. Find your perfect love story genre from contemporary to fantasy romance.">
+    <meta property="twitter:image" content="https://velvetquill.com/images/categories-twitter.jpg">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://velvetquill.com/category-list.html">
+    
+    <!-- Preload Critical Resources -->
+    <link rel="preload" href="styles/style.css" as="style">
+    <link rel="preload" href="scripts/categories-list.js" as="script">
+    
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/w3css.css">
+    <link rel="stylesheet" href="styles/categories-list.css">
+    <link rel="stylesheet" href="styles/materialize.min.css">
+    <link href="styles/font/micons.css" rel="stylesheet">
+    
+    <link rel="stylesheet" href="scripts/Slick/slick.css">
+    <link rel="stylesheet" href="scripts/Slick/slick-theme.css">
+    
+    <!-- Google Fonts -->
+    <link href="styles/Playfair/VQFonts.css" rel="stylesheet">
+    
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "Romance Story Categories",
+      "description": "Browse all romance story categories and genres available on VelvetQuill",
+      "url": "https://velvetquill.com/category-list.html",
+      "mainEntity": {
+        "@type": "ItemList",
+        "numberOfItems": 20,
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Contemporary Romance"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Historical Romance"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Fantasy Romance"
+          }
+        ]
+      }
+    }
+    </script>
+</head>
+
+
+<body>
+  
+        <!-- Navigation -->
+<nav class="w3-container navbar sticky">
+    <div class="nav-wrapper">
+        <a href="#" class="brand-logo">VelvetQuill</a>
+        <a href="#" data-target="mobile-nav" class="sidenav-trigger"><i class="material-icons">menu</i></a>
+        
+        <a id="user-avatar-link" class="w3-right" href="index.html" data-target="">
+            <div class="user-avatar" id="user-avatar-header">U</div>
+        </a>
+        
+        <!-- Desktop Navigation -->
+        <ul class="right hide-on-med-and-down">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="about.html">About</a></li>
+            <li><a href="FAQ.html">FAQ</a></li>
+            
+            <!-- User Actions - Changes based on login state -->
+            <li class="user-actions" style="display: none !important;">
+                <!-- Logged Out State - Initially visible -->
+                <div id="guest-actions" class="nav-state">
+                    <a class="waves-effect waves-light btn modal-trigger" href="signin.html" id="login-btn">Login</a>
+                    <a class="waves-effect waves-light btn modal-trigger" href="signup.html" id="register-btn">Sign Up</a>
+                </div>
+                
+                <!-- Logged In State - Initially hidden -->
+                <div id="user-menu" class="nav-state" style="display: none !important;">
+                    <!-- Write Story Button -->
+                    <a id="desktop-author-register-btn" class="waves-effect waves-light btn modal-trigger" href="author-register.html" style="margin-right: 10px; background-color: #C71585;">
+                        <i class="material-icons left">user-plus</i>Become An Author
+                    </a>
+                    
+                    <!-- User Dropdown -->
+                    <a class="dropdown-trigger" href="#" data-target="user-dropdown">
+                        <div class="user-avatar" id="user-avatar">U</div>
+                    </a>
+                    <ul id="user-dropdown" class="dropdown-content">
+                        <ul id="desktop-user-actions">
+                            <li><a href="author-register.html" id="mobile-author-register-btn">Become An Author</a></li>
+                        </ul>
+                        <ul class="" id="desktop-author-actions" style="display: none !important;">
+                            <li><a id="desktop-author-profile" class="" href=""></a> </li>
+                            <li><a id="desktop-author-create-story" class="" href="create-post.html">Write a Story</a> </li>
+                            <li><a id="desktop-author-dashboard" class="" href=""></a> </li>
+                        </ul>
+                        <ul id="desktop-admin-actions" class="nav-state" style="display: none !important;">
+                            <li><a href="admin-dashboard.html" id="desktop-admin-dashboard-btn">To Dashboard</a></li>
+                        </ul>
+                        <li class="divider"></li>
+                        <li><a href="#" id="logout-btn">Logout</a></li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<!-- Mobile Navigation -->
+<ul class="sidenav" id="mobile-nav">
+    <li><a href="index.html">Home</a></li>
+    <li><a href="about.html">About</a></li>
+    <li><a href="FAQ.html">FAQ</a></li>
+    
+    <!-- Mobile User Actions -->
+    <li id="mobile-guest-actions" class="nav-state">
+        <a class="modal-trigger" href="signin.html">Login</a>
+        <a class="modal-trigger" href="signup.html">Sign Up</a>
+    </li>
+    <li id="mobile-user-actions" class="nav-state" style="display: none !important;">
+        <a href="author-register.html" id="mobile-author-register-btn">Become An Author</a>
+    </li>
+    <li id="mobile-admin-actions" class="nav-state" style="display: none !important;">
+        <a href="admin-dashboard.html" id="mobile-admin-dashboard-btn">To Dashboard</a>
+    </li>
+    <li id="mobile-author-actions" class="nav-state" style="display: none !important;">
+        <a href="author-room.html" id="mobile-author-profile-btn">My Profile</a>
+        <a id="mobile-author-create-story-btn" href="create-post.html">Write a Story</a>
+        <a href="author-dashboard.html" id="mobile-author-dashboard-btn">My Dashboard</a>
+    </li>
+    <li id="mobile-logout" style="display: none !important;">
+        <a href="#" id="mobile-logout-btn" class="primary-text">Logout</a> 
+    </li>
+</ul>
+    
+    
+    <!-- Categories Header -->
+    <section class="categories-header">
+        <div class="container w3-text-white">
+            <div class="breadcrumb w3-medium">
+                <a href="index.html" class="w3-text-light-grey">Home</a>
+                <span class="separator">/</span>
+                <span class="w3-text-light-grey bold">Categories</span>
+            </div>
+            <h1 class="categories-title bold w3-xxxlarge">Story Categories</h1>
+            <p class="categories-description">Explore our diverse collection of romance stories across various genres and themes</p>
+            <div class="categories-count" id="categories-count">Discover your next favorite story</div>
+        </div>
+    </section>
+    
+    
+    <div id="poster-wall" class="w3-container w3-margin w3-card-4 w3-center" style="padding:0;margin:10px;height:60vh;width: 90vw;object-fit:contain;background-size: contain;background-position:center;">
+        
+    </div>
+    
+
+    <!-- Categories Grid -->
+    <section class="categories-grid-section section-padding">
+        <div class="container">
+            <div class="row" id="categories-container">
+                <!-- Categories will be loaded here by JavaScript --> 
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Categories -->
+    <section class="popular-categories section-padding">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 center-align">
+                    <h3 class="section-title">Most Popular Categories</h3>
+                    <p class="section-subtitle">Start with our most loved genres</p>
+                </div>
+            </div>
+            <div class="row" id="popular-categories-container">
+                <!-- Popular categories will be loaded here by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="w3-container page-footer">
+        <div class="w3-container">
+            <div class="row">
+                <div class="col l6 s12">
+                    <h5 class="white-text">VelvetQuill</h5>
+                    <p class="grey-text text-lighten-4">Home of Romance & Erotica.</p>
+                     
+                </div>
+                <div class="col l4 offset-l2 s12">
+                    <h5 class="white-text">Links</h5>
+                    <ul>
+                        <li><a class="grey-text text-lighten-3 bold" href="community-bulletin.html">Community Bulletin</a></li>
+                        <li><a class="grey-text text-lighten-3" href="about.html">About Us</a></li>
+                        <li><a class="grey-text text-lighten-3" href="legal-compliance.html#content-guidelines">Guidelines</a></li>
+                        <li><a class="grey-text text-lighten-3" href="FAQ.html">FAQ</a></li>
+                        <li><a class="grey-text text-lighten-3" href="legal-compiance.html#privacy-policy">Privacy Policy</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-copyright">
+            <div class="w3-container">
+                © 2025 VelvetQuill
+                <a class="grey-text text-lighten-4 right" href="#!">More Links</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/Slick/slick.min.js"></script>
+    <script src="scripts/materialize.min.js"></script>
+
+    <script src="scripts/api-service.js"></script>
+    <script src="scripts/page-nav.js"></script>
+    <script src="scripts/categories-list.js"></script>
+    <!--script src="scripts/vq.js"></script-->
+</body>
+</html>
