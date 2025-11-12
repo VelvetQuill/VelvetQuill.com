@@ -1,0 +1,215 @@
+
+/* VelvetQuill Theme Styles */
+:root {
+    --velvet-primary: #8B0000;
+    --velvet-secondary: #B22222;
+    --velvet-accent: #DC143C;
+    --velvet-light: #FFF0F5;
+    --velvet-dark: #4A0000;
+    --velvet-gold: #D4AF37;
+}
+
+body {
+    background: linear-gradient(135deg, var(--velvet-light) 0%, #ffffff 100%);
+    min-height: 100vh;
+}
+
+/* Navigation */
+.velvet-nav {
+    background: linear-gradient(135deg, var(--velvet-primary) 0%, var(--velvet-secondary) 100%);
+    box-shadow: 0 2px 10px rgba(139, 0, 0, 0.3);
+}
+
+.velvet-nav .brand-logo {
+    font-weight: 600;
+    padding-left: 15px;
+}
+
+.velvet-nav a.active {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+}
+
+/* Cards */
+.velvet-card {
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(139, 0, 0, 0.15);
+    border: 1px solid rgba(139, 0, 0, 0.1);
+}
+
+.velvet-card .card-title {
+    color: var(--velvet-primary);
+    font-weight: 600;
+    border-bottom: 2px solid var(--velvet-light);
+    padding-bottom: 10px;
+}
+
+.velvet-light {
+    background-color: var(--velvet-light) !important;
+    border-left: 4px solid var(--velvet-primary);
+}
+
+/* Buttons */
+.velvet-btn {
+    background: linear-gradient(135deg, var(--velvet-primary) 0%, var(--velvet-secondary) 100%);
+    border-radius: 25px;
+    text-transform: none;
+    font-weight: 500;
+    box-shadow: 0 4px 15px rgba(139, 0, 0, 0.3);
+    transition: all 0.3s ease;
+}
+
+.velvet-btn:hover {
+    background: linear-gradient(135deg, var(--velvet-secondary) 0%, var(--velvet-accent) 100%);
+    box-shadow: 0 6px 20px rgba(139, 0, 0, 0.4);
+    transform: translateY(-2px);
+}
+
+.velvet-btn-outline {
+    background: transparent;
+    border: 2px solid var(--velvet-primary);
+    color: var(--velvet-primary);
+    border-radius: 25px;
+    text-transform: none;
+    font-weight: 500;
+}
+
+.velvet-btn-outline:hover {
+    background: var(--velvet-primary);
+    color: white;
+}
+
+/* Form Styles */
+.input-field input:focus + label,
+.input-field textarea:focus + label {
+    color: var(--velvet-primary) !important;
+}
+
+.input-field input:focus,
+.input-field textarea:focus {
+    border-bottom: 2px solid var(--velvet-primary) !important;
+    box-shadow: 0 1px 0 0 var(--velvet-primary) !important;
+}
+
+[type="checkbox"].filled-in:checked + span:not(.lever):after {
+    border: 2px solid var(--velvet-primary);
+    background-color: var(--velvet-primary);
+}
+
+/* Word Counter */
+.word-counter {
+    text-align: right;
+    font-size: 0.8rem;
+    color: #666;
+    margin-top: 5px;
+}
+
+.word-counter.warning {
+    color: var(--velvet-accent);
+    font-weight: bold;
+}
+
+/* Image Preview */
+.image-preview-container {
+    margin-top: 15px;
+    text-align: center;
+    padding: 15px;
+    border: 2px dashed #ddd;
+    border-radius: 10px;
+    background: #fafafa;
+}
+
+.preview-image {
+    max-width: 200px;
+    max-height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--velvet-primary);
+}
+
+#remove-image {
+    display: block;
+    margin: 10px auto 0;
+}
+
+/* Feature Cards */
+.feature-card {
+    padding: 20px;
+}
+
+.feature-card .velvet-icon {
+    color: var(--velvet-primary);
+    margin-bottom: 15px;
+}
+
+.feature-card h5 {
+    color: var(--velvet-dark);
+    margin-bottom: 15px;
+}
+
+.feature-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* Progress Bar */
+.velvet-progress {
+    background-color: #f0f0f0;
+}
+
+.velvet-progress .indeterminate {
+    background-color: var(--velvet-primary);
+}
+
+/* Titles */
+.velvet-title {
+    color: var(--velvet-primary);
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Modal Styles */
+.modal {
+    border-radius: 15px;
+}
+
+.modal .modal-content h4 {
+    color: var(--velvet-primary);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        width: 95%;
+    }
+    
+    .preview-image {
+        max-width: 150px;
+        max-height: 150px;
+    }
+    
+    .feature-card {
+        margin-bottom: 30px;
+    }
+}
+
+/* Loading States */
+.submit-btn:disabled {
+    background: #ccc !important;
+    box-shadow: none !important;
+    transform: none !important;
+    cursor: not-allowed;
+}
+
+/* Success States */
+.green-text {
+    color: #4CAF50 !important;
+}
+
+/* Error States */
+.red-text {
+    color: var(--velvet-accent) !important;
+}
+
+

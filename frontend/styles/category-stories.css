@@ -1,0 +1,191 @@
+
+
+/* Add to existing CSS or create a new category-stories.css file */
+
+
+        .category-header {
+            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+            color: white;
+            padding: 60px 0;
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .category-title {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        .category-description {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        
+        .stories-count {
+            background: rgba(255,255,255,0.2);
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-top: 15px;
+            display: inline-block;
+        }
+        
+        .filter-options {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+        }
+        
+        .filter-row {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+        
+        .filter-group {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .view-options {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .view-option {
+            padding: 8px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .view-option.active {
+            background: var(--primary-color);
+            color: white;
+            border-color: var(--primary-color);
+        }
+        
+        .stories-per-page {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .stories-per-page select {
+            width: auto;
+            display: inline-block;
+        }
+        
+        .breadcrumb {
+            margin-bottom: 20px;
+        }
+        
+        .breadcrumb a {
+            color: var(--primary-color);
+        }
+        
+        .breadcrumb .separator {
+            margin: 0 10px;
+            color: #666;
+        }
+        
+        @media (max-width: 768px) {
+            .category-title {
+                font-size: 2rem;
+            }
+            
+            .filter-row {
+                flex-direction: column;
+            }
+            
+            .filter-group {
+                width: 100%;
+            }
+        }
+
+/* List View Styles */
+#stories-container.list-view {
+    display: block;
+}
+
+#stories-container.list-view .col {
+    width: 100%;
+    float: none;
+}
+
+#stories-container.list-view .story-card {
+    display: flex;
+    flex-direction: row;
+    height: 200px;
+}
+
+#stories-container.list-view .story-card-image {
+    width: 150px;
+    height: 100%;
+    flex-shrink: 0;
+}
+
+#stories-container.list-view .card-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+#stories-container.list-view .truncate {
+    -webkit-line-clamp: 3;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+/* Category Cards */
+.category-card {
+    transition: transform 0.3s ease;
+    height: 200px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+}
+
+.category-card .btn {
+    margin-top: 15px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    #stories-container.list-view .story-card {
+        flex-direction: column;
+        height: auto;
+    }
+    
+    #stories-container.list-view .story-card-image {
+        width: 100%;
+        height: 150px;
+    }
+    
+    .category-card {
+        height: auto;
+        margin-bottom: 20px;
+    }
+}
+
+/* Loading and empty states */
+#loading-indicator, #no-stories-message {
+    padding: 40px 0;
+}
+
+.section-padding {
+    padding: 60px 0;
+}

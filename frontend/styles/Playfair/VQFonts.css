@@ -1,0 +1,47 @@
+@font-face {
+    font-family: 'pd-black';
+    src: url('PlayfairDisplay-BlackItalic.woff2') format('woff2'),
+        url('PlayfairDisplay-BlackItalic.woff') format('woff');
+    font-weight: 900;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'pd-italic';
+    src: url('PlayfairDisplay-Italic.woff2') format('woff2'),
+        url('PlayfairDisplay-Italic.woff') format('woff');
+    font-weight: normal;
+    font-style: italic;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'pd-semitalic';
+    src: url('/styles/Playfair/PlayfairDisplay-SemiBold.woff2') format('woff2'),
+        url('/styles/PlayfairDisplay-SemiBoldItalic.woff') format('woff');
+    font-weight: 600;
+    font-style: italic;
+    font-display: swap;
+}
+
+
+.vq-black{
+  font-family: pd-black;
+}
+.vq-italic{
+  font-family: pd-italic;
+}
+.vq-bold{
+  font-family: pd-semitalic;
+}
+
+.bold{
+    font-weight: bold;
+}
+
+.underline{
+    text-decoration: underline;
+}
+
+

@@ -1,0 +1,288 @@
+
+
+/* sponsors.css */
+:root {
+    --primary-color: #8B0000;
+    --primary-light: #B22222;
+    --primary-dark: #5D0000;
+    --secondary-color: #FFE4E1;
+    --accent-color: #C71585;
+    --text-dark: #2C1810;
+    --text-light: #F5F5F5;
+    --background-light: #FFF8F8;
+    --card-bg: #FFFFFF;
+    --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --bronze: #CD7F32;
+    --silver: #C0C0C0;
+    --gold: #FFD700;
+}
+
+.sponsors-hero {
+    background: linear-gradient(rgba(139, 0, 0, 0.85), rgba(139, 0, 0, 0.85)), url('assets/VQ3.jpg') no-repeat center center;
+    background-size: cover;
+    color: white;
+    padding: 120px 0;
+    text-align: center;
+}
+
+.sponsors-hero .hero-title {
+    font-size: 3.5rem;
+    margin-bottom: 20px;
+}
+
+.sponsors-hero .hero-subtitle {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    font-weight: 300;
+}
+
+.cta-button {
+    background-color: var(--accent-color);
+    font-size: 1.2rem;
+    padding: 0 2rem;
+    height: 50px;
+    line-height: 50px;
+    border-radius: 25px;
+}
+
+.section-padding {
+    padding: 80px 0;
+}
+
+.section-title {
+    text-align: center;
+    margin-bottom: 40px;
+    position: relative;
+}
+
+.section-title:after {
+    content: '';
+    display: block;
+    width: 100px;
+    height: 3px;
+    background-color: var(--primary-color);
+    margin: 15px auto;
+}
+
+.section-subtitle {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    margin-bottom: 40px;
+}
+
+/* Benefit Cards */
+.benefit-card {
+    height: 100%;
+    transition: transform 0.3s ease;
+}
+
+.benefit-card:hover {
+    transform: translateY(-10px);
+}
+
+.benefit-card i {
+    color: var(--primary-color);
+    margin-bottom: 20px;
+}
+
+/* Tier Cards */
+.tier-card {
+    position: relative;
+    overflow: visible;
+    transition: transform 0.3s ease;
+}
+
+.tier-card:hover {
+    transform: translateY(-10px);
+}
+
+.tier-card.popular {
+    transform: scale(1.05);
+    z-index: 1;
+}
+
+.tier-card.popular:hover {
+    transform: scale(1.05) translateY(-10px);
+}
+
+.popular-badge {
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--accent-color);
+    color: white;
+    padding: 5px 15px;
+    border-radius: 15px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.tier-card.bronze .card-title {
+    color: var(--bronze);
+}
+
+.tier-card.silver .card-title {
+    color: var(--silver);
+}
+
+.tier-card.gold .card-title {
+    color: var(--gold);
+}
+
+.price {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.period {
+    font-size: 1rem;
+    color: #666;
+}
+
+.tier-features {
+    margin: 20px 0;
+}
+
+.tier-features li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.tier-features i {
+    margin-right: 10px;
+}
+
+.tier-features i.check {
+    color: #4CAF50;
+}
+
+.tier-features i.close {
+    color: #F44336;
+}
+
+.bronze-btn {
+    background-color: var(--bronze);
+}
+
+.silver-btn {
+    background-color: var(--silver);
+    color: #333;
+}
+
+.gold-btn {
+    background-color: var(--gold);
+    color: #333;
+}
+
+/* Benefits Section */
+.benefit-category {
+    margin-bottom: 50px;
+}
+
+.benefit-category-title {
+    color: var(--primary-color);
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid var(--secondary-color);
+}
+
+.benefit-item {
+    padding: 20px;
+    text-align: center;
+}
+
+.benefit-item h4 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+.benefit-item i {
+    margin-right: 10px;
+    color: var(--primary-color);
+}
+
+/* Current Sponsors */
+#sponsors-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+
+.sponsor-logo {
+    width: 150px;
+    height: 100px;
+    background-color: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow);
+    padding: 15px;
+    transition: transform 0.3s ease;
+}
+
+.sponsor-logo:hover {
+    transform: scale(1.05);
+}
+
+.sponsor-logo img {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+/* Contact Form */
+.contact-section {
+    background-color: var(--secondary-color);
+}
+
+/* FAQ Section */
+.collapsible {
+    border: none;
+    box-shadow: var(--shadow);
+}
+
+.collapsible-header {
+    font-weight: 500;
+}
+
+.collapsible-body {
+    background-color: var(--background-light);
+}
+
+/* Responsive Design */
+@media (max-width: 992px) {
+    .tier-card.popular {
+        transform: scale(1);
+    }
+    
+    .tier-card.popular:hover {
+        transform: translateY(-10px);
+    }
+}
+
+@media (max-width: 600px) {
+    .sponsors-hero .hero-title {
+        font-size: 2.5rem;
+    }
+    
+    .sponsors-hero .hero-subtitle {
+        font-size: 1.2rem;
+    }
+    
+    .section-padding {
+        padding: 50px 0;
+    }
+    
+    .price {
+        font-size: 2rem;
+    }
+}
+

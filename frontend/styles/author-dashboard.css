@@ -1,0 +1,367 @@
+/* author-dashboard.css */
+
+/* Dashboard Header */
+.dashboard-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+}
+
+.dashboard-header h1 {
+    margin: 0;
+    font-size: 2.5rem;
+    font-weight: 300;
+}
+
+.dashboard-subtitle {
+    opacity: 0.9;
+    margin: 0.5rem 0 0 0;
+    font-size: 1.1rem;
+}
+
+.author-profile-summary {
+    text-align: right;
+}
+
+/* Stats Cards */
+.dashboard-stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.stat-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    border-left: 4px solid #667eea;
+    transition: transform 0.3s ease;
+}
+
+.stat-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.stat-number {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #667eea;
+    display: block;
+}
+
+.stat-label {
+    color: #666;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Published Stories Stats Table */
+.published-stats-table-container {
+    overflow-x: auto;
+    margin: 1rem 0;
+}
+
+.published-stats-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.published-stats-table th {
+    background: linear-gradient(135deg, #667eea, #764ba2);
+    color: white;
+    padding: 1rem;
+    text-align: left;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+}
+
+.published-stats-table td {
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    vertical-align: middle;
+}
+
+.published-stats-table tr:hover {
+    background-color: #f8f9fa;
+}
+
+.story-stats-filters {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.story-stats-filters select {
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 0.5rem;
+    background: white;
+    font-size: 0.9rem;
+}
+
+/* Performance Indicators */
+.performance-indicator {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.9rem;
+}
+
+.performance-good {
+    color: #4caf50;
+}
+
+.performance-average {
+    color: #ff9800;
+}
+
+.performance-poor {
+    color: #f44336;
+}
+
+/* Chart Containers */
+.chart-container {
+    position: relative;
+    height: 300px;
+    width: 100%;
+}
+
+/* Cards */
+.card {
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 2rem;
+}
+
+.card-content {
+    padding: 1.5rem;
+}
+
+.card-title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+/* Quick Actions */
+.quick-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.action-btn {
+    margin: 0.25rem 0;
+    border-radius: 4px;
+    text-transform: none;
+    font-weight: 500;
+}
+
+.full-width {
+    width: 100%;
+}
+
+/* Followers Section */
+.followers-section {
+    text-align: center;
+    padding: 1rem 0;
+}
+
+.followers-count {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: #667eea;
+    font-weight: bold;
+}
+
+.followers-count i {
+    vertical-align: middle;
+    margin-right: 0.5rem;
+}
+
+.follower-growth {
+    font-size: 0.9rem;
+}
+
+.growth-positive {
+    color: #4caf50;
+}
+
+.growth-negative {
+    color: #f44336;
+}
+
+/* Comments */
+.comment-item {
+    border-left: 3px solid #667eea;
+    padding: 1rem;
+    margin: 0.5rem 0;
+    background: #f8f9fa;
+    border-radius: 0 4px 4px 0;
+}
+
+.comment-author {
+    font-weight: 600;
+    color: #333;
+}
+
+.comment-date {
+    color: #666;
+    font-size: 0.8rem;
+}
+
+.comment-content {
+    margin: 0.5rem 0 0 0;
+    color: #444;
+}
+
+/* Top Stories */
+.top-story-item {
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+}
+
+.story-rank {
+    font-weight: bold;
+    color: #667eea;
+    min-width: 2rem;
+}
+
+.story-title {
+    flex: 1;
+    font-weight: 500;
+    color: #333;
+    text-decoration: none;
+}
+
+.story-title:hover {
+    color: #667eea;
+}
+
+.story-stats {
+    font-size: 0.8rem;
+    color: #666;
+    text-align: right;
+}
+
+/* Pagination */
+.pagination {
+    display: flex;
+    justify-content: center;
+    list-style: none;
+    padding: 1rem 0;
+    gap: 0.5rem;
+}
+
+.pagination li.active {
+    background-color: #667eea;
+}
+
+.pagination li a {
+    color: #667eea;
+}
+
+.pagination li.active a {
+    color: white;
+}
+
+/* Analytics Cards */
+.analytics-card {
+    background: #f8f9fa;
+    border-radius: 8px;
+    padding: 1rem;
+    margin: 0.5rem 0;
+}
+
+.analytics-metric {
+    text-align: center;
+    padding: 1rem;
+    background: white;
+    border-radius: 6px;
+    margin: 0.5rem 0;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.metric-value {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #667eea;
+}
+
+.metric-label {
+    font-size: 0.9rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .dashboard-stats {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    .card-title-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .story-stats-filters {
+        width: 100%;
+        justify-content: space-between;
+    }
+    
+    .published-stats-table {
+        font-size: 0.9rem;
+    }
+    
+    .published-stats-table th,
+    .published-stats-table td {
+        padding: 0.75rem 0.5rem;
+    }
+    
+    .chart-container {
+        height: 250px;
+    }
+}
+
+@media (max-width: 480px) {
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+    
+    .dashboard-header h1 {
+        font-size: 2rem;
+    }
+    
+    .published-stats-table {
+        font-size: 0.8rem;
+    }
+    
+    .story-stats-filters {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .story-stats-filters select {
+        width: 100%;
+    }
+}

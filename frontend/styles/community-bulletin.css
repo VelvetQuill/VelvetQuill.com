@@ -1,0 +1,302 @@
+
+/* Community Bulletin Specific Styles */
+.community-bulletin {
+    background-color: var(--background-light);
+    min-height: 100vh;
+    padding: 20px 0;
+}
+
+.bulletin-header {
+    background: linear-gradient(135deg, var(--primary-color), var(--primary-light));
+    color: white;
+    padding: 3rem 0;
+    text-align: center;
+    margin-bottom: 2rem;
+}
+
+.bulletin-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+}
+
+.bulletin-subtitle {
+    font-size: 1.2rem;
+    opacity: 0.9;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.section-card {
+    background: var(--card-bg);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    margin-bottom: 2rem;
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.section-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.section-header {
+    background: linear-gradient(135deg, var(--primary-dark), var(--primary-color));
+    color: white;
+    padding: 1.5rem;
+    border-bottom: 3px solid var(--accent-color);
+}
+
+.section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.8rem;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.section-title i {
+    color: var(--secondary-color);
+}
+
+.section-content {
+    padding: 1.5rem;
+}
+
+.contest-card {
+    border-left: 4px solid var(--accent-color);
+    background: var(--secondary-color);
+    padding: 1.5rem;
+    margin-bottom: 1rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.contest-card:hover {
+    transform: translateX(5px);
+    background: #FFD7D0;
+}
+
+.contest-title {
+    color: var(--primary-dark);
+    font-weight: bold;
+    font-size: 1.3rem;
+    margin-bottom: 0.5rem;
+}
+
+.contest-theme {
+    color: var(--primary-color);
+    font-style: italic;
+    margin-bottom: 1rem;
+}
+
+.contest-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.contest-timeline {
+    color: var(--text-dark);
+    font-size: 0.9rem;
+}
+
+.contest-prizes {
+    background: var(--primary-color);
+    color: white;
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.contest-description {
+    color: var(--text-dark);
+    margin-bottom: 1rem;
+    line-height: 1.5;
+}
+
+.contest-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.btn-join {
+    background-color: var(--accent-color);
+    color: white;
+}
+
+.btn-join:hover {
+    background-color: #D81B60;
+}
+
+.story-item, .author-item, .winner-item {
+    display: flex;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid #eee;
+    transition: background-color 0.3s ease;
+}
+
+.story-item:hover, .author-item:hover, .winner-item:hover {
+    background-color: var(--secondary-color);
+}
+
+.story-item:last-child, .author-item:last-child, .winner-item:last-child {
+    border-bottom: none;
+}
+
+.rank-badge {
+    background: var(--primary-color);
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 1rem;
+    flex-shrink: 0;
+}
+
+.rank-1 { 
+    background: #FFD700; 
+    color: var(--text-dark); 
+}
+
+.rank-2 { 
+    background: #C0C0C0; 
+}
+
+.rank-3 { 
+    background: #CD7F32; 
+}
+
+.item-content {
+    flex: 1;
+}
+
+.item-title {
+    font-weight: bold;
+    color: var(--primary-dark);
+    margin-bottom: 0.25rem;
+}
+
+.item-meta {
+    color: #666;
+    font-size: 0.9rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.item-stats {
+    display: flex;
+    gap: 1rem;
+    margin-top: 0.5rem;
+}
+
+.stat {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    color: var(--primary-color);
+    font-size: 0.85rem;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 3rem 2rem;
+    color: #666;
+}
+
+.empty-state i {
+    font-size: 4rem;
+    color: #ddd;
+    margin-bottom: 1rem;
+}
+
+.view-all-btn {
+    text-align: center;
+    margin-top: 1.5rem;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .bulletin-title {
+        font-size: 2.2rem;
+    }
+    
+    .contest-meta {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .contest-actions {
+        width: 100%;
+        justify-content: flex-start;
+    }
+    
+    .item-meta, .item-stats {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .story-item, .author-item, .winner-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1rem;
+    }
+    
+    .rank-badge {
+        align-self: flex-start;
+    }
+}
+
+/* Search Section Styles */
+.search-section {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    padding: 2rem 0;
+    margin-bottom: 2rem;
+}
+
+.search-container {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.search-form {
+    display: flex;
+    gap: 1rem;
+    align-items: flex-end;
+}
+
+.search-form .input-field {
+    flex: 1;
+    margin: 0;
+}
+
+.search-btn {
+    white-space: nowrap;
+}
+
+/* Responsive design */
+@media (max-width: 600px) {
+    .search-form {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .search-btn {
+        width: 100%;
+    }
+}
