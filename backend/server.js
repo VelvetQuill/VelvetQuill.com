@@ -30,6 +30,7 @@ const app = express();
 
 app.use(cors({
   origin: [
+    'https://velvetquill.github.io',
     'https://velvetquill.github.io/VelvetQuill/',
     'https://velvetquill-com.onrender.com',
     'http://localhost:3000',
