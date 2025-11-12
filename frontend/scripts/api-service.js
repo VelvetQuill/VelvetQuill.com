@@ -1,5 +1,5 @@
 
-// api-service.js - Production Ready API Service for VelvetQuill
+// api-service.js 
 class ApiService {
     
     constructor() {
@@ -24,7 +24,6 @@ class ApiService {
         if (hostname.includes('netlify.app') || hostname.includes('velvetquillstories.netlify.app')) {
             return 'https://velvetquill-com.onrender.com/api';
         }
-        
         // Production - replace with your actual Render backend URL
         return 'https://velvetquill-com.onrender.com/api';
     }
