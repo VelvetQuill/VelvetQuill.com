@@ -28,17 +28,10 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
-// Production CORS configuration
-const allowedOrigins = [
-  'https://velvetquillstories.netlify.app',
-  'https://velvetquill-backend.onrender.com',
-  'http://localhost:3000',
-  'http://localhost:5000'
-];
-
 app.use(cors({
   origin: [
     'https://velvetquillstories.netlify.app',
+    'https://velvetquill-backend.onrender.com',
     'http://localhost:3000',
     'http://localhost:5000'
   ],
