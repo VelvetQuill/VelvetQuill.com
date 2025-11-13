@@ -49,37 +49,68 @@ class ApiService {
         return this.baseURL.includes('localhost') ? 'development' : 'production';
     }
 
+    // Facebook Lite detection
+isFacebookLite() {
+    const ua = navigator.userAgent;
+    return /FBAN\/FBLite|FBLite|FacebookLite/i.test(ua);
+}
+
+// Facebook Browser detection
+isFacebookBrowser() {
+    const ua = navigator.userAgent;
+    return /FBAN|FBAV|Facebook|FBIOS|FBLite/i.test(ua);
+}
+
     // Enhanced request method with retry logic
     async request(endpoint, options = {}, retries = 3) {
-        const url = `${this.baseURL}${endpoint}`;
-        
-        // Show loading indicator for longer requests
-        const loadingTimeout = setTimeout(() => {
-            this.showLoading(true);
-        }, 1000);
+    // Facebook-specific URL modifications
+    let url = `${this.baseURL}${endpoint}`;
+    
+    // Add cache-busting for Facebook browsers
+    if (this.isFacebookBrowser()) {
+        const separator = endpoint.includes('?') ? '&' : '?';
+        const cacheBuster = this.isFacebookLite() ? `_fbl=${Date.now()}` : `_fb=${Date.now()}`;
+        url += `${separator}${cacheBuster}&_rnd=${Math.random()}`;
+    }
+    
+    // Show loading indicator for longer requests
+    const loadingTimeout = setTimeout(() => {
+        this.showLoading(true);
+    }, 1000);
 
-        try {
-            const config = this.buildRequestConfig(options);
-            const response = await this.executeRequest(url, config);
-            
-            clearTimeout(loadingTimeout);
-            this.showLoading(false);
-            
-            return await this.handleResponse(response);
-            
-        } catch (error) {
-            clearTimeout(loadingTimeout);
-            this.showLoading(false);
-            
-            // Retry logic for network errors
-            if (retries > 0 && this.shouldRetry(error)) {
-                console.log(`Retrying request... ${retries} attempts left`);
-                await this.delay(1000 * (4 - retries)); // Exponential backoff
-                return this.request(endpoint, options, retries - 1);
-            }
-            
-            throw this.normalizeError(error);
+    try {
+        const config = this.buildRequestConfig(options);
+        
+        // Special handling for Facebook Lite
+        if (this.isFacebookLite() && options.method === 'GET') {
+            console.log('Facebook Lite detected - using enhanced retry logic');
+            retries = 5; // More retries for Facebook Lite
         }
+        
+        const response = await this.executeRequest(url, config);
+        
+        clearTimeout(loadingTimeout);
+        this.showLoading(false);
+        
+        return await this.handleResponse(response);
+        
+    } catch (error) {
+        clearTimeout(loadingTimeout);
+        this.showLoading(false);
+        
+        // Enhanced retry logic for Facebook browsers
+        if (retries > 0 && this.shouldRetry(error)) {
+            const delayTime = this.isFacebookLite() ? 
+                2000 * (4 - retries) : // Longer delays for Facebook Lite
+                1000 * (4 - retries);  // Normal delays for others
+                
+            console.log(`Retrying request... ${retries} attempts left (Facebook: ${this.isFacebookBrowser()})`);
+            await this.delay(delayTime);
+            return this.request(endpoint, options, retries - 1);
+        }
+        
+        throw this.normalizeError(error);
+    }
     }
 
     // Build request configuration
