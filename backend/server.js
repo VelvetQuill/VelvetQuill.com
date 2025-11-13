@@ -28,20 +28,53 @@ const __dirname = path.dirname(__filename);
 
 const app = express();
 
+const allowedOrigins = [
+  // Your main domain
+  'https://velvetquill.github.io',
+  
+  // Regular Facebook domains
+  'https://m.facebook.com',
+  'https://lm.facebook.com',
+  'https://web.facebook.com',
+  'https://static.xx.fbcdn.net',
+  'https://fbcdn.net',
+
+  'https://velvetquill.github.io.VelvetQuill',
+  
+  // FACEBOOK LITE SPECIFIC DOMAINS
+  'https://mbasic.facebook.com',
+  'https://mobile.facebook.com', 
+  'https://lite.facebook.com',
+  'https://m.lite.facebook.com',
+  
+  // Allow any subdomain of github.io (more permissive)
+  /https:\/\/[a-zA-Z0-9-]+\.github\.io$/,
+  
+  // Development
+  'http://localhost:3000',
+  'http://localhost:5000'
+];
+
+// Ultra-permissive for Facebook Lite detection
 app.use(cors({
-  origin: [
-    'https://velvetquill.github.io',
-    'https://m.facebook.com',
-    'https://lm.facebook.com',
-    'https://web.facebook.com',
-    'https://velvetquill.github.io/VelvetQuill/',
-    'https://velvetquill-com.onrender.com',
-    'http://localhost:3000',
-    'http://localhost:5000'
-  ],
+  origin: function (origin, callback) {
+    // Allow all Facebook-related and GitHub Pages origins
+    if (!origin || 
+        origin.includes('facebook') || 
+        origin.includes('github.io') ||
+        allowedOrigins.some(allowed => {
+          if (allowed instanceof RegExp) return allowed.test(origin);
+          return allowed === origin;
+        })) {
+      callback(null, true);
+    } else {
+      console.log('Blocked by CORS:', origin);
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With','Accept','Origin']
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'PATCH'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With', 'Accept', 'Origin']
 }));
 
 app.use(express.json({ limit: '10mb' }));
