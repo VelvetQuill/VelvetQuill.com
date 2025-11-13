@@ -33,7 +33,7 @@ jobs:
       uses: actions/upload-pages-artifact@v3
       with:
         # THIS IS THE KEY PART - points to your frontend folder
-        path: '.'
+        path: './frontend'
         
     - name: Deploy to GitHub Pages
       id: deployment
