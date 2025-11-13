@@ -402,24 +402,6 @@ function setupReadEventHandler() {
     console.log("ALL READ STORY BUTTONS PREPPED !");   
 }
 
-   
-    // Category filter with backend integration
-    $('.category-link').on('click', function() {
-        $('.category-link').removeClass('active');
-        $(this).addClass('active');
-        const category = $(this).data('category');
-        
-        // Redirect after short delay
-        setTimeout(() => {
-            if (category === "home") {
-                window.location.href = "index.html";
-            } else if (category === "all") {
-                window.location.href = "category-list.html";
-            } else {
-                window.location.href = `./category-stories.html?category=${category}`;
-            }
-        }, 500);
-    });
 
     // Story detail navigation
     $(document).on('click', '.read-story, .read-featured-story', function(e) {
