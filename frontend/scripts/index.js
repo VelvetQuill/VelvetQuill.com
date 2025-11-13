@@ -5,6 +5,7 @@ class IndexStories {
         this.storiesContainer = document.getElementById('recent-stories');
         this.paginationContainer = document.getElementById('pagination');
         this.maxStories = 20; // Maximum stories for index page
+        setEventListeners();
     }
 
     // Initialize index page stories
@@ -47,6 +48,27 @@ class IndexStories {
                 this.storiesContainer.innerHTML = '<p>Error loading stories. Please try again later.</p>';
             }
         }
+    }
+
+    
+setEventListeners() {
+        $('.category-link').on('click', function () {
+            $('.category-link').removeClass('active');
+            $(this).addClass('active');
+            const category = $(this).data('category');
+
+            // Redirect after short delay
+            setTimeout(() => {
+                if (category === "home") {
+                    window.location.href = "index.html";
+                } else if (category === "all") {
+                    window.location.href = "category-list.html";
+                } else {
+                    window.location.href = `./category-stories.html?category=${category}`;
+                }
+            }, 500);
+        });
+        console.log("INDEX LINKS LISTENERS SET !");
     }
 
     // Render stories to the container
