@@ -5,7 +5,7 @@ class IndexStories {
         this.storiesContainer = document.getElementById('recent-stories');
         this.paginationContainer = document.getElementById('pagination');
         this.maxStories = 20; // Maximum stories for index page
-        setEventListeners();
+        this.setEventListeners();
     }
 
     // Initialize index page stories
