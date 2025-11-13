@@ -124,6 +124,10 @@ isFacebookBrowser() {
             signal: AbortSignal.timeout(30000) // 30 second timeout
         };
 
+        if(this.isFacebookLite()){
+            config.signal = AbortSignal.timeout(45000);
+        }
+
         // Handle request body
         if (options.body) {
             config.body = this.processRequestBody(options.body, config.headers);
