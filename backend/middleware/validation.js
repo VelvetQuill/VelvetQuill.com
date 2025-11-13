@@ -129,17 +129,17 @@ export const validateStory = [
             for (let i = 0; i < pages.length; i++) {
                 const page = pages[i];
                 const charCount = page.content.split('').length;
-                if (!page.content || charCount < 1000) {
-                    throw new Error(`Page ${i + 1} must have at least 1000 characters; CURRENT COUNT: ${charCount}`);
+                const wordCount = page.content.split(' ').length;
+                if (!page.content || wordCount < 1000) {
+                    throw new Error(`Page ${i + 1} must have at least 1000+ words; CURRENT COUNT: ${wordCount}`);
                 }
-                if (charCount > 10000) {
-                    throw new Error(`Page ${i + 1} cannot exceed 10000 characters`);
+                if (charCount > 25000) {
+                    throw new Error(`Page ${i + 1} cannot exceed 25000 characters; CURRENT COUNT: ${charCount}`);
                 }
             }
             return true;
         }),
 
-    
     body('excerpt')
         .optional()
         .isLength({ max: 300 })
