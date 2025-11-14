@@ -332,7 +332,7 @@ class CreatePostPage {
 validatePageContent() {
         const content = document.getElementById('page-content')?.value || '';
         const words = this.countWords(content);
-        const charCount = countChars(content);
+        const charCount = this.countChars(content);
         
         const savePageBtn = document.getElementById('save-page-btn');
         const addPageBtn = document.getElementById('add-page-btn');
@@ -655,7 +655,7 @@ validatePageContent() {
 
         try {
             const formData = this.getFormData();
-            console.log('Submitting story data:', formData); // Debug log
+            //console.log('Submitting story data:', JSON.stringify(formData)); // Debug log
             
             const response = await window.apiService.createStory(formData);
 
@@ -666,7 +666,7 @@ validatePageContent() {
                 throw new Error(response.message || 'Failed to submit story');
             }
         } catch (error) {
-            console.error('Story submission error:', error);
+            //console.error('Story submission error:', error);
             M.toast({html: `Submission failed: ${error.message}`});
         } finally {
             this.setLoadingState(false);
@@ -733,6 +733,4 @@ validatePageContent() {
 document.addEventListener('DOMContentLoaded', function() {
     window.createPostPage = new CreatePostPage();
 });
-
-
 
