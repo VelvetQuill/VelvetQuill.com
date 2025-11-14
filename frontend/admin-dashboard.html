@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - VelvetQuill</title>
+
+    <link rel="stylesheet" href="styles/w3css.css" >
+    <link rel="stylesheet" href="styles/style.css">
+
+    <link rel="stylesheet" href="styles/admin-dashboard.css">
+    <link rel="stylesheet" href="styles/materialize.min.css">
+    <link href="styles/font/micons.css" rel="stylesheet">
+    <link href="styles/Playfair/VQFonts.css" rel="stylesheet">
+    
+</head>
+<body>
+    
+    <!-- Sidebar -->
+    <div class="w3-container sidebar">
+        <div class="sidebar-header">
+            <h5>VelvetQuill Admin</h5>
+        </div>
+        <div class="sidebar-menu">
+            <a href="#" class="active sidebar-menuitem" data-sideaction="dashboard"><i class="material-icons">dashboard</i> <span>Dashboard</span></a>
+            <a href="#user-management" class="sidebar-menuitem" data-sideaction="user-management"><i class="material-icons">people</i> <span>User Management</span></a>
+            <a href="#pending-requests-management" class="sidebar-menuitem" data-sideaction="pending-requests-management"><i class="material-icons">hourglass_top</i> <span>Pending Author Requests Management</span></a>
+            <a href="#author-management" class="sidebar-menuitem" data-sideaction="author-management"><i class="material-icons">person</i> <span>Author Management</span></a>
+            <a href="#content-management" class="sidebar-menuitem" data-sideaction="content-management"><i class="material-icons">library_books</i> <span>Content Management</span></a>
+            <a href="#contests" class="sidebar-menuitem" data-sideaction="contests"><i class="material-icons">emoji_events</i> <span>Contests & Awards</span></a>
+            <a href="#announcements" class="sidebar-menuitem" data-sideaction="announcements"><i class="material-icons">campaign</i> <span>Announcements</span></a>
+            <a href="#badges" class="sidebar-menuitem" data-sideaction="badges"><i class="material-icons">verified</i> <span>Badges System</span></a>
+            <a href="/community-bulletin.html" class=""><i class="material-icons">settings</i> <span>Community Bulletin Board</span></a>
+            <a href="/index.html" class=""><i class="material-icons">exit_to_app</i> <span>Logout</span></a>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="w3-container y-overflow main-content">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <h4>Admin Dashboard</h4>
+            <div class="user-info">
+                <div class="user-avatar">A</div>
+                <div>
+                    <div>Admin User</div>
+                    <div style="font-size: 0.8rem; color: #666;">Administrator</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <div class="quick-action-card" id="create-announcement">
+                <i class="material-icons">campaign</i>
+                <h6>Create Announcement</h6>
+            </div> 
+            <div class="quick-action-card" id="manage-contest">
+                <i class="material-icons">emoji_events</i>
+                <h6>Manage Contest</h6>
+            </div>
+            <div class="quick-action-card" id="review-requests">
+                <i class="material-icons">rate_review</i>
+                <h6>Review Requests</h6>
+            </div>
+            <div class="quick-action-card" id="create-badge">
+                <i class="material-icons">verified</i>
+                <h6>Create Badge</h6>
+            </div>
+        </div>
+
+        <!-- Stats Cards -->
+        <div class="stats-cards">
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #FFE4E1;">
+                    <i class="material-icons" style="color: var(--primary-color);">library_books</i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="total-stories">1,247</h3>
+                    <p>Total Stories</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #E8F5E9;">
+                    <i class="material-icons" style="color: #2e7d32;">people</i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="total-users">5,892</h3>
+                    <p>Registered Users</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #E3F2FD;">
+                    <i class="material-icons" style="color: #1565c0;">person</i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="total-authors">1,245</h3>
+                    <p>Registered Authors</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #FFF3E0;">
+                    <i class="material-icons" style="color: #ef6c00;">pending_actions</i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="pending-requests">42</h3>
+                    <p>Pending Requests</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #E3F2FD;">
+                    <i class="material-icons" style="color: #1565c0;">person</i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="total-announcements">5</h3>
+                    <p>Total Announcements</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #FFF3E0;">
+                    <i class="material-icons" style="color: #ef6c00;">pending_actions</i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="total-contests">42</h3>
+                    <p>Total Contests</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #E8F5E9;">
+                    <i class="material-icons" style="color: #2E7D32;">people-alt</i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="total-visitors">0</h3>
+                    <p>Total Visitors</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #E8F5E9;">
+                    <i class="material-icons" style="color: #2E7D32;">people-alt</i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="unique-visitors">0</h3>
+                    <p>Unique Visitors</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #E8F5E9;">
+                    <i class="material-icons" style="color: #2E7D32;">people-alt</i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="today-visitors">0</h3>
+                    <p>Today Visitors</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon" style="background: #E8F5E9;">
+                    <i class="material-icons" style="color: #2E7D32;">people-alt</i>
+                </div>
+                <div class="stat-content">
+                    <h3 id="returning-visitors">0</h3>
+                    <p>Returning Visitors</p>
+                </div>
+            </div>
+
+
+        </div>
+        
+
+        <!-- Tabs for Different Management Sections -->
+        <div class="tabs-container">
+            <div class="tabs">
+                <a href="#" class="tab-link active" data-tab="dashboard">Dashboard</a>
+                <a href="#" class="tab-link" data-tab="user-management">User Management</a>
+                <a href="#" class="tab-link" data-tab="pending-request-management">Pending Requests Management</a>
+                <a href="#" class="tab-link" data-tab="author-management">Author Management</a>
+                <a href="#" class="tab-link" data-tab="content-management">Content Management</a>
+                <a href="#" class="tab-link" data-tab="contests">Contests</a>
+                <a href="#" class="tab-link" data-tab="announcements">Announcements</a>
+                <a href="#" class="tab-link" data-tab="badges">Badges</a>
+                <a href="#" class="tab-link" data-tab="visitor-analytics">Visitor Analytics</a>
+            </div>
+
+            <!-- Dashboard Tab -->
+            <div id="dashboard" class="tab-content active">
+                
+                <!-- Charts Row 1 -->
+                <div class="chart-row">
+                    <div class="chart-container">
+                        <h4 class="chart-title">Stories by Category</h4>
+                        <canvas id="categoryChart" style="height: 300px;"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h4 class="chart-title">User Registration Trend</h4>
+                        <div id="userTrendChart" style="height: 300px;"></div>
+                    </div>
+                </div>
+
+                <!-- Charts Row 2 -->
+                <div class="chart-row">
+                    <div class="chart-container">
+                        <h4 class="chart-title">Content Status Distribution</h4>
+                        <canvas id="statusChart" style="height: 300px;"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h4 class="chart-title">Top Rated Stories</h4>
+                        <div id="topRatedChart" style="height: 300px;"></div>
+                    </div>
+                </div>
+
+                <!-- Recent Stories Table -->
+                <div class="data-table">
+                    <div class="table-header">
+                        <h5 style="margin: 0; color: white;">Recent Stories</h5>
+                        <a class="btn-admin" id="add-story-btn">Add New Story</a>
+                    </div>
+                    <table id="recent-stories-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Category</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Rating</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Stories will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+            <!-- User Management Tab -->
+            <div id="user-management" class="tab-content">
+                <div class="search-box">
+                    <input type="text" id="user-search" placeholder="Search users...">
+                </div>
+                <div class="filter-options">
+                    <select id="user-role-filter">
+                        <option value="all">All Roles</option>
+                        <option value="user">Regular User</option>
+                        <option value="author">Author</option>
+                        <option value="admin">Admin</option>
+                    </select>
+                    <select id="user-status-filter">
+                        <option value="all">All Status</option>
+                        <option value="active">Active</option>
+                        <option value="pending">Pending</option>
+                        <option value="suspended">Suspended</option>
+                    </select>
+                    <button class="btn-admin" id="export-users-btn">Export Users</button>
+                </div>
+                <div class="data-table">
+                    <div class="table-header">
+                        <h5 style="margin: 0; color: white;">User Management</h5>
+                        <a class="btn-admin" id="promote-user-btn">Promote to Admin</a>
+                    </div>
+                    <table id="user-management-table">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Join Date</th>
+                                <th>Role</th>
+                                <th>Stories</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Users will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+             <!-- Pending Requests Management Tab -->
+            <div id="pending-request-management" class="tab-content">
+
+                <div class="data-table">
+                    <div class="table-header">
+                        <h5 style="margin: 0; color: white;">Pending Author Requests</h5>
+                    </div>
+                    <table id="pending-author-requests-table">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Users will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        
+
+
+            <!-- Author Management Tab -->
+            <div id="author-management" class="tab-content">
+                <div class="search-box">
+                    <input type="text" id="author-search" placeholder="Search authors...">
+                </div>
+                <div class="filter-options">
+                    <select id="author-status-filter">
+                        <option value="all">All Status</option>
+                        <option value="approved">Approved</option>
+                        <option value="pending">Pending Approval</option>
+                        <option value="rejected">Rejected</option>
+                    </select>
+                    <button class="btn-admin" id="export-authors-btn">Export Authors</button>
+                </div>
+                <div class="data-table">
+                    <div class="table-header">
+                        <h5 style="margin: 0; color: white;">Author Management</h5>
+                        <a class="btn-admin" id="approve-author-btn">Approve Selected</a>
+                    </div>
+                    <table id="author-management-table">
+                        <thead>
+                            <tr>
+                                <th><input type="checkbox" id="select-all-authors"></th>
+                                <th>Username</th>
+                                <th>Email</th>
+                                <th>Join Date</th>
+                                <th>Stories</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Authors will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Content Management Tab -->
+            <div id="content-management" class="tab-content">
+                <div class="search-box">
+                    <input type="text" id="content-search" placeholder="Search content...">
+                </div>
+                <div class="filter-options">
+                    <select id="content-category-filter">
+                        <option value="all">All Categories</option>
+                        <option value="romance">Romance</option>
+                        <option value="contemporary">Contemporary</option>
+                        <option value="historical">Historical</option>
+                        <option value="fantasy">Fantasy</option>
+                        <option value="lgbtq">LGBTQ+</option>
+                    </select>
+                    <select id="content-status-filter">
+                        <option value="all">All Status</option>
+                        <option value="published">Published</option>
+                        <option value="pending">Pending</option>
+                        <option value="draft">Draft</option>
+                        <option value="rejected">Rejected</option>
+                    </select>
+                    <button class="btn-admin" id="export-content-btn">Export Content</button>
+                </div>
+                <div class="data-table">
+                    <div class="table-header">
+                        <h5 style="margin: 0; color: white;">Content Management</h5>
+                        <a class="btn-admin" id="create-content-btn">Create Content</a>
+                    </div>
+                    <table id="content-management-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Author</th>
+                                <th>Category</th>
+                                <th>Date</th>
+                                <th>Views</th>
+                                <th>Rating</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Content will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Contests Tab -->
+            <div id="contests" class="tab-content">
+                <div class="data-table">
+                    <div class="table-header">
+                        <h5 style="margin: 0; color: white;">Contest Management</h5>
+                        <a class="btn-admin" id="create-contest-btn">Create Contest</a>
+                    </div>
+                    <table id="contest-management-table">
+                        <thead>
+                            <tr>
+                                <th>Contest Name</th>
+                                <th>Theme</th>
+                                <th>Start Date</th>
+                                <th>End Date</th>
+                                <th>Participants</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Contests will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Announcements Tab -->
+            <div id="announcements" class="tab-content">
+                <div class="data-table">
+                    <div class="table-header">
+                        <h5 style="margin: 0; color: white;">Announcement Management</h5>
+                        <a class="btn-admin" id="create-announcement-btn">Create Announcement</a>
+                    </div>
+                    <table id="announcement-management-table">
+                        <thead>
+                            <tr>
+                                <th>Title</th>
+                                <th>Content</th>
+                                <th>Date</th>
+                                <th>Status</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Announcements will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Badges Tab -->
+            <div id="badges" class="tab-content">
+                <div class="data-table">
+                    <div class="table-header">
+                        <h5 style="margin: 0; color: white;">Badge Management</h5>
+                        <a class="btn-admin" id="create-badge-btn">Create Badge</a>
+                    </div>
+                    <table id="badge-management-table">
+                        <thead>
+                            <tr>
+                                <th>Badge Name</th>
+                                <th>Description</th>
+                                <th>Type</th>
+                                <th>Recipients</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Badges will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Add the visitor analytics tab content -->
+            <div id="visitor-analytics" class="tab-content">
+                <div class="chart-row">
+                    <div class="chart-container">
+                        <h4 class="chart-title">Visitor Trends (Last 7 Days)</h4>
+                        <canvas id="visitorTrendChart" style="height: 300px;"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h4 class="chart-title">Device Distribution</h4>
+                        <canvas id="deviceChart" style="height: 300px;"></canvas>
+                    </div>
+                </div>
+            
+                <div class="chart-row">
+                    <div class="chart-container">
+                        <h4 class="chart-title">Browser Usage</h4>
+                        <canvas id="browserChart" style="height: 300px;"></canvas>
+                    </div>
+                    <div class="chart-container">
+                        <h4 class="chart-title">Traffic Sources</h4>
+                        <canvas id="referrerChart" style="height: 300px;"></canvas>
+                    </div>
+                </div>
+            
+                <!-- Visitor Details Table -->
+                <div class="data-table">
+                    <div class="table-header">
+                        <h5 style="margin: 0; color: white;">Recent Visitors</h5>
+                        <button class="btn-admin" id="refresh-visitors-btn">
+                            <i class="material-icons">refresh</i> Refresh
+                        </button>
+                    </div>
+                    <table id="visitor-analytics-table">
+                        <thead>
+                            <tr>
+                                <th>IP Address</th>
+                                <th>Country</th>
+                                <th>Device</th>
+                                <th>Browser</th>
+                                <th>OS</th>
+                                <th>First Visit</th>
+                                <th>Last Visit</th>
+                                <th>Pages Visited</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- Visitor data will be populated by JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Modals -->
+    <!-- Create Announcement Modal -->
+    <div id="create-announcement-modal" class="modal">
+        <div class="modal-content">
+            <h4>Create Announcement</h4>
+            <form id="announcement-form">
+                <div class="input-field">
+                    <input id="announcement-title" type="text" required>
+                    <label for="announcement-title">Title</label>
+                </div>
+                <div class="input-field">
+                    <textarea id="announcement-content" class="materialize-textarea" required></textarea>
+                    <label for="announcement-content">Content</label>
+                </div>
+                <div class="input-field">
+                    <select id="announcement-type">
+                        <option value="general">General</option>
+                        <option value="contest">Contest</option>
+                        <option value="maintenance">Maintenance</option>
+                        <option value="feature">New Feature</option>
+                    </select>
+                    <label>Announcement Type</label>
+                </div>
+                <div class="input-field">
+                    <input type="date" id="announcement-expiry">
+                    <label for="announcement-expiry">Expiry Date (Optional)</label>
+                </div>
+                <button class="btn-admin" type="submit">Publish Announcement</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Create Contest Modal -->
+    <div id="create-contest-modal" class="modal">
+        <div class="modal-content">
+            <h4>Create Contest</h4>
+            <form id="contest-form">
+                <div class="input-field">
+                    <input id="contest-name" type="text" required>
+                    <label for="contest-name">Contest Name</label>
+                </div>
+                <div class="input-field">
+                    <textarea id="contest-description" class="materialize-textarea" required></textarea>
+                    <label for="contest-description">Description</label>
+                </div>
+                <div class="input-field">
+                    <input id="contest-theme" type="text" required>
+                    <label for="contest-theme">Theme</label>
+                </div>
+                <div class="input-field">
+                    <input type="date" id="contest-start" required>
+                    <label for="contest-start">Start Date</label>
+                </div>
+                <div class="input-field">
+                    <input type="date" id="contest-end" required>
+                    <label for="contest-end">End Date</label>
+                </div>
+                <div class="input-field">
+                    <input id="contest-prize" type="text" required>
+                    <label for="contest-prize">Prize</label>
+                </div>
+                <button class="btn-admin" type="submit">Create Contest</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Create Badge Modal -->
+    <div id="create-badge-modal" class="modal">
+        <div class="modal-content">
+            <h4>Create Badge</h4>
+            <form id="badge-form">
+                <div class="input-field">
+                    <input id="badge-name" type="text" required>
+                    <label for="badge-name">Badge Name</label>
+                </div>
+                <div class="input-field">
+                    <textarea id="badge-description" class="materialize-textarea" required></textarea>
+                    <label for="badge-description">Description</label>
+                </div>
+                <div class="input-field">
+                    <select id="badge-type" required>
+                        <option value="achievement">Achievement</option>
+                        <option value="rank">Rank</option>
+                        <option value="special">Special</option>
+                        <option value="contest">Contest Winner</option>
+                    </select>
+                    <label>Badge Type</label>
+                </div>
+                <div class="input-field">
+                    <input id="badge-color" type="color" value="#8B0000">
+                    <label for="badge-color">Badge Color</label>
+                </div>
+                <div class="input-field">
+                    <input id="badge-criteria" type="text">
+                    <label for="badge-criteria">Award Criteria (Optional)</label>
+                </div>
+                <button class="btn-admin" type="submit">Create Badge</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Promote User Modal -->
+    <div id="promote-user-modal" class="modal">
+        <div class="modal-content">
+            <h4>Promote User to Admin</h4>
+            <p>Select a user to promote to administrator:</p>
+            <div class="input-field">
+                <select id="user-to-promote" required>
+                    <option value="" disabled selected>Choose a user</option>
+                    <!-- Users will be populated by JavaScript -->
+                </select>
+                <label>Select User</label>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-admin" id="confirm-promotion">Promote to Admin</button>
+                <a href="#!" class="modal-close btn-admin-outline">Cancel</a>
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/materialize.min.js"></script>
+    <script src="scripts/chart.js"></script>
+    <script src="scripts/mock/mockData.js"></script>
+    <script src="scripts/api-service.js"></script>
+    <script src="scripts/admin-dashboard.js"></script>
+</body>
+</html>

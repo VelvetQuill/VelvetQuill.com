@@ -1,0 +1,290 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reading Story - VelvetQuill</title>
+    
+    <!-- Include all necessary stylesheets -->
+    <link rel="stylesheet" href="styles/story-read.css">
+    <link rel="stylesheet" href="styles/w3css.css">
+    <link rel="stylesheet" href="styles/style.css">
+    <link rel="stylesheet" href="styles/materialize.min.css">
+    <link rel="stylesheet" href="scripts/Slick/slick.css">
+    <link rel="stylesheet" href="scripts/Slick/slick-theme.css">
+    <link href="styles/font/micons.css" rel="stylesheet">
+    
+    <!-- Google Fonts -->
+    <link href="styles/Playfair/VQFonts.css" rel="stylesheet">
+</head>
+<body>
+    <!-- Reading Progress Bar -->
+    <div class="reading-progress">
+        <div class="reading-progress-bar" id="reading-progress"></div>
+    </div>
+
+    <!-- Navigation (same as before) -->
+    <nav class="w3-container navbar sticky">
+        <!-- ... existing navigation code ... -->
+    </nav>
+
+    <!-- Story Hero Section -->
+    <section class="story-hero">
+        <div class="container">
+            <div class="breadcrumb w3-medium">
+                <a href="index.html" class="w3-text-light-gray">Home</a>
+                <span class="separator">/</span>
+                <a href="category-list" id="category-breadcrumb" class="w3-text-light-gray">Category</a>
+                <span class="separator">/</span>
+                <span id="story-title-breadcrumb" class="w3-bold">Story Title</span>
+            </div>
+
+            <h1 id="story-title" class="w3-xxxlarge w3-text-white">Story Title</h1>
+            <div class="author-info">
+                <div class="author-avatar" id="author-avatar">A</div>
+                <div class="author-details">
+                    <h4 id="" class="w3-xlarge w3-text-white bold">
+                        <a href="author-room.html" id="author-name1" class="w3-text-white">Author Name</a>
+                    </h4>
+                    <div class="author-stats w3-text-white">
+                        <span class="author-stat w3-text-white" id="">stories&nbsp;<span id="author-stories-count"></span></span>
+                        <span class="author-stat w3-text-white" id="">followers&nbsp;<span id="author-followers-count"></span></span>
+                    </div>
+                </div>
+            </div>
+            <div class="w3-text-white story-meta">
+                <div class="meta-item">
+                    <i class="material-icons">category</i>
+                    <span id="story-category">Category</span>
+                </div>
+                <div class="meta-item">
+                    <i class="material-icons">calendar_today</i>
+                    <span id="story-date">October 15, 2023</span>
+                </div>
+                <div class="meta-item">
+                    <i class="material-icons">visibility</i>
+                    <span id="story-views">1,245 views</span>
+                </div>
+                <div class="meta-item">
+                    <i class="material-icons">star</i>
+                    <span id="story-rating">4.8/5.0</span>
+                </div>
+                <div class="meta-item">
+                    <i class="material-icons">schedule</i>
+                    <span id="reading-time">15 min read</span>
+                </div>
+                <!-- ADD: Page Count Display -->
+                <div class="meta-item">
+                    <i class="material-icons">book</i>
+                    <span id="page-count">1 page</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Page Navigation -->
+    <section class="page-navigation-section">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m10 offset-m1">
+                    <div class="page-navigation">
+                        <button class="btn waves-effect waves-light btn-admin-outline" id="prev-page-btn" disabled>
+                            <i class="material-icons left">chevron_left</i> Previous Page
+                        </button>
+                        
+                        <div class="page-indicator">
+                            <span id="current-page">Page 1</span>
+                            <span class="page-separator">of</span>
+                            <span id="total-pages">1</span>
+                        </div>
+                        
+                        <button class="btn waves-effect waves-light btn-admin" id="next-page-btn">
+                            Next Page <i class="material-icons right">chevron_right</i>
+                        </button>
+                    </div>
+                    
+                    <!-- ADD: Reading Progress for Multi-Page -->
+                    <div class="multi-page-progress">
+                        <div class="progress-labels">
+                            <span>Your Progress:</span>
+                            <span id="progress-percentage">0%</span>
+                        </div>
+                        <div class="progress-bar-container">
+                            <div class="progress-bar" id="multi-page-progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Content -->
+    <section class="w3-container story-content-section" style="margin:0%;padding:0%;">
+        <div class="container" style="margin:0%;padding:0%;">
+            <div class="row" style="margin:0%;padding:0%;">
+                <div class="col s12 m10 offset-m1" >
+                    <article class="story-content" id="story-content" style="margin:0%;padding:0%;">
+                        <!-- Page content will be loaded here dynamically -->
+                        <div class="page-loading">
+                            <div class="progress">
+                                <div class="indeterminate"></div>
+                            </div>
+                            <p class="center-align">Loading page content...</p>
+                        </div>
+                    </article>
+
+                    <!-- Page Navigation (Bottom) -->
+                    <div class="page-navigation-bottom">
+                        <button class="btn waves-effect waves-light btn-admin-outline" id="prev-page-bottom" disabled>
+                            <i class="material-icons left">chevron_left</i> Previous Page
+                        </button>
+                        <button class="btn waves-effect waves-light btn-admin" id="next-page-bottom">
+                            Next Page <i class="material-icons right">chevron_right</i>
+                        </button>
+                    </div>
+
+                    <!-- Quick Page Jump -->
+                    <div class="quick-page-jump">
+                        <div class="input-field">
+                            <select id="page-selector">
+                                <option value="" disabled selected>Jump to page...</option>
+                            </select>
+                            <label>Quick Navigation</label>
+                        </div>
+                    </div>
+
+                    <div style="width: 70vw;margin:0%;padding:0%;" class="w3-container w3-section w3-padding w3-small story-hero">
+                        <div class="author-info">
+                            <div class="author-avatar center-align w3-center" style="padding:0%;" id="author-avatar2">A</div>
+                            <div class="author-details">
+                                <h4 id="" class="w3-xlarge w3-text-white bold">
+                                    <a href="author-room.html" id="author-name2" class="w3-text-white">Author Name</a>
+                                </h4>
+                                <div class="author-stats w3-text-white">
+                                    <span class="author-stat w3-text-white" id="">stories&nbsp;<span id="author-stories-count2"></span></span>
+                                    <span class="author-stat w3-text-white" id="">followers&nbsp;<span id="author-followers-count2"></span></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Reactions Section -->
+                    <div class="reactions-section">
+                        <h3 class="reactions-title">What did you think of this story?</h3>
+                        <div class="reactions-container" id="reactions-container">
+                            <button class="reaction-btn" data-reaction="like">
+                                <i class="material-icons">thumb_up</i>
+                                <span class="reaction-text">Like</span>
+                                <span class="reaction-count" id="like-count">0</span>
+                            </button>
+                            <button class="reaction-btn" data-reaction="love">
+                                <i class="material-icons">favorite</i>
+                                <span class="reaction-text">Love</span>
+                                <span class="reaction-count" id="love-count">0</span>
+                            </button>
+                            <button class="reaction-btn" data-reaction="wow">
+                                <i class="material-icons">sentiment_very_satisfied</i>
+                                <span class="reaction-text">Wow</span>
+                                <span class="reaction-count" id="wow-count">0</span>
+                            </button>
+                            <button class="reaction-btn" data-reaction="sad">
+                                <i class="material-icons">sentiment_very_dissatisfied</i>
+                                <span class="reaction-text">Sad</span>
+                                <span class="reaction-count" id="sad-count">0</span>
+                            </button>
+                        </div>
+                        
+                        <div class="rating-section">
+                            <h4>Rate this story</h4>
+                            <div class="star-rating" id="star-rating">
+                                <span class="star" data-rating="1">★</span>
+                                <span class="star" data-rating="2">★</span>
+                                <span class="star" data-rating="3">★</span>
+                                <span class="star" data-rating="4">★</span>
+                                <span class="star" data-rating="5">★</span>
+                            </div>
+                            <p id="rating-text">Click to rate this story</p>
+                        </div>
+                    </div>
+
+                    <!-- Comments Section -->
+                    <div class="comments-section">
+                        <div class="comments-header">
+                            <h3>Comments</h3>
+                            <span class="comments-count" id="comments-count">0 comments</span>
+                        </div>
+
+                        <!-- Comment Form -->
+                        <div class="comment-form" id="comment-form-section">
+                            <h4>Leave a Comment</h4>
+                            <form id="comment-form">
+                                <div class="input-field">
+                                    <textarea id="comment-text" class="materialize-textarea" placeholder="Share your thoughts about this story..." required></textarea>
+                                    <label for="comment-text">Your Comment</label>
+                                </div>
+                                <button type="submit" class="btn waves-effect waves-light" id="submit-comment">
+                                    Post Comment
+                                </button>
+                                <div id="comment-login-prompt" style="display: none; margin-top: 15px;">
+                                    <p>Please <a href="#" class="modal-trigger" data-target="login-modal">login</a> or <a href="#" class="modal-trigger" data-target="register-modal">sign up</a> to comment.</p>
+                                </div>
+                            </form>
+                        </div>
+
+                        <!-- Comments List -->
+                        <div class="w3-container" id="comments-list" style="margin:0%;padding:0%;">
+                            <!-- Comments will be loaded here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Similar Stories Section -->
+    <section class="similar-stories">
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <h3 class="section-title">Similar Stories You Might Enjoy</h3>
+                    <div class="similar-stories-grid" id="similar-stories">
+                        <!-- Similar stories will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Signup CTA Section -->
+    <section class="signup-cta">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m8 offset-m2">
+                    <h3>Join the VelvetQuill Community</h3>
+                    <p>Discover thousands of romance stories, connect with authors, and share your own love stories.</p>
+                    <a class="btn-large waves-effect waves-light white black-text modal-trigger" href="signup.html">
+                        Sign Up Free
+                    </a>
+                    <p style="margin-top: 15px; font-size: 1rem;">
+                        Already have an account? <a href="signin.html" class="modal-trigger white-text" style="text-decoration: underline;" data-target="login-modal">Log in</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="w3-container page-footer">
+        <!-- ... existing footer code ... -->
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/materialize.min.js"></script>
+    <script src="scripts/Slick/slick.min.js"></script>
+    <script src="scripts/api-service.js"></script>
+    <script src="scripts/story-read.js"></script>
+</body>
+</html>
+
