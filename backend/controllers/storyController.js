@@ -314,11 +314,11 @@ async createStory(req, res) {
 
         const storyData = {
             title,
+            author: req.userId,
+            pages: pages,
             excerpt,
             category, 
             tags,
-            pages: pages,
-            author: req.userId,
             ...otherData
         };
 
