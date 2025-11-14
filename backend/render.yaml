@@ -1,0 +1,29 @@
+
+# render.yaml
+services:
+  - type: web
+    name: velvetquill-backend
+    env: node
+    plan: free
+    region: ohio
+    buildCommand: npm install
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: MONGODB_URI
+        fromDatabase:
+          name: velvetquill-db
+          property: connectionString
+      - key: JWT_SECRET
+        generateValue: true
+      - key: CLIENT_URL
+        value: https://your-app.netlify.app
+    healthCheckPath: /api/health
+
+databases:
+  - name: velvetquill-db
+    plan: free
+    region: ohio
+    databaseName: velvetquill-db
+    ipAllowList: []
