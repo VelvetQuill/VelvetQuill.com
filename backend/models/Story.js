@@ -23,8 +23,8 @@ const storySchema = new mongoose.Schema({
         content: {
             type: String,
             required: true,
-            minlength: [1000, 'Each page must have at least 1000 characters'],
-            maxlength: [10000, 'Page content cannot exceed 10000 characters']
+            minlength: [3500, 'Each page must have at least 3500 characters'],
+            maxlength: [25000, 'Page content cannot exceed 25000 characters']
         },
         wordCount: {
             type: Number,
