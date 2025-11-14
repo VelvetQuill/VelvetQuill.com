@@ -328,14 +328,16 @@ class CreatePostPage {
         if (totalWordsElem) totalWordsElem.textContent = `Total Words: ${totalWords}`;
     }
 
-    validatePageContent() {
+    
+validatePageContent() {
         const content = document.getElementById('page-content')?.value || '';
         const words = this.countWords(content);
+        const charCount = countChars(content);
         
         const savePageBtn = document.getElementById('save-page-btn');
         const addPageBtn = document.getElementById('add-page-btn');
         
-        const isValid = words >= 1000 && words <= 2000;
+        const isValid = charCount >= 3500 && charCount <= 25000;
         const canAddNewPage = words >= 1000;
         
         if (savePageBtn) {
@@ -349,9 +351,9 @@ class CreatePostPage {
         const wordCountElem = document.getElementById('page-word-count');
         if (wordCountElem) {
             wordCountElem.className = '';
-            if (words < 1000) {
+            if (words > 0 && charCount < 3500) {
                 wordCountElem.classList.add('word-count-invalid');
-            } else if (words > 2000) {
+            } else if (words > 0 && charCount > 25000) {
                 wordCountElem.classList.add('word-count-warning');
             } else {
                 wordCountElem.classList.add('word-count-valid');
@@ -361,6 +363,7 @@ class CreatePostPage {
         return isValid;
     }
 
+    
     saveCurrentPage() {
         this.saveCurrentPageContent();
         const currentPage = this.pages[this.currentPageIndex];
@@ -376,6 +379,10 @@ class CreatePostPage {
 
     countWords(text) {
         return text.trim() ? text.trim().split(/\s+/).length : 0;
+    }
+    
+    countChars(text){
+        return text.trim() ? text.trim().split('').length : 0;
     }
 
     // ==================== CATEGORY MANAGEMENT ====================
@@ -588,8 +595,8 @@ class CreatePostPage {
         
         // Check if all pages are valid
         const allPagesValid = this.pages.every(page => {
-            const words = page.wordCount;
-            return words >= 1000 && words <= 2000;
+            const words = this.countChars(page.content);
+            return words >= 3500 && words <= 25000;
         });
         
         if (!title) {
