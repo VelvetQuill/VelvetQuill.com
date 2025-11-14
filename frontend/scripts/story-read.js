@@ -371,6 +371,11 @@ async function setAuthorAvatarHeader() {
         $('#story-rating').text(`${storyData.rating}/5.0 (${storyData.ratingCount} ratings)`);
         $('#reading-time').text(`${storyData.readingTime} min read`);
         $('#page-count').text(`${totalPages} page${totalPages !== 1 ? 's' : ''}`);
+
+        if(authorId){
+            $('#author-name1').attr('href',`author-room.html?id=${authorId}`);
+            $('#author-name2').attr('href',`author-room.html?id=${authorId}`);
+        }
         
         updateReactionsDisplay();
     }
