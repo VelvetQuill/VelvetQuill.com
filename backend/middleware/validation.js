@@ -128,13 +128,13 @@ export const validateStory = [
             // Validate each page has content
             for (let i = 0; i < pages.length; i++) {
                 const page = pages[i];
-                //const charCount = page.content.split('').length;
-                const wordCount = page.content.split(' ').length;
-                if (!page.content || wordCount < 800) {
-                    throw new Error(`Page ${i + 1} must have at least 1000+ words; CURRENT COUNT: ${wordCount}`);
+                const charCount = page.content.split('').length;
+                //const wordCount = page.content.split(' ').length;
+                if (!page.content || charCount < 3500) {
+                    throw new Error(`Page ${i + 1} must have at least 3500+ characters; CURRENT COUNT: ${charCount}`);
                 }
-                if (wordCount > 5000) {
-                    throw new Error(`Page ${i + 1} cannot exceed 5000 words; CURRENT COUNT: ${wordCount}`);
+                if (charCount > 25000) {
+                    throw new Error(`Page ${i + 1} cannot exceed 25000 characters; CURRENT COUNT: ${charCount}`);
                 }
             }
             return true;
