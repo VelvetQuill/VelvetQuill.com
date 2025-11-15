@@ -240,7 +240,7 @@ class SignUpPage {
 
     async submitSignUp(formData) {
         try {
-            console.log(`Sending Form Data:`, formData);
+            //console.log(`Sending Form Data:`, formData);
             
             const payload = {
                 username: formData.username,
@@ -250,7 +250,7 @@ class SignUpPage {
                 dateOfBirth: this.formatDate(formData.dateOfBirth)
             };
             
-            console.log(`User Data Payload:`, payload);
+            //console.log(`User Data Payload:`, payload);
             
             // Use API service to make the backend call
             const response = await window.apiService.signUp(payload);
@@ -279,7 +279,7 @@ class SignUpPage {
         localStorage.setItem('velvetquill_user_session', JSON.stringify(userSession));
         localStorage.setItem('velvetquill_user', JSON.stringify(response.user));
         localStorage.setItem('velvetquill_token', response.token);
-        console.log("User registered and stored!");
+        //console.log("User registered and stored!");
         
         // Show success modal
         document.getElementById('user-email').textContent = email;
@@ -335,7 +335,7 @@ class SignUpPage {
         localStorage.removeItem('velvetquill_token');
         localStorage.removeItem("signup_attempts");
         
-        console.log("VQ Data Cleared!");
+        //console.log("VQ Data Cleared!");
     }
     
     setLoadingState(loading) {
@@ -370,10 +370,10 @@ class SignUpPage {
             throw new Error("INVALID DATE FORMAT. EXPECTED YYYY-MM-DD");
         }
 
-        console.log(`DATE STRING: ${dateString.split('-')}`);
+        //console.log(`DATE STRING: ${dateString.split('-')}`);
         const [y, m, d] = dateString.split('-');
 
-        console.log(`DATE INPUT: ${y}-${m}-${d}`);
+        //console.log(`DATE INPUT: ${y}-${m}-${d}`);
 
         const monthNum = parseInt(m);
         const dayNum = parseInt(d);
@@ -393,4 +393,3 @@ class SignUpPage {
 document.addEventListener('DOMContentLoaded', function() {
     window.signUpPage = new SignUpPage();
 });
-
