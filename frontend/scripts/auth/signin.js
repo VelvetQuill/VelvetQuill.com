@@ -257,10 +257,10 @@ class SignInPage {
             let response;
 
             if (this.useMockData) {
-                console.log('Using mock data for signin');
+                //console.log('Using mock data for signin');
                 response = await this.mockSignIn(formData);
             } else {
-                console.log('Using real API for signin');
+                //console.log('Using real API for signin');
                 response = await this.realSignIn(formData);
             }
             
@@ -315,7 +315,7 @@ class SignInPage {
                 identifier: formData.identifier,
                 password: formData.password
             };
-            console.log(`SIGNIN PAYLOAD:`, payload);
+            //console.log(`SIGNIN PAYLOAD:`, payload);
             
             const response = await window.apiService.signIn(payload);
             return response;
@@ -324,7 +324,7 @@ class SignInPage {
             
             // If real API fails and we're in dev mode, fall back to mock data
             if (this.isDevMode) {
-                console.log('Falling back to mock data due to API failure');
+                //console.log('Falling back to mock data due to API failure');
                 this.useMockData = true;
                 localStorage.setItem('use_mock_data', 'true');
                 return await this.mockSignIn(formData);
@@ -378,7 +378,7 @@ class SignInPage {
         );
 
         if (user) {
-            console.log(`Mock login: Found user ${user.username} with password length: ${password.length}`);
+            //console.log(`Mock login: Found user ${user.username} with password length: ${password.length}`);
             // For demo purposes, accept any non-empty password
             return user;
         }
@@ -433,7 +433,7 @@ class SignInPage {
             using_mock_data: this.useMockData
         };
         
-        console.log("User authenticated and stored!", {
+        //console.log("User authenticated and stored!", {
             username: response.user.username,
             role: response.user.role,
             usingMockData: this.useMockData
@@ -507,18 +507,18 @@ class SignInPage {
     }
 
     handleRememberMe(remember) {
-        console.log('Remember me:', remember);
+        //console.log('Remember me:', remember);
     }
 
     redirectAfterLogin(user) {
         if (user.role === 'admin' || user.role === 'overallAdmin') {
-            console.log('ADMIN DASHBOARD REDIRECT:');
+            //console.log('ADMIN DASHBOARD REDIRECT:');
             window.location.href = './admin-dashboard.html';
         } else if (user.role === 'author' || user.isAuthor) {
-            console.log('AUTHOR ROOM REDIRECT:');
+            //console.log('AUTHOR ROOM REDIRECT:');
             window.location.href = './author-room.html';
         } else {
-            console.log('HOMEPAGE REDIRECT');
+            //console.log('HOMEPAGE REDIRECT');
             window.location.href = 'index.html';
         }
     }
@@ -533,10 +533,6 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('login-identifier').value = identifier;
         document.getElementById('login-password').value = password;
         M.updateTextFields();
-        console.log(`Prefilled credentials for testing: ${identifier} / ${password}`);
+        //console.log(`Prefilled credentials for testing: ${identifier} / ${password}`);
     };
 });
-
-
-
-
