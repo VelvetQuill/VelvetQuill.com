@@ -40,7 +40,7 @@ class AuthorDashboard {
             // Update author info
             this.updateAuthorInfo();
             
-            console.log("Author dashboard initialized successfully");
+            //console.log("Author dashboard initialized successfully");
         } catch (error) {
             console.error("Failed to initialize dashboard:", error);
             M.toast({html: 'Failed to load dashboard data. Please refresh the page.'});
@@ -755,6 +755,3 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = '/signin.html';
     }
 });
-
-
-
