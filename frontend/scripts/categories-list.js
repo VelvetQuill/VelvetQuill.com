@@ -1,5 +1,4 @@
 
-
 // categories-list.js - FULLY REFACTORED WITH BACKEND API INTEGRATION
 $(document).ready(function(){
     // Initialize Materialize components
@@ -334,7 +333,7 @@ $(document).ready(function(){
         
         if (posterWall && posters.length > 0) {
             const randomIndex = Math.floor(Math.random() * posters.length);
-            const randomPoster = `/assets/Posters/${posters[randomIndex]}`;
+            const randomPoster = `assets/Posters/${posters[randomIndex]}`;
             
             const img = document.createElement('img');
             img.src = randomPoster;
