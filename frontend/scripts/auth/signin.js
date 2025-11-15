@@ -433,11 +433,11 @@ class SignInPage {
             using_mock_data: this.useMockData
         };
         
-        //console.log("User authenticated and stored!", {
+        /*/console.log("User authenticated and stored!", {
             username: response.user.username,
             role: response.user.role,
             usingMockData: this.useMockData
-        });
+        });*/
         
         // Store session data
         localStorage.setItem('velvetquill_user_session', JSON.stringify(userSession));
