@@ -1,4 +1,5 @@
 
+
 // categories-list.js - FULLY REFACTORED WITH BACKEND API INTEGRATION
 $(document).ready(function(){
     // Initialize Materialize components
@@ -60,7 +61,7 @@ $(document).ready(function(){
     // Load categories from backend API
     async function loadCategoriesFromAPI() {
         try {
-            console.log('📚 Fetching categories from backend...');
+            //console.log('📚 Fetching categories from backend...');
             
             // Show loading state
             showLoadingState();
@@ -68,7 +69,7 @@ $(document).ready(function(){
             const response = await window.apiService.request('/categories');
             
             if (response.success && response.categories) {
-                console.log('✅ Categories loaded successfully:', response.categories.length);
+                //console.log('✅ Categories loaded successfully:', response.categories.length);
                 await processCategoriesData(response.categories);
             } else {
                 throw new Error('Invalid response format from categories API');
@@ -127,11 +128,11 @@ $(document).ready(function(){
             // Get story counts for each category
             for (const category of categories) {
                 try {
-                    console.log(`CATEGORY: ${JSON.stringify(category)}`);
-                    console.log(`SLUG: ${category.slug}`);
+                    //console.log(`CATEGORY: ${JSON.stringify(category)}`);
+                    //console.log(`SLUG: ${category.slug}`);
                     // Use the category stories endpoint to get count
                     const storiesResponse = await window.apiService.getCategoryStories(category.slug);
-                    console.log(`CATEGORY RESPONSE: ${JSON.stringify(storiesResponse)} `);
+                    //console.log(`CATEGORY RESPONSE: ${JSON.stringify(storiesResponse)} `);
                     const storyCount = storiesResponse.pagination ? storiesResponse.pagination.total : 0;
 
                     totalStories += storyCount;
@@ -284,7 +285,7 @@ $(document).ready(function(){
 
     // Fallback to hardcoded data if API fails
     function loadFallbackCategories() {
-        console.log('🔄 Loading fallback categories data...');
+        //console.log('🔄 Loading fallback categories data...');
         const fallbackCategories = Object.keys(fallbackCategoryData).map(key => ({
             ...fallbackCategoryData[key]
         }));
@@ -414,7 +415,3 @@ $(document).ready(function(){
         loadCategoriesFromAPI();
     });
 });
-
-
-
-
