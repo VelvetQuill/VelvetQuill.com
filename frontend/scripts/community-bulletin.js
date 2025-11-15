@@ -518,5 +518,3 @@ class CommunityBulletin {
 document.addEventListener('DOMContentLoaded', function() {
     window.communityBulletin = new CommunityBulletin();
 });
-
-
