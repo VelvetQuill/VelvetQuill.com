@@ -1,12 +1,13 @@
 
 
+
 // author-room.js - UPDATED WITH PUBLIC ACCESS SUPPORT
 $(document).ready(function(){
-    console.log("AUTHOR ROOM INITIALIZING - PUBLIC ACCESS SUPPORT");
+    //console.log("AUTHOR ROOM INITIALIZING - PUBLIC ACCESS SUPPORT");
     
     // Check if we're on the author-room page
     if (!window.location.pathname.includes('author-room')) {
-        console.log("NOT on author-room page, current page:", window.location.pathname);
+        //console.log("NOT on author-room page, current page:", window.location.pathname);
         return;
     }
 
@@ -33,8 +34,8 @@ $(document).ready(function(){
         return;
     }
 
-    console.log("AUTHOR ID:", authorId);
-    console.log("CURRENT USER:", currentUser ? currentUser.username : "Not logged in");
+    //console.log("AUTHOR ID:", authorId);
+    //console.log("CURRENT USER:", currentUser ? currentUser.username : "Not logged in");
     
     // Current author data
     let currentAuthor = null;
@@ -56,7 +57,7 @@ $(document).ready(function(){
             isViewingOwnProfile = window.apiService ? 
                 window.apiService.isViewingOwnProfile(authorId) : false;
             
-            console.log("Viewing own profile:", isViewingOwnProfile);
+            //console.log("Viewing own profile:", isViewingOwnProfile);
             
             // Load author data with dual strategy
             await loadAuthorData();
@@ -74,7 +75,7 @@ $(document).ready(function(){
             setupEventListeners();
             updateUIForAuthState();
             
-            console.log("Author room initialized successfully");
+            //console.log("Author room initialized successfully");
         } catch (error) {
             console.error("Failed to initialize author room:", error);
             M.toast({html: 'Failed to load author room. Please try again.'});
@@ -89,7 +90,7 @@ $(document).ready(function(){
         $('#loading-indicator').show();
         $('#author-profile-section').hide();
         
-        console.log(`Loading author data for: ${authorId}`);
+        //console.log(`Loading author data for: ${authorId}`);
 
         try {
             let authorData;
@@ -97,17 +98,17 @@ $(document).ready(function(){
             // Strategy 1: Try authenticated endpoint first (if logged in)
             if (AuthManager.isAuthenticated()) {
                 try {
-                    console.log("Trying authenticated profile endpoint...");
+                    //console.log("Trying authenticated profile endpoint...");
                     authorData = await apiService.getUserProfile(authorId);
                 } catch (authError) {
-                    console.log("Authenticated endpoint failed, falling back to public:", authError.message);
+                    //console.log("Authenticated endpoint failed, falling back to public:", authError.message);
                     // Fall through to public endpoint
                 }
             }
             
             // Strategy 2: Use public endpoint (for unauthenticated or if auth failed)
             if (!authorData || !authorData.success) {
-                console.log("Using public profile endpoint...");
+                //console.log("Using public profile endpoint...");
                 authorData = await apiService.getPublicUserProfile(authorId);
             }
 
@@ -115,7 +116,7 @@ $(document).ready(function(){
                 throw new Error(authorData.message || 'Failed to load author profile');
             }
 
-            console.log("Author data loaded successfully:", authorData.user.username);
+            //console.log("Author data loaded successfully:", authorData.user.username);
 
             currentAuthor = {
                 id: authorData.user.id || authorData.user._id,
@@ -184,7 +185,7 @@ $(document).ready(function(){
             // Strategy 1: Try authenticated endpoint first (if logged in)
             if (AuthManager.isAuthenticated()) {
                 try {
-                    console.log("Trying authenticated stories endpoint...");
+                    //console.log("Trying authenticated stories endpoint...");
                     response = await apiService.getStories({
                         author: currentAuthor.id,
                         status: 'published',
@@ -192,14 +193,14 @@ $(document).ready(function(){
                         limit: storiesPerPage
                     });
                 } catch (authError) {
-                    console.log("Authenticated stories endpoint failed, falling back to public:", authError.message);
+                    //console.log("Authenticated stories endpoint failed, falling back to public:", authError.message);
                     // Fall through to public endpoint
                 }
             }
             
             // Strategy 2: Use public endpoint (for unauthenticated or if auth failed)
             if (!response || !response.success) {
-                console.log("Using public stories endpoint...");
+                //console.log("Using public stories endpoint...");
                 response = await apiService.getPublicStoriesByAuthor(currentAuthor.id, {
                     page: currentPage,
                     limit: storiesPerPage
@@ -259,7 +260,7 @@ $(document).ready(function(){
     function updateUIForAuthState() {
         const isAuthenticated = AuthManager.isAuthenticated();
         
-        console.log("Updating UI for auth state:", {
+        //console.log("Updating UI for auth state:", {
             authenticated: isAuthenticated,
             viewingOwnProfile: isViewingOwnProfile
         });
@@ -507,7 +508,7 @@ $(document).ready(function(){
 
         // Read story
         $(document).on('click', '.read-story', function(e) {
-            console.log("Reading story:", $(this).data('id'));
+            //console.log("Reading story:", $(this).data('id'));
         });
 
         // Save story to reading list
@@ -581,4 +582,3 @@ $(document).ready(function(){
     // Initialize the author room
     initAuthorRoom();
 });
-
