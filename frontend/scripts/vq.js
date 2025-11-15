@@ -1,3 +1,5 @@
+
+
 // vq.js - Refactored with proper backup stories integration
 $(document).ready(function(){
     // Initialize Materialize components
@@ -39,7 +41,7 @@ $(document).ready(function(){
     // Load featured stories from backend with backup support
     async function loadFeaturedStories() {
         try {
-            console.log('Loading featured stories from backend...');
+            //console.log('Loading featured stories from backend...');
             const response = await window.apiService.getStories({ 
                 status: 'published',
                 limit: 6,
@@ -48,17 +50,17 @@ $(document).ready(function(){
             });
             
             if (response.success && response.stories && response.stories.length > 0) {
-                console.log('Backend stories loaded successfully:', response.stories.length);
+                //console.log('Backend stories loaded successfully:', response.stories.length);
                 setRepo(response.stories);
                 displayFeaturedStories(response.stories);
             } else {
-                console.log('No stories from backend, using backup stories');
+                //console.log('No stories from backend, using backup stories');
                 setRepo(backupStories);
                 loadBackupFeaturedStories();
             }
         } catch (error) {
             console.error('Error loading featured stories from backend:', error);
-            console.log('Falling back to backup stories');
+            //console.log('Falling back to backup stories');
             setRepo(backupStories);
             loadBackupFeaturedStories();
         }
@@ -67,18 +69,18 @@ $(document).ready(function(){
     function setRepo(stories=[]){
         storiesRepo = stories;
         if(storiesRepo.length > 0){
-            console.log(`STORIES REPO SET! SIZE: ${storiesRepo.length}\n`);
+            //console.log(`STORIES REPO SET! SIZE: ${storiesRepo.length}\n`);
         }
     }
     
     // Load featured stories from backup data
     function loadBackupFeaturedStories() {
         try {
-            console.log('Loading backup featured stories...');
+            //console.log('Loading backup featured stories...');
             
             // Check if backupStories exists and has data
             if (typeof backupStories !== 'undefined' && backupStories && backupStories.length > 0) {
-                console.log('Backup stories found:', backupStories.length);
+                //console.log('Backup stories found:', backupStories.length);
                 displayFeaturedStories(backupStories);
             } else {
                 console.error('Backup stories not available');
@@ -109,20 +111,20 @@ $(document).ready(function(){
         const carousel = $('.featured-carousel');
         carousel.empty();
         
-        //console.log('Displaying stories:', stories);
+        ////console.log('Displaying stories:', stories);
         
         // Filter stories to only show featured ones
         const featuredStories = stories.filter(story => {
             // Check if story has isFeatured property and it's true
             const isFeatured = story.isFeatured === true;
-            //console.log(`Story: ${story.title}, isFeatured: ${story.isFeatured}, Included: ${isFeatured}`);
+            ////console.log(`Story: ${story.title}, isFeatured: ${story.isFeatured}, Included: ${isFeatured}`);
             return isFeatured;
         });
         
-        //console.log('Featured stories after filtering:', featuredStories.length);
+        ////console.log('Featured stories after filtering:', featuredStories.length);
         
         if (featuredStories.length === 0) {
-            //console.log('No featured stories found, showing all stories');
+            ////console.log('No featured stories found, showing all stories');
             // If no featured stories, show first 3 published stories
             const publishedStories = stories.filter(story => story.status === 'published').slice(0, 3);
             if (publishedStories.length > 0) {
@@ -142,7 +144,7 @@ $(document).ready(function(){
         // Reinitialize slick carousel with the new content
         reinitializeCarousel(featuredStories.length);
         
-        console.log('Featured stories carousel updated successfully');
+        //console.log('Featured stories carousel updated successfully');
     }
     
     // Create individual featured story slide
@@ -150,7 +152,7 @@ $(document).ready(function(){
         // Get author name safely
         const authorName = getAuthorName(story);
         
-        console.log(`STORY EXCERPT: ${story.excerpt}`);
+        //console.log(`STORY EXCERPT: ${story.excerpt}`);
         // Get excerpt or create from content
         const excerpt = story.excerpt || (story.content ? story.content.substring(0, 100) + '...' : 'No description available');
         
@@ -284,7 +286,7 @@ $(document).ready(function(){
     function displayRecentStories(stories) {
         const container = $('#stories-container');
         if (!container.length) {
-            console.log('Recent stories container not found');
+            //console.log('Recent stories container not found');
             return;
         }
         
@@ -344,7 +346,7 @@ function setupReadEventHandler() {
     $(document).on('click', '.read-story, .read-featured-story', async function(e) {
         e.preventDefault();
         const storyId = $(this).data('id');
-        console.log(`STORY CLICKED ID: ${storyId}`);
+        //console.log(`STORY CLICKED ID: ${storyId}`);
         
         if (!storyId) {
             console.error('No story ID found');
@@ -353,14 +355,14 @@ function setupReadEventHandler() {
 
         try {
             // Try to get story from backend first
-            console.log(`Fetching story ${storyId} from backend...`);
+            //console.log(`Fetching story ${storyId} from backend...`);
             const response = await window.apiService.getStory(storyId);
             
             let storyObj = null;
             
             if (response.success && response.story) {
                 storyObj = response.story;
-                console.log(`Story loaded from backend: ${storyObj.title}`);
+                //console.log(`Story loaded from backend: ${storyObj.title}`);
             } else {
                 // Fallback to local stories repo
                 storyObj = storiesRepo.find(story => 
@@ -368,7 +370,7 @@ function setupReadEventHandler() {
                 );
                 
                 if (storyObj) {
-                    console.log(`Story found in local repo: ${storyObj.title}`);
+                    //console.log(`Story found in local repo: ${storyObj.title}`);
                 } else {
                     console.error(`Story with ID ${storyId} not found`);
                     M.toast({html: 'Story not found'});
@@ -378,7 +380,7 @@ function setupReadEventHandler() {
             
             // Store in localStorage for story-read page
             localStorage.setItem("currentStory", JSON.stringify(storyObj));
-            console.log(`Story stored in localStorage: ${storyObj.title}`);
+            //console.log(`Story stored in localStorage: ${storyObj.title}`);
             
             // Navigate to story read page
             window.location.href = `story-read.html?id=${storyId}`;
@@ -400,7 +402,7 @@ function setupReadEventHandler() {
         }
     });
     
-    console.log("ALL READ STORY BUTTONS PREPPED !");   
+    //console.log("ALL READ STORY BUTTONS PREPPED !");   
 }
 
    
@@ -442,15 +444,15 @@ function setupReadEventHandler() {
     function checkAuthStatus() {
         const currentUser = AuthManager.getCurrentUser();
         if (currentUser) {
-            console.log('User authenticated:', currentUser.username);
+            //console.log('User authenticated:', currentUser.username);
         } else {
-            console.log('User not authenticated');
+            //console.log('User not authenticated');
         }
     }
     
     // Enhanced updateUserUI function with backend integration
     function updateUserUI(user) {
-        console.log("Updating UI for user:", user);
+        //console.log("Updating UI for user:", user);
         
         if (user) {
             // User is logged in - show user menu, hide guest actions
@@ -476,7 +478,7 @@ function setupReadEventHandler() {
                 $('#user-avatar-link').attr('href', './admin-dashboard.html');
             }
             else if (user.isAuthor || user.role === 'author') {
-                console.log("User Is Author!");
+                //console.log("User Is Author!");
                 setElementVisibility('#mobile-author-actions', true);
                 setElementVisibility('#mobile-user-actions', false);
                 setElementVisibility('#desktop-author-actions', true);
@@ -513,7 +515,7 @@ function setupReadEventHandler() {
             $('.dropdown-trigger').dropdown();
         }, 100);
         
-        console.log("UI update complete");
+        //console.log("UI update complete");
     }
 
     
