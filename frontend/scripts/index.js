@@ -1,4 +1,5 @@
 
+
 // index.js - Handles recent stories and "See All Stories" link for index page
 class IndexStories {
     constructor() {
@@ -68,7 +69,7 @@ class IndexStories {
                 }
             }, 500);
         });
-        console.log("INDEX LINKS LISTENERS SET !");
+        //console.log("INDEX LINKS LISTENERS SET !");
     }
 
 
@@ -81,7 +82,7 @@ class IndexStories {
             return;
         }
 
-        console.log(`STORY EXCERPT: ${stories[1].excerpt}`);
+        //console.log(`STORY EXCERPT: ${stories[1].excerpt}`);
 
         const storiesHTML = stories.map(story => `
             <div class="story-card" data-story-id="${story.id}">
