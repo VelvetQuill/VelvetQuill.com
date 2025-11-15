@@ -1,3 +1,4 @@
+
 // admin-dashboard.js
 class AdminDashboard {
     constructor() {
@@ -21,20 +22,20 @@ class AdminDashboard {
         }
         
 
-        console.log("INITIALIZING ADMIN DASHBOARD");
+        //console.log("INITIALIZING ADMIN DASHBOARD");
         this.initializeDashboard();
     }
 
     async initializeDashboard() {
-        console.log("INITIALIZING COMPONENTS");
+        //console.log("INITIALIZING COMPONENTS");
         this.initializeComponents();
-        console.log("LOADING ADMIN DATA");
+        //console.log("LOADING ADMIN DATA");
         await this.loadAdminData();
-        console.log("SETTING UP EVENT LISTENERS");
+        //console.log("SETTING UP EVENT LISTENERS");
         this.setupEventListeners();
-        console.log("INITIALIZING CHARTS");
+        //console.log("INITIALIZING CHARTS");
         this.initializeCharts();
-        this.loadVisitorStats();
+        //this.loadVisitorStats();
     }
 
     initializeComponents() {
@@ -51,20 +52,20 @@ class AdminDashboard {
                     responsiveThreshold: Infinity
                 });
             }catch(error){
-               console.warn('TABS INITIALIZATION FAILED!');
+               //console.warn('TABS INITIALIZATION FAILED!');
                this.switchToTab('dashboard');
             }
         }
     }
 
-    async loadVisitorStats(){
+    async getVisitorStats(){
         try{
 
-            return await apiService.getVisitorStats();
-            console.log('Total visitors:', visitorStats.stats.totalVisitors);
-
+            return visitorStats = await apiService.getVisitorStats();
+            //console.log('Total visitors:', visitorStats.stats.totalVisitors);
+            return visitorStats;
         }catch(error){
-            console.warn('Could not load visitor stats: ', error);
+            //console.warn('Could not load visitor stats: ', error);
 
             return {
                 success: false,
@@ -105,13 +106,14 @@ class AdminDashboard {
              const [stats, users, authors, stories, contests, announcements, badges, visitorStats] = 
                 await Promise.race([loadPromise, timeoutPromise]);
 
-                console.log('DASHBOARD AUTHORS: ', authors.authors[0]);
+               /* console.log('DASHBOARD AUTHORS: ', authors.authors[0]);
                 console.log('DASHBOARD USERS: ', users);
                 console.log('DASHBOARD STORIES: ', stories);
                 console.log('DASHBOARD ANNONCEMENTS: ', announcements);
                 console.log('DASHBOARD BADGES: ', badges);
+                console.log('VISITOR STATS: ',visitorStats);*/
 
-                
+            this.visitorStats = visitorStats;
             this.adminData = {
                 users: this.ensureArray(users.data || users.users),
                 authors: this.ensureArray(authors.data || authors.authors),
@@ -123,7 +125,7 @@ class AdminDashboard {
                 visitorStats: visitorStats || {}
             };
 
-            console.log('ADMIN DATA LOADED: ',{
+            /* console.log('ADMIN DATA LOADED: ',{
                 users: this.adminData.users.length,
                 authors: this.adminData.authors.length,
                 stories: this.adminData.stories.length,
@@ -131,7 +133,7 @@ class AdminDashboard {
                 announcements: this.adminData.announcements.length,
                 badges: this.adminData.badges.length,
                 visitorStats: this.adminData.visitorStats
-            });
+            });*/
 
             this.useMockData = false;
             this.loadStats();
@@ -157,6 +159,9 @@ class AdminDashboard {
             }
             if(data.users && Array.isArray(data.users)){
                 return data.users;
+            }
+            if(data.announcements && Array.isArray(data.announcementss)){
+                return data.announcements;
             }
 
             return [data];
@@ -251,7 +256,7 @@ class AdminDashboard {
             return await apiService.getContests();
         } catch (error) {
             // Return empty array for contests if API fails
-            console.warn('Could not load contests:', error);
+           // console.warn('Could not load contests:', error);
             return { data: [] };
         }
     }
@@ -261,7 +266,7 @@ class AdminDashboard {
             return await apiService.request('/admin/announcements');
         } catch (error) {
             // Return empty array for announcements if API fails
-            console.warn('Could not load announcements:', error);
+            //console.warn('Could not load announcements:', error);
             return { data: [] };
         }
     }
@@ -271,7 +276,7 @@ class AdminDashboard {
             return await apiService.request('/admin/badges');
         } catch (error) {
             // Return empty array for badges if API fails
-            console.warn('Could not load badges:', error);
+           // console.warn('Could not load badges:', error);
             return { data: [] };
         }
     }
@@ -309,11 +314,11 @@ class AdminDashboard {
     }
 
     loadStats() {
-        console.log("ATTEMPTING TO LOAD STATS...");
+        //console.log("ATTEMPTING TO LOAD STATS...");
         const stats = this.adminData.stats.stats;
 
-        console.log('STATS: ',stats);
-        console.lohg('VISITOR STATS: ',this.visitorStats);
+        //console.log('STATS: ',stats);
+        //console.log('VISITOR STATS: ',this.visitorStats);
 
         document.getElementById('total-stories').textContent = stats.totalStories || 0;
         document.getElementById('total-users').textContent = stats.totalUsers || 0;
@@ -326,16 +331,18 @@ class AdminDashboard {
 
         //VISITORS STATS
 
-        document.getElementById('total-visitors').textContent = this.visitorStats? this.visitorStats.totalVisitors || 0 : 0;   
-        document.getElementById('unique-visitors').textContent = this.visitorStats? this.visitorStats.uniqueVisitors || 0 : 0;
-        document.getElementById('today-visitors').textContent = this.visitorStats? this.visitorStats.todayVisitors || 0 : 0;
-        document.getElementById('returning-visitors').textContent = this.visitorStats? this.visitorStats.returningVisitors || 0 : 0;
+        const vstats = this.visitorStats ? this.visitorStats.stats : null;
 
-        console.log("STATS LOADED !");
+        document.getElementById('total-visitors').textContent = vstats? vstats.totalVisitors : 0;   
+        document.getElementById('unique-visitors').textContent = vstats? vstats.uniqueVisitorsVisitors : 0;
+        document.getElementById('today-visitors').textContent = vstats? vstats.todayVisitors : 0; 
+        document.getElementById('returning-visitors').textContent = vstats? vstats.returningVisitors : 0; 
+
+        //console.log("STATS LOADED !");
     }
 
     loadTables() {
-        console.log("ATTEMPTING TO LOAD TABLES....");
+        //console.log("ATTEMPTING TO LOAD TABLES....");
         this.loadRecentStories();
         this.loadRecentUsers();
         this.loadUserManagementTable();
@@ -346,11 +353,11 @@ class AdminDashboard {
         this.loadBadgeManagementTable();
         this.loadVisitorAnalyticsTable();
         
-        console.log("TABLES LOADED !");
+        //console.log("TABLES LOADED !");
     }
 
     loadRecentStories() {
-        console.log("ATTEMPTING TO LOAD RECENT STORIES...");
+        //console.log("ATTEMPTING TO LOAD RECENT STORIES...");
         const tbody = document.querySelector('#recent-stories-table tbody');
         if (!tbody || !this.adminData.stories) return;
         
@@ -360,11 +367,11 @@ class AdminDashboard {
             const row = this.createStoryRow(story);
             tbody.appendChild(row);
         });
-        console.log("RECENT STORIES LOADED");
+        //console.log("RECENT STORIES LOADED");
     }
 
     loadRecentUsers() {
-        console.log("ATTEMPTING TO LOAD RECENT USERS....");
+        //console.log("ATTEMPTING TO LOAD RECENT USERS....");
         const tbody = document.querySelector('#pending-author-requests-table tbody');
         if (!tbody || !this.adminData.users) return;
         
@@ -376,11 +383,11 @@ class AdminDashboard {
                 tbody.appendChild(row);
             }
         });
-        console.log("Pending Author Requests LOADED !");
+        //console.log("Pending Author Requests LOADED !");
     }
 
     loadUserManagementTable() {
-        console.log("ATTEMPTING TO LOAD USER MANAGEMENT TABLE....");
+        //console.log("ATTEMPTING TO LOAD USER MANAGEMENT TABLE....");
         const tbody = document.querySelector('#user-management-table tbody');
         if (!tbody || !this.adminData.users) return;
         
@@ -390,11 +397,11 @@ class AdminDashboard {
             const row = this.createUserManagementRow(user);
             tbody.appendChild(row);
         });
-        console.log("USER MANAGEMENT TABLE LOADED !");
+        //console.log("USER MANAGEMENT TABLE LOADED !");
     }
 
     loadAuthorManagementTable() {
-        console.log("ATTEMPTING TO LOAD AUTHOR MANAGEMENT TABLE....");
+        //console.log("ATTEMPTING TO LOAD AUTHOR MANAGEMENT TABLE....");
         const tbody = document.querySelector('#author-management-table tbody');
         if (!tbody || !this.adminData.authors) return;
         
@@ -404,11 +411,11 @@ class AdminDashboard {
                 const row = this.createAuthorManagementRow(author);
                 tbody.appendChild(row);
         });
-        console.log("AUTHOR MANAGEMENT TABLE LOADED");
+        //console.log("AUTHOR MANAGEMENT TABLE LOADED");
     }
 
     loadContentManagementTable() {
-        console.log("ATTEMPTING TO LOAD CONTEST MANAGEMENT TABLE....");
+        //console.log("ATTEMPTING TO LOAD CONTEST MANAGEMENT TABLE....");
         const tbody = document.querySelector('#content-management-table tbody');
         if (!tbody || !this.adminData.stories) return;
         
@@ -418,11 +425,11 @@ class AdminDashboard {
             const row = this.createContentManagementRow(story);
             tbody.appendChild(row);
         });
-        console.log("CONTENT MANAGEMENT TABLE LOADED ");
+        //console.log("CONTENT MANAGEMENT TABLE LOADED ");
     }
 
     loadContestManagementTable() {
-        console.log("ATTEMPTING TO LOAD CONTEST MGNT. TABLE....");
+        //console.log("ATTEMPTING TO LOAD CONTEST MGNT. TABLE....");
         const tbody = document.querySelector('#contest-management-table tbody');
         if (!tbody || !this.adminData.contests) return;
         
@@ -432,11 +439,11 @@ class AdminDashboard {
             const row = this.createContestManagementRow(contest);
             tbody.appendChild(row);
         });
-        console.log("CONTEST MGNT. TABLE LOADED");
+        //console.log("CONTEST MGNT. TABLE LOADED");
     }
 
     loadAnnouncementManagementTable() {
-        console.log("ATTEMPTING TO LOAD ANNOUNCEMENT MGNT. TABLE...");
+        //console.log("ATTEMPTING TO LOAD ANNOUNCEMENT MGNT. TABLE...");
         const tbody = document.querySelector('#announcement-management-table tbody');
         if (!tbody || !this.adminData.announcements) return;
         
@@ -446,11 +453,11 @@ class AdminDashboard {
             const row = this.createAnnouncementManagementRow(announcement);
             tbody.appendChild(row);
         });
-        console.log("ANNOUNCEMENT MGNT TABLE LOADED");
+        //console.log("ANNOUNCEMENT MGNT TABLE LOADED");
     }
 
     loadBadgeManagementTable() {
-        console.log("ATTEMPTING TO LOAD BADGE MANAGEMENT TABLE....");
+       // console.log("ATTEMPTING TO LOAD BADGE MANAGEMENT TABLE....");
         const tbody = document.querySelector('#badge-management-table tbody');
         if (!tbody || !this.adminData.badges) return;
         
@@ -460,12 +467,12 @@ class AdminDashboard {
             const row = this.createBadgeManagementRow(badge);
             tbody.appendChild(row);
         });
-        console.log("BADGE MGNT. TABLE LOADED");
+        //console.log("BADGE MGNT. TABLE LOADED");
     }
 
     // Add visitor analytics table method
     loadVisitorAnalyticsTable() {
-        console.log("ATTEMPTING TO LOAD VISITOR ANALYTICS TABLE....");
+        //console.log("ATTEMPTING TO LOAD VISITOR ANALYTICS TABLE....");
         const tbody = document.querySelector('#visitor-analytics-table tbody');
         if (!tbody) return;
         
@@ -473,7 +480,7 @@ class AdminDashboard {
         
         // Note: You'll need to implement an API endpoint to get detailed visitor data
         // For now, we're showing a placeholder
-        console.log("VISITOR ANALYTICS TABLE LOADED");
+        //console.log("VISITOR ANALYTICS TABLE LOADED");
     }
 
     // Enhanced row creation methods that handle both API and mock data structures
@@ -830,7 +837,7 @@ class AdminDashboard {
 
     switchToTab(tabId) {
         // Update active tab
-        console.log("SWITCHING ACTIVE TAG TO: "+tabId);
+        //console.log("SWITCHING ACTIVE TAG TO: "+tabId);
         document.querySelectorAll('.tab-link').forEach(tab => {
             tab.classList.remove('active');
         });
@@ -1290,5 +1297,6 @@ document.addEventListener('DOMContentLoaded', function() {
         window.location.href = '/frontend/signin.html';
     }
 });
+
 
 
