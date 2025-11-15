@@ -1,5 +1,7 @@
 
 
+
+
 // category-stories.js - Refactored with Integrated Pagination
 
 class CategoryStories {
@@ -40,13 +42,13 @@ class CategoryStories {
         this.currentCategory = urlParams.get('category') || 'romance';
         this.currentPage = parseInt(urlParams.get('page')) || 1;
         
-        console.log(`CATEGORY SLUG: ${this.currentCategory}, PAGE: ${this.currentPage}`);
+        //console.log(`CATEGORY SLUG: ${this.currentCategory}, PAGE: ${this.currentPage}`);
     }
 
     // Load category data from backend
     async loadCategoryData() {
         try {
-            console.log(`Loading category data for: ${this.currentCategory}`);
+            //console.log(`Loading category data for: ${this.currentCategory}`);
             
             // Fetch category object from database
             const response = await window.apiService.getCategory(this.currentCategory);
@@ -59,7 +61,7 @@ class CategoryStories {
                     icon: response.category.icon,
                     slug: response.category.slug
                 };
-                console.log('Category data loaded:', this.currentCategoryData);
+                //console.log('Category data loaded:', this.currentCategoryData);
             } else {
                 throw new Error('Failed to load category data');
             }
@@ -112,7 +114,7 @@ class CategoryStories {
         try {
             this.showLoadingState(true);
             
-            console.log(`Loading stories for category: ${this.currentCategoryData.title}, page: ${this.currentPage}`);
+            //console.log(`Loading stories for category: ${this.currentCategoryData.title}, page: ${this.currentPage}`);
             
             let response;
             
@@ -142,7 +144,7 @@ class CategoryStories {
             if (response && response.success) {
                 stories = response.stories || [];
                 this.totalStories = response.total || response.count || stories.length;
-                console.log(`Loaded ${stories.length} stories for category (total: ${this.totalStories})`);
+                //console.log(`Loaded ${stories.length} stories for category (total: ${this.totalStories})`);
             } else {
                 console.error('Invalid response format:', response);
                 throw new Error('Invalid response from server');
@@ -481,5 +483,3 @@ $(document).ready(function(){
     const categoryStories = new CategoryStories();
     categoryStories.init();
 });
-
-
