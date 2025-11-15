@@ -1,4 +1,5 @@
 
+
 // api-service.js - Production Ready API Service for VelvetQuill
 class ApiService {
     
@@ -31,8 +32,8 @@ class ApiService {
 
     // Setup request/response interceptors
     setupInterceptors() {
-        console.log(`🚀 API Service initialized in ${this.getEnvironment()} mode`);
-        console.log(`🔗 Base URL: ${this.baseURL}`);
+        //console.log(`🚀 API Service initialized in ${this.getEnvironment()} mode`);
+        //console.log(`🔗 Base URL: ${this.baseURL}`);
     }
 
     // Setup global error handling
@@ -62,7 +63,7 @@ class ApiService {
                             (endpoint === '/stories' && (!options.method || options.method === 'GET')) ||
                             (endpoint.match('/^\/stories\/[a-f0-9{24}$/]') && (!options.method || options.method === 'GET'));
 
-    console.log(`API Request: ${endpoint} - Public: ${isPublicEndpoint}`);
+    //console.log(`API Request: ${endpoint} - Public: ${isPublicEndpoint}`);
     
     // Show loading indicator for longer requests
     const loadingTimeout = setTimeout(() => {
@@ -73,7 +74,7 @@ class ApiService {
         const processedOptions = {...options};
         if(processedOptions.body && typeof processedOptions.body === 'object' && !(processedOptions.body instanceof FormData)){
             processedOptions.body = JSON.stringify(processedOptions.body);
-            console.log('STRINGIFIED REQUEST BODY TO JSON !')
+            //console.log('STRINGIFIED REQUEST BODY TO JSON !')
         }
 
         const config = this.buildRequestConfig(processedOptions, isPublicEndpoint);
@@ -99,7 +100,7 @@ class ApiService {
         
         // Retry logic for network errors
         if (retries > 0 && this.shouldRetry(error)) {
-            console.log(`Retrying request... ${retries} attempts left`);
+            //console.log(`Retrying request... ${retries} attempts left`);
             await this.delay(1000 * (4 - retries)); // Exponential backoff
             return this.request(endpoint, options, retries - 1);
         }
@@ -124,12 +125,12 @@ class ApiService {
             const token = AuthManager.getToken();
             if(token){
                 config.headers['Authorization'] = `Bearer ${token}`;
-                console.log('ADDING AUTH HEADER FOR PROTECTED ENDPOINT');
+                //console.log('ADDING AUTH HEADER FOR PROTECTED ENDPOINT');
             }
 
             
         }else{
-            console.log('NO AUTH - USER NOT AUTHENTICATED !');
+            //console.log('NO AUTH - USER NOT AUTHENTICATED !');
         }
 
 
@@ -255,7 +256,7 @@ class ApiService {
 
     showToast(message, type = 'info') {
         // You can implement a toast notification system here
-        console.log(`[${type.toUpperCase()}] ${message}`);
+        //console.log(`[${type.toUpperCase()}] ${message}`);
         
         // Simple browser notification
         if (type === 'error' && this.getEnvironment() === 'production') {
@@ -301,7 +302,7 @@ class ApiService {
     // ==================== AUTHENTICATION & USER MANAGEMENT ====================
 
     async signUp(userData) {
-        console.log("📝 Attempting user signup");
+        //console.log("📝 Attempting user signup");
         
         const response = await this.request('/auth/signup', {
             method: 'POST',
@@ -316,7 +317,7 @@ class ApiService {
     }
 
     async signIn(credentials) {
-        console.log("🔐 Attempting user signin");
+        //console.log("🔐 Attempting user signin");
 
         const response = await this.request('/auth/signin', {
             method: 'POST',
@@ -1063,7 +1064,7 @@ async removeAvatar() {
  * @returns {Promise<Object>} Response with public user profile
  */
 async getPublicUserProfile(identifier) {
-    console.log(`GETTING PUBLIC USER PROFILE FOR: ${identifier}`);
+    //console.log(`GETTING PUBLIC USER PROFILE FOR: ${identifier}`);
     return this.request(`/users/profile/public/${identifier}`);
 }
 
@@ -1092,7 +1093,7 @@ async getPublicStoriesByAuthor(identifier, options = {}) {
         sortOrder
     }).toString();
 
-    console.log(`GETTING PUBLIC STORIES FOR AUTHORS: ${identifier}?${queryParams}`);
+    //console.log(`GETTING PUBLIC STORIES FOR AUTHORS: ${identifier}?${queryParams}`);
     
     return this.request(`/stories/public/author/${encodeURIComponent(identifier)}?${queryParams}`);
 }
@@ -1278,7 +1279,7 @@ function initializeApiService() {
         window.apiService = new ApiService();
         window.AuthManager = AuthManager;
         
-        console.log('✅ API Service initialized successfully');
+        //console.log('✅ API Service initialized successfully');
         
         // Auto-verify session on page load
         document.addEventListener('DOMContentLoaded', async () => {
@@ -1288,7 +1289,7 @@ function initializeApiService() {
                     console.warn('Session invalid, logging out...');
                     await AuthManager.logout();
                 } else {
-                    console.log('✅ Session verified');
+                    //console.log('✅ Session verified');
                 }
             }
             
@@ -1308,8 +1309,4 @@ function initializeApiService() {
 
 // Initialize the service
 initializeApiService();
-
-
-
-
 
