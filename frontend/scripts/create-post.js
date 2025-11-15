@@ -458,7 +458,7 @@ validatePageContent() {
     }
 
     showDraftsModal(drafts) {
-        console.log('Available drafts:', drafts);
+        //console.log('Available drafts:', drafts);
     }
 
     async saveDraft() {
@@ -655,7 +655,7 @@ validatePageContent() {
 
         try {
             const formData = this.getFormData();
-            //console.log('Submitting story data:', JSON.stringify(formData)); // Debug log
+            ////console.log('Submitting story data:', JSON.stringify(formData)); // Debug log
             
             const response = await window.apiService.createStory(formData);
 
@@ -733,6 +733,3 @@ validatePageContent() {
 document.addEventListener('DOMContentLoaded', function() {
     window.createPostPage = new CreatePostPage();
 });
-
-
-
