@@ -260,10 +260,10 @@ $(document).ready(function(){
     function updateUIForAuthState() {
         const isAuthenticated = AuthManager.isAuthenticated();
         
-        //console.log("Updating UI for auth state:", {
+        /*/console.log("Updating UI for auth state:", {
             authenticated: isAuthenticated,
             viewingOwnProfile: isViewingOwnProfile
-        });
+        });*/
         
         // Show/hide follow buttons based on auth and profile ownership
         if (!isAuthenticated) {
