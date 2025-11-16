@@ -209,14 +209,14 @@ const loadRoutes = async () => {
     }
 };
 
-// Auto-approve author applications after 8 hours
+// Auto-approve author applications after 5 seconds
 const autoApproveAuthorApplications = async () => {
     try {
-        const eightHoursAgo = new Date(Date.now() - 8 * 60 * 60 * 1000);
+        const fiveSecondsAgo = new Date(Date.now() - 5 * 1000); // Changed from 8 hours to 5 seconds
         
         const pendingApplications = await User.find({
             'authorApplication.status': 'pending',
-            'authorApplication.appliedAt': { $lte: eightHoursAgo }
+            'authorApplication.appliedAt': { $lte: fiveSecondsAgo }
         });
 
         for (const user of pendingApplications) {
@@ -224,10 +224,10 @@ const autoApproveAuthorApplications = async () => {
             user.role = 'author';
             user.authorApplication.status = 'approved';
             user.authorApplication.reviewedAt = new Date();
-            user.authorApplication.rejectionReason = 'Automatically approved after 8 hours';
+            user.authorApplication.rejectionReason = 'Automatically approved after 5 seconds';
             
             await user.save();
-            console.log(`Auto-approved author application for user: ${user.username}`);
+            //console.log(`Auto-approved author application for user: ${user.username}`);
         }
 
         if (pendingApplications.length > 0) {
@@ -238,9 +238,10 @@ const autoApproveAuthorApplications = async () => {
     }
 };
 
-// Schedule the job to run every hour
-cron.schedule('0 * * * *', autoApproveAuthorApplications);
-console.log('✅ Author auto-approval scheduler initialized');
+// Schedule the job to run every 10 seconds for faster processing
+cron.schedule('*/10 * * * * *', autoApproveAuthorApplications); // Changed to run every 10 seconds
+//console.log('✅ Author auto-approval scheduler initialized (5 seconds delay)');
+
 
 // Start server function
 const startServer = async () => {
