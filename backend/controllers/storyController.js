@@ -258,7 +258,7 @@ async getStory(req, res) {
                 _id: story._id,
                 title: story.title,
                 excerpt: story.excerpt,
-                content: story.pages, // Return all pages for the story
+                pages: story.pages, // Return all pages for the story
                 category: story.category,
                 tags: story.tags,
                 status: story.status,
