@@ -376,7 +376,7 @@ async function setAuthorAvatarHeader() {
         
         const authorId = currentStory.author?.username || currentStory.authorId;
 
-        console.log(`AUTHOR ID: ${authorId}`);
+        //console.log(`AUTHOR ID: ${authorId}`);
         if(authorId){
             $('#author-name1').attr('href',`author-room.html?id=${authorId}`);
             $('#author-name2').attr('href',`author-room.html?id=${authorId}`);
@@ -599,7 +599,7 @@ async function setAuthorAvatarHeader() {
         if (!storyId) return;
 
         try {
-            console.log(`Loading comments for story: ${storyId}`);
+            //console.log(`Loading comments for story: ${storyId}`);
 
             const response = await window.apiService.getStoryComments(storyId, {
                 page: 1,
@@ -656,7 +656,7 @@ async function setAuthorAvatarHeader() {
             container.append(commentHTML);
         });
 
-        console.log(`Displayed ${sortedComments.length} comments`);
+        //console.log(`Displayed ${sortedComments.length} comments`);
     }
 
     // Create comment HTML
@@ -929,7 +929,7 @@ async function setAuthorAvatarHeader() {
 
     // Load story from fallback sources
     async function loadStoryFromFallback(storyId) {
-        console.log('Trying fallback sources for story:', storyId);
+        //console.log('Trying fallback sources for story:', storyId);
         
         // Try localStorage
         const localStorageStory = localStorage.getItem("currentStory");
@@ -939,7 +939,7 @@ async function setAuthorAvatarHeader() {
                 if (parsedStory._id === storyId || parsedStory.id === storyId) {
                     currentStory = parsedStory;
                     totalPages = currentStory.pages ? currentStory.pages.length : 1;
-                    console.log('Story loaded from localStorage:', currentStory.title);
+                    //console.log('Story loaded from localStorage:', currentStory.title);
                     localStorage.removeItem("currentStory");
                     return;
                 }
@@ -956,7 +956,7 @@ async function setAuthorAvatarHeader() {
             if (backupStory) {
                 currentStory = backupStory;
                 totalPages = currentStory.pages ? currentStory.pages.length : 1;
-                console.log('Story loaded from backup data:', currentStory.title);
+                //console.log('Story loaded from backup data:', currentStory.title);
                 return;
             }
         }
