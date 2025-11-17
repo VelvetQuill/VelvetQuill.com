@@ -1347,7 +1347,7 @@ function initializeApiService() {
         console.error('❌ Failed to initialize API Service:', error);
         // Fallback: create basic service without enhanced features
         window.apiService = {
-            baseURL: 'https://velvetquill-backend.onrender.com/api',
+            baseURL: 'https://velvetquill-com.onrender.com/api',
             request: async () => { throw new Error('API Service not properly initialized'); }
         };
     }
