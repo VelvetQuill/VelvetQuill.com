@@ -21,7 +21,7 @@ class ApiService {
         }
         
         // Netlify preview deployments
-        if (hostname.includes('netlify.app') && !hostname.includes('velvetquill')) {
+        if (hostname.includes('github.io') || hostname.includes('velvetquill.github.io')) {
             return 'https://velvetquill-com.onrender.com/api';
         }
         
