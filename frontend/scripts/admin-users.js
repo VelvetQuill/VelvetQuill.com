@@ -1,6 +1,7 @@
 
 
-// admin-users.js - Refactored to use API Service
+
+// admin-users.js - Fixed to use correct API service methods
 class AdminUsersManager {
     constructor() {
         this.users = [];
@@ -67,7 +68,7 @@ class AdminUsersManager {
 
         try {
             // Use apiService to get users with pagination and filtering
-            const response = await this.apiService.getAdminUsers(this.currentPage, this.itemsPerPage, this.searchQuery);
+            const response = await this.apiService.getUsers(this.currentPage, this.itemsPerPage, this.searchQuery);
             
             if (response.success) {
                 this.users = response.users || [];
@@ -166,7 +167,7 @@ class AdminUsersManager {
                 <td><input type="checkbox" class="user-checkbox" value="${user._id}" ${isSelected ? 'checked' : ''}></td>
                 <td class="user-info">
                     <div class="user-avatar">
-                        <img src="${user.profile?.avatar || '../assets/images/default-avatar.png'}" alt="${user.username}">
+                        <img src="${user.profile?.avatar || 'assets/avatars/avatar-male1.jpg'}" alt="${user.username}">
                     </div>
                     <div class="user-details">
                         <div class="user-name">${user.displayName || user.username}</div>
@@ -240,7 +241,8 @@ class AdminUsersManager {
     // User action methods using apiService
     async viewUserDetails(userId) {
         try {
-            const response = await this.apiService.getAdminUser(userId);
+            // Use the correct method name from api-service.js
+            const response = await this.apiService.request(`/admin/users/${userId}`);
             
             if (response.success) {
                 this.showUserDetailModal(response.user);
@@ -300,7 +302,10 @@ class AdminUsersManager {
     async deleteUser(userId) {
         if (confirm('Are you sure you want to delete this user? This action cannot be undone.')) {
             try {
-                const response = await this.apiService.deleteAdminUser(userId);
+                // Use the generic request method since deleteAdminUser doesn't exist
+                const response = await this.apiService.request(`/admin/users/${userId}`, {
+                    method: 'DELETE'
+                });
                 
                 if (response.success) {
                     this.showSuccess('User deleted successfully');
@@ -327,29 +332,30 @@ class AdminUsersManager {
 
         if (confirm(`Are you sure you want to ${actionText} ${userIds.length} users?`)) {
             try {
-                // Use individual API calls via apiService
-                const promises = userIds.map(userId => {
-                    switch (action) {
-                        case 'suspend':
-                            return this.apiService.suspendUser(userId, 'Bulk action');
-                        case 'activate':
-                            return this.apiService.activateUser(userId);
-                        case 'delete':
-                            return this.apiService.deleteAdminUser(userId);
+                // Use the bulk actions endpoint
+                const response = await this.apiService.request('/admin/users/bulk-actions', {
+                    method: 'POST',
+                    body: {
+                        userIds,
+                        action,
+                        reason: 'Bulk admin action'
                     }
                 });
 
-                await Promise.all(promises);
-                this.showSuccess(`Successfully ${actionText}ed ${userIds.length} users`);
-                this.clearSelection();
-                this.loadUsersData();
+                if (response.success) {
+                    this.showSuccess(`Successfully ${actionText}ed ${response.count || userIds.length} users`);
+                    this.clearSelection();
+                    this.loadUsersData();
+                } else {
+                    throw new Error(response.message);
+                }
             } catch (error) {
                 this.showError(`Failed to ${actionText} users: ${error.message}`);
             }
         }
     }
 
-    // Selection management (unchanged)
+    // Selection management
     toggleSelectAll(e) {
         const checkboxes = document.querySelectorAll('.user-checkbox');
         checkboxes.forEach(checkbox => {
@@ -387,7 +393,7 @@ class AdminUsersManager {
         }
     }
 
-    // Pagination (unchanged)
+    // Pagination
     updatePagination() {
         const totalPages = Math.ceil(this.filteredUsers.length / this.itemsPerPage);
         document.getElementById('currentPage').textContent = this.currentPage;
@@ -412,7 +418,7 @@ class AdminUsersManager {
         }
     }
 
-    // Search with debounce (unchanged)
+    // Search with debounce
     handleSearch() {
         this.searchQuery = document.getElementById('userSearch').value.trim();
         this.applyFilters();
@@ -430,7 +436,7 @@ class AdminUsersManager {
         };
     }
 
-    // Modal management (unchanged)
+    // Modal management
     showUserDetailModal(user) {
         const content = document.getElementById('userDetailContent');
         content.innerHTML = this.generateUserDetailHTML(user);
@@ -489,12 +495,12 @@ class AdminUsersManager {
         }
     }
 
-    // HTML generators for modals (unchanged)
+    // HTML generators for modals
     generateUserDetailHTML(user) {
         return `
             <div class="user-detail-view">
                 <div class="user-header">
-                    <img src="${user.profile?.avatar || '../assets/images/default-avatar.png'}" 
+                    <img src="${user.profile?.avatar || 'assets/avatars/avatar-male1.png'}" 
                          alt="${user.username}" class="detail-avatar">
                     <div class="user-header-info">
                         <h4>${user.displayName || user.username}</h4>
@@ -564,7 +570,7 @@ class AdminUsersManager {
         `;
     }
 
-    // UI State Management (unchanged)
+    // UI State Management
     showLoading() {
         document.getElementById('loadingState').classList.remove('hidden');
     }
@@ -617,3 +623,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.adminUsersManager = new AdminUsersManager();
 });
+
+
+
