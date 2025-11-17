@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Story Management - Velvet Quill Admin</title>
+    <link rel="stylesheet" href="styles/admin-stories.css">
+</head>
+<body>
+    <div class="admin-container">
+        <header class="admin-header">
+            <h1>📚 Story Management</h1>
+            <div class="header-actions">
+                <div class="search-box">
+                    <input type="text" id="storySearch" placeholder="Search stories by title, author, content...">
+                    <button id="searchBtn">🔍</button>
+                </div>
+                <select id="statusFilter">
+                    <option value="all">All Stories</option>
+                    <option value="pending">Pending Approval</option>
+                    <option value="published">Published</option>
+                    <option value="rejected">Rejected</option>
+                    <option value="draft">Drafts</option>
+                </select>
+                <select id="categoryFilter">
+                    <option value="all">All Categories</option>
+                    <!-- Categories will be populated dynamically -->
+                </select>
+                <button id="refreshStories" class="btn-primary">🔄 Refresh</button>
+                <button onclick="window.location.href='admin-dashboard.html'" class="btn-secondary">← Dashboard</button>
+            </div>
+        </header>
+
+        <!-- Story Statistics Cards -->
+        <div class="story-stats-grid">
+            <div class="stat-card total">
+                <div class="stat-icon">📖</div>
+                <div class="stat-info">
+                    <div class="stat-number" id="totalStories">0</div>
+                    <div class="stat-label">Total Stories</div>
+                </div>
+            </div>
+            <div class="stat-card pending">
+                <div class="stat-icon">⏳</div>
+                <div class="stat-info">
+                    <div class="stat-number" id="pendingStories">0</div>
+                    <div class="stat-label">Pending Review</div>
+                </div>
+            </div>
+            <div class="stat-card published">
+                <div class="stat-icon">✅</div>
+                <div class="stat-info">
+                    <div class="stat-number" id="publishedStories">0</div>
+                    <div class="stat-label">Published</div>
+                </div>
+            </div>
+            <div class="stat-card featured">
+                <div class="stat-icon">⭐</div>
+                <div class="stat-info">
+                    <div class="stat-number" id="featuredStories">0</div>
+                    <div class="stat-label">Featured</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bulk Actions Bar -->
+        <div class="bulk-actions-bar hidden" id="bulkActions">
+            <div class="bulk-info">
+                <span id="selectedCount">0</span> stories selected
+            </div>
+            <div class="bulk-buttons">
+                <button class="btn-success" id="bulkApprove">Approve</button>
+                <button class="btn-danger" id="bulkReject">Reject</button>
+                <button class="btn-warning" id="bulkFeature">Feature</button>
+                <button class="btn-danger" id="bulkUnfeature">Unfeature</button>
+                <button class="btn-danger" id="bulkDelete">Delete</button>
+                <button class="btn-secondary" id="clearSelection">Clear</button>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loadingState" class="loading-container">
+            <div class="spinner"></div>
+            <p>Loading stories...</p>
+        </div>
+
+        <!-- Error State -->
+        <div id="errorState" class="error-container hidden">
+            <p>❌ Failed to load stories</p>
+            <button id="retryLoad" class="btn-primary">Retry</button>
+        </div>
+
+        <!-- Stories Grid/Table View Toggle -->
+        <div class="view-controls">
+            <button id="tableViewBtn" class="view-btn active">📋 Table View</button>
+            <button id="gridViewBtn" class="view-btn">🖼️ Grid View</button>
+        </div>
+
+        <!-- Stories Table View -->
+        <div id="storiesTableView" class="stories-table-container">
+            <table class="stories-table">
+                <thead>
+                    <tr>
+                        <th><input type="checkbox" id="selectAll"></th>
+                        <th>Story</th>
+                        <th>Author</th>
+                        <th>Category</th>
+                        <th>Status</th>
+                        <th>Created</th>
+                        <th>Engagement</th>
+                        <th>Badges</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="storiesTableBody">
+                    <!-- Stories will be populated here -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Stories Grid View -->
+        <div id="storiesGridView" class="stories-grid-container hidden">
+            <div class="stories-grid" id="storiesGrid">
+                <!-- Story cards will be populated here -->
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <button id="prevPage" class="pagination-btn">← Previous</button>
+            <span class="page-info">Page <span id="currentPage">1</span> of <span id="totalPages">1</span></span>
+            <button id="nextPage" class="pagination-btn">Next →</button>
+        </div>
+
+        <!-- Story Detail Modal -->
+        <div id="storyDetailModal" class="modal hidden">
+            <div class="modal-content large">
+                <div class="modal-header">
+                    <h3>Story Details & Preview</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body" id="storyDetailContent">
+                    <!-- Story details will be loaded here -->
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-success" id="approveStory">Approve</button>
+                    <button class="btn-danger" id="rejectStory">Reject</button>
+                    <button class="btn-warning" id="featureStory">Feature</button>
+                    <button class="btn-secondary" id="closeStoryModal">Close</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Badge Management Modal -->
+        <div id="badgeModal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Manage Story Badges</h3>
+                    <button class="close-modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="badge-selection">
+                        <label><input type="checkbox" value="featured"> ⭐ Featured</label>
+                        <label><input type="checkbox" value="trending"> 🔥 Trending</label>
+                        <label><input type="checkbox" value="editors_choice"> 🏆 Editor's Choice</label>
+                        <label><input type="checkbox" value="new_release"> 🆕 New Release</label>
+                        <label><input type="checkbox" value="popular"> 👑 Popular</label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn-primary" id="saveBadges">Save Badges</button>
+                    <button class="btn-secondary" id="closeBadgeModal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/api-service.js"></script>
+    <script src="scripts/admin-stories.js"></script>
+</body>
+</html>
+

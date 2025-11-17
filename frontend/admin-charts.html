@@ -1,0 +1,116 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analytics Dashboard - Velvet Quill Admin</title>
+    
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="styles/materialize.min.css">
+    <link href="styles/font/micons.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/admin-charts.css">
+</head>
+<body>
+    <!-- Admin Header -->
+    <nav class="blue darken-3">
+        <div class="nav-wrapper">
+            <a href="#" class="brand-logo center">📊 Analytics Dashboard</a>
+            <ul id="nav-mobile" class="right">
+                <li><a href="admin-dashboard.html" class="waves-effect waves-light btn blue"><i class="material-icons left">arrow_back</i>Back to Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+
+<!-- admin-dashboard.html -->
+<div class="container">
+    <h4>Admin Dashboard</h4>
+    
+    <!-- Quick Stats Cards -->
+    <div class="row">
+        <div class="col s12 m6 l3">
+            <div class="card green lighten-1 white-text">
+                <div class="card-content">
+                    <span class="card-title">Total Visitors</span>
+                    <h4 id="totalVisitors">0</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6 l3">
+            <div class="card blue lighten-1 white-text">
+                <div class="card-content">
+                    <span class="card-title">Registered Users</span>
+                    <h4 id="totalUsers">0</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6 l3">
+            <div class="card orange lighten-1 white-text">
+                <div class="card-content">
+                    <span class="card-title">Authors</span>
+                    <h4 id="totalAuthors">0</h4>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m6 l3">
+            <div class="card pink lighten-1 white-text">
+                <div class="card-content">
+                    <span class="card-title">Published Stories</span>
+                    <h4 id="totalStories">0</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="row">
+        <div class="col s12">
+            <button id="refreshStats" class="btn waves-effect waves-light">
+                <i class="material-icons left">refresh</i>Refresh Stats
+            </button>
+            <button id="exportStats" class="btn waves-effect waves-light blue">
+                <i class="material-icons left">download</i>Export Data
+            </button>
+        </div>
+    </div>
+
+    <!-- Simple Charts -->
+    <div class="row">
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-content">
+                    <canvas id="usersChart" height="250"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-content">
+                    <canvas id="categoriesChart" height="250"></canvas>
+                </div>
+            </div>
+        </div>
+        <div class="col s12 m4">
+            <div class="card">
+                <div class="card-content">
+                    <canvas id="storiesChart" height="250"></canvas>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Chart.js -->
+    <script src="scripts/jquery.js"></script>
+    <!-- jQuery -->
+    <script src="scripts/chart.js"></script>
+    <!-- Date-fns for date manipulation -->
+    <script src="scripts/date-fns.js"></script>
+    <!-- Materialize JavaScript -->
+    <script src="scripts/api-service.js"></script> 
+    <script src="scripts/materialize.min.js"></script>
+    <script src="scripts/admin-charts.js"></script>
+</body>
+</html>
