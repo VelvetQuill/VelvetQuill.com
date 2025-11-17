@@ -1,6 +1,6 @@
 
 
-// admin-users.js - Simplified User Management System
+// admin-users.js - Refactored to use API Service
 class AdminUsersManager {
     constructor() {
         this.users = [];
@@ -10,10 +10,22 @@ class AdminUsersManager {
         this.itemsPerPage = 20;
         this.currentFilter = 'all';
         this.searchQuery = '';
+        
+        // Initialize API service
+        this.apiService = window.apiService;
+        this.authManager = window.AuthManager;
+        
         this.init();
     }
 
     init() {
+        // Check admin privileges
+        if (!this.authManager.isAdmin()) {
+            alert('Admin access required');
+            window.location.href = '/index.html';
+            return;
+        }
+        
         this.bindEvents();
         this.loadUsersData();
     }
@@ -54,37 +66,29 @@ class AdminUsersManager {
         this.hideUsersTable();
 
         try {
-            // Use existing admin/users endpoint
-            const response = await fetch('/api/admin/users?limit=1000', {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                }
-            });
+            // Use apiService to get users with pagination and filtering
+            const response = await this.apiService.getAdminUsers(this.currentPage, this.itemsPerPage, this.searchQuery);
             
-            if (!response.ok) throw new Error('Failed to fetch users');
-            
-            const data = await response.json();
-            
-            if (data.success) {
-                this.users = data.users || [];
+            if (response.success) {
+                this.users = response.users || [];
                 this.updateStatistics();
                 this.applyFilters();
                 this.hideLoading();
                 this.showUsersTable();
             } else {
-                throw new Error(data.message || 'Failed to load users');
+                throw new Error(response.message || 'Failed to load users');
             }
             
         } catch (error) {
             console.error('Failed to load users:', error);
             this.hideLoading();
-            this.showError();
+            this.showError('Failed to load users: ' + error.message);
         }
     }
 
     updateStatistics() {
-        // Calculate stats from existing user data
-        const visitorsCount = 0; // Would come from your analytics if available
+        // Calculate stats from user data
+        const visitorsCount = 0; // Would come from analytics if available
         const registeredCount = this.users.length;
         const authorsCount = this.users.filter(u => u.isAuthor || u.role === 'author').length;
         const pendingCount = this.users.filter(u => u.authorApplication?.status === 'pending').length;
@@ -150,11 +154,11 @@ class AdminUsersManager {
         const userType = this.getUserType(user);
         const status = this.getUserStatus(user);
         const joinDate = new Date(user.createdAt).toLocaleDateString();
-        const lastActive = user.lastLogin ? new Date(user.lastLogin).toLocaleDateString() : 'Never';
+        const lastActive = user.lastActive ? new Date(user.lastActive).toLocaleDateString() : 'Never';
         
-        // Use existing stats from your user model
-        const storyCount = user.stories?.length || 0;
-        const followersCount = user.followers?.length || 0;
+        // Use stats from enhanced user data
+        const storyCount = user.storyCount || 0;
+        const followersCount = user.followersCount || 0;
         const totalLikes = user.totalLikes || 0;
 
         return `
@@ -233,23 +237,15 @@ class AdminUsersManager {
         });
     }
 
-    // User action methods using existing endpoints
+    // User action methods using apiService
     async viewUserDetails(userId) {
         try {
-            const response = await fetch(`/api/admin/users/${userId}`, {
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                }
-            });
+            const response = await this.apiService.getAdminUser(userId);
             
-            if (!response.ok) throw new Error('Failed to fetch user details');
-            
-            const data = await response.json();
-            
-            if (data.success) {
-                this.showUserDetailModal(data.user);
+            if (response.success) {
+                this.showUserDetailModal(response.user);
             } else {
-                throw new Error(data.message);
+                throw new Error(response.message);
             }
         } catch (error) {
             this.showError('Failed to load user details: ' + error.message);
@@ -272,24 +268,13 @@ class AdminUsersManager {
     async suspendUser(userId) {
         if (confirm('Are you sure you want to suspend this user?')) {
             try {
-                const response = await fetch(`/api/admin/users/${userId}/suspend`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                    },
-                    body: JSON.stringify({ reason: 'Admin suspension' })
-                });
+                const response = await this.apiService.suspendUser(userId, 'Admin suspension');
                 
-                if (!response.ok) throw new Error('Failed to suspend user');
-                
-                const data = await response.json();
-                
-                if (data.success) {
+                if (response.success) {
                     this.showSuccess('User suspended successfully');
                     this.loadUsersData();
                 } else {
-                    throw new Error(data.message);
+                    throw new Error(response.message);
                 }
             } catch (error) {
                 this.showError('Failed to suspend user: ' + error.message);
@@ -299,22 +284,13 @@ class AdminUsersManager {
 
     async activateUser(userId) {
         try {
-            const response = await fetch(`/api/admin/users/${userId}/activate`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                }
-            });
+            const response = await this.apiService.activateUser(userId);
             
-            if (!response.ok) throw new Error('Failed to activate user');
-            
-            const data = await response.json();
-            
-            if (data.success) {
+            if (response.success) {
                 this.showSuccess('User activated successfully');
                 this.loadUsersData();
             } else {
-                throw new Error(data.message);
+                throw new Error(response.message);
             }
         } catch (error) {
             this.showError('Failed to activate user: ' + error.message);
@@ -324,22 +300,13 @@ class AdminUsersManager {
     async deleteUser(userId) {
         if (confirm('Are you sure you want to delete this user? This action cannot be undone.')) {
             try {
-                const response = await fetch(`/api/admin/users/${userId}`, {
-                    method: 'DELETE',
-                    headers: {
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                    }
-                });
+                const response = await this.apiService.deleteAdminUser(userId);
                 
-                if (!response.ok) throw new Error('Failed to delete user');
-                
-                const data = await response.json();
-                
-                if (data.success) {
+                if (response.success) {
                     this.showSuccess('User deleted successfully');
                     this.loadUsersData();
                 } else {
-                    throw new Error(data.message);
+                    throw new Error(response.message);
                 }
             } catch (error) {
                 this.showError('Failed to delete user: ' + error.message);
@@ -347,7 +314,7 @@ class AdminUsersManager {
         }
     }
 
-    // Bulk actions using individual API calls
+    // Bulk actions using apiService
     async bulkAction(action) {
         const userIds = Array.from(this.selectedUsers);
         if (userIds.length === 0) return;
@@ -360,32 +327,15 @@ class AdminUsersManager {
 
         if (confirm(`Are you sure you want to ${actionText} ${userIds.length} users?`)) {
             try {
-                // Use individual API calls since bulk endpoint might not exist
+                // Use individual API calls via apiService
                 const promises = userIds.map(userId => {
                     switch (action) {
                         case 'suspend':
-                            return fetch(`/api/admin/users/${userId}/suspend`, {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                                },
-                                body: JSON.stringify({ reason: 'Bulk action' })
-                            });
+                            return this.apiService.suspendUser(userId, 'Bulk action');
                         case 'activate':
-                            return fetch(`/api/admin/users/${userId}/activate`, {
-                                method: 'POST',
-                                headers: {
-                                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                                }
-                            });
+                            return this.apiService.activateUser(userId);
                         case 'delete':
-                            return fetch(`/api/admin/users/${userId}`, {
-                                method: 'DELETE',
-                                headers: {
-                                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                                }
-                            });
+                            return this.apiService.deleteAdminUser(userId);
                     }
                 });
 
@@ -399,7 +349,7 @@ class AdminUsersManager {
         }
     }
 
-    // Selection management
+    // Selection management (unchanged)
     toggleSelectAll(e) {
         const checkboxes = document.querySelectorAll('.user-checkbox');
         checkboxes.forEach(checkbox => {
@@ -437,7 +387,7 @@ class AdminUsersManager {
         }
     }
 
-    // Pagination
+    // Pagination (unchanged)
     updatePagination() {
         const totalPages = Math.ceil(this.filteredUsers.length / this.itemsPerPage);
         document.getElementById('currentPage').textContent = this.currentPage;
@@ -462,7 +412,7 @@ class AdminUsersManager {
         }
     }
 
-    // Search with debounce
+    // Search with debounce (unchanged)
     handleSearch() {
         this.searchQuery = document.getElementById('userSearch').value.trim();
         this.applyFilters();
@@ -480,7 +430,7 @@ class AdminUsersManager {
         };
     }
 
-    // Modal management
+    // Modal management (unchanged)
     showUserDetailModal(user) {
         const content = document.getElementById('userDetailContent');
         content.innerHTML = this.generateUserDetailHTML(user);
@@ -503,26 +453,17 @@ class AdminUsersManager {
         document.querySelectorAll('.modal').forEach(modal => modal.classList.add('hidden'));
     }
 
-    // Author application actions using existing endpoints
+    // Author application actions using apiService
     async approveAuthor(userId) {
         try {
-            const response = await fetch(`/api/admin/authors/${userId}/approve`, {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${localStorage.getItem('token')}`
-                }
-            });
+            const response = await this.apiService.approveAuthor(userId);
             
-            if (!response.ok) throw new Error('Failed to approve author');
-            
-            const data = await response.json();
-            
-            if (data.success) {
+            if (response.success) {
                 this.showSuccess('Author application approved');
                 this.closeModals();
                 this.loadUsersData();
             } else {
-                throw new Error(data.message);
+                throw new Error(response.message);
             }
         } catch (error) {
             this.showError('Failed to approve author: ' + error.message);
@@ -533,25 +474,14 @@ class AdminUsersManager {
         const reason = prompt('Please provide a reason for rejection:');
         if (reason) {
             try {
-                const response = await fetch(`/api/admin/authors/${userId}/reject`, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Authorization': `Bearer ${localStorage.getItem('token')}`
-                    },
-                    body: JSON.stringify({ reason })
-                });
+                const response = await this.apiService.rejectAuthor(userId, reason);
                 
-                if (!response.ok) throw new Error('Failed to reject author');
-                
-                const data = await response.json();
-                
-                if (data.success) {
+                if (response.success) {
                     this.showSuccess('Author application rejected');
                     this.closeModals();
                     this.loadUsersData();
                 } else {
-                    throw new Error(data.message);
+                    throw new Error(response.message);
                 }
             } catch (error) {
                 this.showError('Failed to reject author: ' + error.message);
@@ -559,7 +489,7 @@ class AdminUsersManager {
         }
     }
 
-    // HTML generators for modals
+    // HTML generators for modals (unchanged)
     generateUserDetailHTML(user) {
         return `
             <div class="user-detail-view">
@@ -577,13 +507,13 @@ class AdminUsersManager {
                 
                 <div class="user-stats">
                     <div class="stat-item">
-                        <strong>Stories:</strong> ${user.stories?.length || 0}
+                        <strong>Stories:</strong> ${user.storyStats?.total || 0}
                     </div>
                     <div class="stat-item">
-                        <strong>Followers:</strong> ${user.followers?.length || 0}
+                        <strong>Followers:</strong> ${user.followersCount || 0}
                     </div>
                     <div class="stat-item">
-                        <strong>Following:</strong> ${user.following?.length || 0}
+                        <strong>Following:</strong> ${user.followingCount || 0}
                     </div>
                 </div>
 
@@ -597,6 +527,15 @@ class AdminUsersManager {
                     ${user.authorApplication.rejectionReason ? `
                         <p><strong>Rejection Reason:</strong> ${user.authorApplication.rejectionReason}</p>
                     ` : ''}
+                </div>
+                ` : ''}
+
+                ${user.recentActivity && user.recentActivity.length > 0 ? `
+                <div class="recent-activity">
+                    <h5>Recent Activity</h5>
+                    ${user.recentActivity.map(activity => 
+                        `<div class="activity-item">${activity.title} - ${new Date(activity.createdAt).toLocaleDateString()}</div>`
+                    ).join('')}
                 </div>
                 ` : ''}
             </div>
@@ -625,7 +564,7 @@ class AdminUsersManager {
         `;
     }
 
-    // UI State Management
+    // UI State Management (unchanged)
     showLoading() {
         document.getElementById('loadingState').classList.remove('hidden');
     }
@@ -652,21 +591,29 @@ class AdminUsersManager {
     }
 
     showSuccess(message) {
-        // Simple alert for success messages
         alert(`✅ ${message}`);
     }
 }
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
-    // Simple admin check - you can enhance this based on your auth system
-    const token = localStorage.getItem('token');
-    if (!token) {
+    // Check if user is authenticated and is admin
+    if (!window.AuthManager || !window.AuthManager.isAuthenticated()) {
         window.location.href = 'index.html';
+        return;
+    }
+
+    if (!window.AuthManager.isAdmin()) {
+        alert('Admin access required');
+        window.location.href = 'index.html';
+        return;
+    }
+
+    // Ensure apiService is available
+    if (!window.apiService) {
+        console.error('API Service not available');
         return;
     }
 
     window.adminUsersManager = new AdminUsersManager();
 });
-
-
