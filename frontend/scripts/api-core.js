@@ -1,5 +1,4 @@
 
-
 // api-service.js - Production Ready API Service for VelvetQuill
 class ApiService {
     
@@ -22,7 +21,7 @@ class ApiService {
         }
         
         // Netlify preview deployments
-        if (hostname.includes('github.io') || hostname.includes('velvetquill.github.io')) {
+        if (hostname.includes('netlify.app') && !hostname.includes('velvetquill')) {
             return 'https://velvetquill-com.onrender.com/api';
         }
         
@@ -794,33 +793,70 @@ async likeStory(storyId) {
     // ==================== COMMENTS & INTERACTIONS ====================
 
     async addComment(commentData) {
-        return this.request('/comments', {
-            method: 'POST',
-            body: commentData
-        });
-    }
+    return this.request('/comments', {
+        method: 'POST',
+        body: commentData
+    });
+}
 
-    async getStoryComments(storyId, options = {}) {
-        const queryParams = new URLSearchParams(options).toString();
-        return this.request(`/comments/story/${storyId}?${queryParams}`);
-    }
+async getStoryComments(storyId, options = {}) {
+    const queryParams = new URLSearchParams(options).toString();
+    return this.request(`/comments/story/${storyId}?${queryParams}`);
+}
 
-    async updateComment(commentId, commentData) {
-        return this.request(`/comments/${commentId}`, {
-            method: 'PUT',
-            body: commentData
-        });
-    }
+async updateComment(commentId, commentData) {
+    return this.request(`/comments/${commentId}`, {
+        method: 'PUT',
+        body: commentData
+    });
+}
 
-    async deleteComment(commentId) {
-        return this.request(`/comments/${commentId}`, {
-            method: 'DELETE'
-        });
-    }
+async deleteComment(commentId) {
+    return this.request(`/comments/${commentId}`, {
+        method: 'DELETE'
+    });
+}
+
+async likeComment(commentId) {
+    return this.request(`/comments/${commentId}/like`, {
+        method: 'POST'
+    });
+}
  
     async getUserComments() {
         return this.request('/users/comments/me');
     }
+
+    // ==================== STORY REACTIONS ====================
+
+async likeStory(storyId) {
+    return this.request(`/stories/${storyId}/like`, {
+        method: 'POST'
+    });
+}
+
+async rateStory(storyId, rating) {
+    return this.request(`/stories/${storyId}/rate`, {
+        method: 'POST',
+        body: { rating }
+    });
+}
+
+async addToReadingList(storyId) {
+    return this.request(`/stories/${storyId}/reading-list`, {
+        method: 'POST'
+    });
+}
+
+async removeFromReadingList(storyId) {
+    return this.request(`/stories/${storyId}/reading-list`, {
+        method: 'DELETE'
+    });
+}
+
+async getStoryReadingStatus(storyId) {
+    return this.request(`/stories/${storyId}/user-interactions`);
+}
 
     // ==================== ADMIN DASHBOARD ====================
 
@@ -830,6 +866,16 @@ async likeStory(storyId) {
 
     async getPlatformAnalytics() {
         return this.request('/admin/analytics');
+    }
+
+
+    async getPlatformAnalytics(timeRange = '30d') {
+        const queryParams = new URLSearchParams({ timeRange }).toString();
+        return this.request(`/admin/analytics?${queryParams}`);
+    }
+
+    async getAdminDashboardStats() {
+        return this.request('/admin/dashboard-stats');
     }
 
     async getUsers(page = 1, limit = 10, search = '') {
@@ -1309,4 +1355,8 @@ function initializeApiService() {
 
 // Initialize the service
 initializeApiService();
+
+
+
+
 
