@@ -1,4 +1,5 @@
 
+
 // story-read.js - COMPLETE REFACTORED VERSION
 $(document).ready(function(){
     // Initialize Materialize components
@@ -95,7 +96,7 @@ async function setAuthorAvatarHeader() {
                 document.getElementById('author-stories-count2').textContent = count;    
             }
             
-            //console.log('Author avatar and stats updated for:', displayName);
+            console.log('Author avatar and stats updated for:', displayName);
         }
     } catch (error) {
         console.error('Error setting author avatar header:', error);
@@ -121,7 +122,7 @@ async function setAuthorAvatarHeader() {
         }
 
         try {
-            //console.log(`Loading story ${storyId} from backend...`);
+            console.log(`Loading story ${storyId} from backend...`);
             
             const response = await window.apiService.getStory(storyId);
             
@@ -129,7 +130,7 @@ async function setAuthorAvatarHeader() {
                 currentStory = response.story;
                 totalPages = currentStory.pages ? currentStory.pages.length : 1;
                 userInteractions = response.userInteractions || {};
-                //console.log('Story loaded from backend:', currentStory.title, `(${totalPages} pages)`);
+                console.log('Story loaded from backend:', currentStory.title, `(${totalPages} pages)`);
             } else {
                 await loadStoryFromFallback(storyId);
             }
@@ -375,7 +376,7 @@ async function setAuthorAvatarHeader() {
         
         const authorId = currentStory.author?.username || currentStory.authorId;
 
-        //console.log(`AUTHOR ID: ${authorId}`);
+        console.log(`AUTHOR ID: ${authorId}`);
         if(authorId){
             $('#author-name1').attr('href',`author-room.html?id=${authorId}`);
             $('#author-name2').attr('href',`author-room.html?id=${authorId}`);
@@ -480,10 +481,17 @@ async function setAuthorAvatarHeader() {
         });
         
         // Comments
-        $('#comment-form').on('submit', function(e) {
+        $('#comment-form').on('submit', function (e) {
             e.preventDefault();
             handleCommentSubmit();
         });
+
+        // Comment actions (delegated for dynamic content)
+        $('#comments-container').on('click', '.like-comment-btn', handleLikeComment);
+        $('#comments-container').on('click', '.reply-comment-btn', handleReplyComment);
+        $('#comments-container').on('click', '.edit-comment-btn', handleEditComment);
+        $('#comments-container').on('click', '.delete-comment-btn', handleDeleteComment);
+
         
         // Scroll progress
         $(window).on('scroll', updateReadingProgress);
@@ -585,84 +593,186 @@ async function setAuthorAvatarHeader() {
         window.history.replaceState({}, '', newUrl);
     }
 
+
     // Load comments for the story
     async function loadComments() {
         if (!storyId) return;
-        
+
         try {
-            const response = await window.apiService.getStoryComments(storyId);
+            console.log(`Loading comments for story: ${storyId}`);
+
+            const response = await window.apiService.getStoryComments(storyId, {
+                page: 1,
+                limit: 50,
+                sortBy: 'createdAt',
+                sortOrder: 'desc',
+                includeReplies: true
+            });
+
             if (response.success) {
                 currentComments = response.comments || [];
+                console.log(`Loaded ${currentComments.length} comments`);
+                updateCommentsDisplay();
+            } else {
+                console.error('Failed to load comments:', response.message);
+                currentComments = [];
                 updateCommentsDisplay();
             }
         } catch (error) {
             console.error('Error loading comments:', error);
             currentComments = [];
+            updateCommentsDisplay();
+
+            // Show error to user
+            M.toast({ html: 'Failed to load comments', classes: 'error-toast' });
         }
     }
 
     // Update comments display
     function updateCommentsDisplay() {
-        const container = $('#comments-container');
+        const container = $('#comments-list');
         container.empty();
-        
+
         if (!currentComments || currentComments.length === 0) {
             container.html(`
-                <div class="center-align">
-                    <p>No comments yet. Be the first to comment!</p>
-                </div>
-            `);
+            <div class="center-align no-comments">
+                <i class="material-icons large">chat_bubble_outline</i>
+                <h5>No comments yet</h5>
+                <p>Be the first to share your thoughts!</p>
+            </div>
+        `);
             return;
         }
-        
-        currentComments.forEach(comment => {
+
+        // Sort comments: pinned first, then by date
+        const sortedComments = [...currentComments].sort((a, b) => {
+            if (a.isPinned && !b.isPinned) return -1;
+            if (!a.isPinned && b.isPinned) return 1;
+            return new Date(b.createdAt) - new Date(a.createdAt);
+        });
+
+        sortedComments.forEach(comment => {
             const commentHTML = createCommentHTML(comment);
             container.append(commentHTML);
         });
+
+        console.log(`Displayed ${sortedComments.length} comments`);
     }
 
     // Create comment HTML
     function createCommentHTML(comment) {
-        return `
-            <div class="comment card-panel">
-                <div class="comment-header">
-                    <span class="comment-author">${comment.author?.displayName || comment.author?.username || 'Anonymous'}</span>
-                    <span class="comment-date">${formatDate(comment.createdAt)}</span>
+    const isPinned = comment.isPinned || false;
+    const replies = comment.replies || [];
+    const likesCount = comment.engagement?.likesCount || 0;
+    const repliesCount = comment.engagement?.repliesCount || 0;
+    
+    return `
+        <div class="comment card-panel ${isPinned ? 'pinned-comment teal lighten-5' : ''}" data-comment-id="${comment._id || comment.id}">
+            ${isPinned ? `
+                <div class="pinned-badge">
+                    <i class="material-icons tiny">push_pin</i>
+                    Pinned by author
                 </div>
-                <div class="comment-content">
-                    <p>${comment.content}</p>
+            ` : ''}
+            
+            <div class="comment-header">
+                <div class="comment-author-info">
+                    <img src="${comment.author?.profile?.avatar || ''}" 
+                         alt="${comment.author?.displayName || 'User'}" 
+                         class="comment-avatar circle"
+                         onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCA0MCA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMjAiIGZpbGw9IiM0Y2EwN2IiLz4KPHN2ZyB4PSIxMCIgeT0iMTAiIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCIgdmlld0JveD0iMCAwIDIwIDIwIiBmaWxsPSJ3aGl0ZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTEwIDBDNC40OCAwIDAgNC40OCAwIDEwQzAgMTUuNTIgNC40OCAyMCAxMCAyMEMxNS41MiAyMCAyMCAxNS41MiAyMCAxMEMyMCA0LjQ4IDE1LjUyIDAgMTAgMFpMNS4wNyAxNS4yOEM2LjUgMTMuOTQgOS4xMSAxMyAxMiAxM0MxNC44NyAxMyAxNy41IDEzLjk0IDE4LjkyIDE1LjI4QzE3LjU1IDE3LjM2IDE1IDE5IDEyIDE5QzkgMTkgNi40NSAxNy4zNiA1LjA3IDE1LjI4Wk0xMiA0QzEzLjY1IDQgMTUgNS4zNSAxNSA3QzE1IDguNjUgMTMuNjUgMTAgMTIgMTBDMTAuMzUgMTAgOSA4LjY1IDkgN0M5IDUuMzUgMTAuMzUgNCAxMiA0WiIvPgo8L3N2Zz4KPC9zdmc+'">
+                    <div class="comment-author-details">
+                        <span class="comment-author-name">${comment.author?.displayName || comment.author?.username || 'Anonymous'}</span>
+                        ${comment.author?.isAuthor ? '<span class="author-badge">Author</span>' : ''}
+                    </div>
+                </div>
+                <div class="comment-meta">
+                    <span class="comment-date">${formatDate(comment.createdAt)}</span>
+                    ${comment.metadata?.isEdited ? '<span class="edited-badge">(edited)</span>' : ''}
                 </div>
             </div>
-        `;
-    }
+            
+            <div class="comment-content">
+                <p>${comment.content}</p>
+            </div>
+            
+            <div class="comment-actions">
+                <button class="btn-flat like-comment-btn ${comment.userLiked ? 'liked' : ''}" 
+                        data-comment-id="${comment._id || comment.id}">
+                    <i class="material-icons left">thumb_up</i>
+                    <span class="likes-count">${likesCount}</span>
+                </button>
+                
+                <button class="btn-flat reply-comment-btn" 
+                        data-comment-id="${comment._id || comment.id}">
+                    <i class="material-icons left">reply</i>
+                    Reply
+                </button>
+                
+                ${AuthManager.isAuthenticated() && (comment.author?._id === AuthManager.getCurrentUser()?.id || AuthManager.isAdmin()) ? `
+                    <button class="btn-flat edit-comment-btn" 
+                            data-comment-id="${comment._id || comment.id}">
+                        <i class="material-icons left">edit</i>
+                        Edit
+                    </button>
+                    
+                    <button class="btn-flat delete-comment-btn red-text" 
+                            data-comment-id="${comment._id || comment.id}">
+                        <i class="material-icons left">delete</i>
+                        Delete
+                    </button>
+                ` : ''}
+            </div>
+            
+            ${replies.length > 0 ? `
+                <div class="comment-replies">
+                    <div class="replies-header">
+                        <i class="material-icons tiny">subdirectory_arrow_right</i>
+                        ${repliesCount} ${repliesCount === 1 ? 'reply' : 'replies'}
+                    </div>
+                    ${replies.map(reply => createReplyHTML(reply)).join('')}
+                </div>
+            ` : ''}
+        </div>
+    `;
+}
 
-    // Handle comment submission
     async function handleCommentSubmit() {
         if (!AuthManager.isAuthenticated()) {
             $('#login-modal').modal('open');
             return;
         }
-        
+
         const commentText = $('#comment-text').val().trim();
         if (!commentText) {
-            M.toast({html: 'Please enter a comment', classes: 'warning-toast'});
+            M.toast({ html: 'Please enter a comment', classes: 'warning-toast' });
             return;
         }
-        
+
+        // Show loading state
+        const submitBtn = $('#submit-comment');
+        const originalText = submitBtn.html();
+        submitBtn.prop('disabled', true).html('<i class="material-icons left">hourglass_empty</i>Posting...');
+
         try {
             const response = await window.apiService.addComment({
                 storyId: storyId,
                 content: commentText
             });
-            
+
             if (response.success) {
                 $('#comment-text').val('');
                 await loadComments(); // Reload comments
-                M.toast({html: 'Comment added!', classes: 'success-toast'});
+                M.toast({ html: 'Comment added successfully!', classes: 'success-toast' });
+            } else {
+                M.toast({ html: 'Failed to add comment: ' + (response.message || 'Unknown error'), classes: 'error-toast' });
             }
         } catch (error) {
             console.error('Error adding comment:', error);
-            M.toast({html: 'Failed to add comment', classes: 'error-toast'});
+            M.toast({ html: 'Failed to add comment. Please try again.', classes: 'error-toast' });
+        } finally {
+            // Restore button state
+            submitBtn.prop('disabled', false).html(originalText);
         }
     }
 
@@ -707,9 +817,119 @@ async function setAuthorAvatarHeader() {
         });
     }
 
+
+    // Handle like/unlike comment
+    async function handleLikeComment(e) {
+        e.preventDefault();
+
+        if (!AuthManager.isAuthenticated()) {
+            $('#login-modal').modal('open');
+            return;
+        }
+
+        const commentId = $(this).data('comment-id');
+        const likeBtn = $(this);
+        const likesCountEl = likeBtn.find('.likes-count');
+
+        try {
+            const response = await window.apiService.likeComment(commentId);
+
+            if (response.success) {
+                const newLikesCount = response.likesCount;
+                likesCountEl.text(newLikesCount);
+
+                // Toggle liked state
+                likeBtn.toggleClass('liked', !likeBtn.hasClass('liked'));
+
+                M.toast({
+                    html: likeBtn.hasClass('liked') ? 'Comment liked!' : 'Like removed',
+                    classes: 'success-toast'
+                });
+            }
+        } catch (error) {
+            console.error('Error liking comment:', error);
+            M.toast({ html: 'Failed to like comment', classes: 'error-toast' });
+        }
+    }
+
+    // Handle reply to comment
+    function handleReplyComment(e) {
+        e.preventDefault();
+
+        if (!AuthManager.isAuthenticated()) {
+            $('#login-modal').modal('open');
+            return;
+        }
+
+        const commentId = $(this).data('comment-id');
+        // Implement reply functionality
+        M.toast({ html: 'Reply functionality coming soon!', classes: 'info-toast' });
+    }
+
+    // Handle edit comment
+    function handleEditComment(e) {
+        e.preventDefault();
+
+        const commentId = $(this).data('comment-id');
+        const commentEl = $(this).closest('.comment, .comment-reply');
+        const contentEl = commentEl.find('.comment-content p');
+        const currentContent = contentEl.text();
+
+        // Simple inline edit implementation
+        const newContent = prompt('Edit your comment:', currentContent);
+
+        if (newContent && newContent !== currentContent) {
+            updateComment(commentId, newContent, commentEl);
+        }
+    }
+
+    // Update comment content
+    async function updateComment(commentId, newContent, commentEl) {
+        try {
+            const response = await window.apiService.updateComment(commentId, {
+                content: newContent
+            });
+
+            if (response.success) {
+                commentEl.find('.comment-content p').text(newContent);
+                commentEl.find('.comment-meta').append('<span class="edited-badge">(edited)</span>');
+                M.toast({ html: 'Comment updated!', classes: 'success-toast' });
+            }
+        } catch (error) {
+            console.error('Error updating comment:', error);
+            M.toast({ html: 'Failed to update comment', classes: 'error-toast' });
+        }
+    }
+
+    // Handle delete comment
+    async function handleDeleteComment(e) {
+        e.preventDefault();
+
+        const commentId = $(this).data('comment-id');
+        const commentEl = $(this).closest('.comment, .comment-reply');
+
+        if (!confirm('Are you sure you want to delete this comment?')) {
+            return;
+        }
+
+        try {
+            const response = await window.apiService.deleteComment(commentId);
+
+            if (response.success) {
+                commentEl.slideUp(300, function () {
+                    $(this).remove();
+                    M.toast({ html: 'Comment deleted!', classes: 'success-toast' });
+                });
+            }
+        } catch (error) {
+            console.error('Error deleting comment:', error);
+            M.toast({ html: 'Failed to delete comment', classes: 'error-toast' });
+        }
+    }
+
     // Load story from fallback sources
     async function loadStoryFromFallback(storyId) {
-        //console.log('Trying fallback sources for story:', storyId);
+        console.log('Trying fallback sources for story:', storyId);
         
         // Try localStorage
         const localStorageStory = localStorage.getItem("currentStory");
@@ -719,7 +939,7 @@ async function setAuthorAvatarHeader() {
                 if (parsedStory._id === storyId || parsedStory.id === storyId) {
                     currentStory = parsedStory;
                     totalPages = currentStory.pages ? currentStory.pages.length : 1;
-                    //console.log('Story loaded from localStorage:', currentStory.title);
+                    console.log('Story loaded from localStorage:', currentStory.title);
                     localStorage.removeItem("currentStory");
                     return;
                 }
@@ -736,7 +956,7 @@ async function setAuthorAvatarHeader() {
             if (backupStory) {
                 currentStory = backupStory;
                 totalPages = currentStory.pages ? currentStory.pages.length : 1;
-                //console.log('Story loaded from backup data:', currentStory.title);
+                console.log('Story loaded from backup data:', currentStory.title);
                 return;
             }
         }
@@ -785,3 +1005,6 @@ async function setAuthorAvatarHeader() {
     // Initialize the story read page
     initStoryRead();
 });
+
+
+
