@@ -238,7 +238,7 @@ class SignInPage {
     async handleSignIn() {
         if (this.isSubmitting) return;
         
-        const rateLimit = this.validation.setupRateLimit('login_attempts', this.maxAttempts, this.lockoutTime);
+       /* const rateLimit = this.validation.setupRateLimit('login_attempts', this.maxAttempts, this.lockoutTime);
         if (!rateLimit.allowed) {
             this.showSecurityWarning();
             return;
@@ -247,7 +247,7 @@ class SignInPage {
         if (!this.validateAllFields()) {
             this.recordFailedAttempt();
             return;
-        }
+        } */
 
         this.isSubmitting = true;
         this.setLoadingState(true);
@@ -256,13 +256,16 @@ class SignInPage {
             const formData = this.getFormData();
             let response;
 
+             response = await this.realSignIn(formData)
+
+            /*
             if (this.useMockData) {
                 //console.log('Using mock data for signin');
                 response = await this.mockSignIn(formData);
             } else {
                 //console.log('Using real API for signin');
                 response = await this.realSignIn(formData);
-            }
+            }*/
             
             if (response.success) {
                 this.handleSignInSuccess(response, formData);
