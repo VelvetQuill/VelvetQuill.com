@@ -294,7 +294,7 @@ class ApiService {
     if (!isAuthPage && !isPublicPage) {
         // Store intended destination for post-login redirect
         sessionStorage.setItem('redirect_after_login', window.location.href);
-        window.location.href = '/signin.html';
+        window.location.href = 'signin.html';
     }
 }
 
