@@ -1226,11 +1226,11 @@ class AuthManager {
             localStorage.removeItem('velvetquill_last_identifier');
             
             // Redirect to home page
-            window.location.href = '/index.html';
+            window.location.href = 'index.html';
         }
     }
 
-    static requireAuth(redirectUrl = '/signin.html') {
+    static requireAuth(redirectUrl = 'signin.html') {
         if (!this.isAuthenticated()) {
             // Store current URL for post-login redirect
             sessionStorage.setItem('redirect_after_login', window.location.href);
@@ -1240,7 +1240,7 @@ class AuthManager {
         return true;
     }
 
-    static requireAuthor(redirectUrl = '/signin.html') {
+    static requireAuthor(redirectUrl = 'signin.html') {
         if (!this.isAuthenticated()) {
             sessionStorage.setItem('redirect_after_login', window.location.href);
             window.location.href = redirectUrl;
@@ -1249,14 +1249,14 @@ class AuthManager {
         
         if (!this.isAuthor()) {
             alert('Author access required');
-            window.location.href = '/index.html';
+            window.location.href = 'index.html';
             return false;
         }
         
         return true;
     }
 
-    static requireAdmin(redirectUrl = '/signin.html') {
+    static requireAdmin(redirectUrl = 'signin.html') {
         if (!this.isAuthenticated()) {
             sessionStorage.setItem('redirect_after_login', window.location.href);
             window.location.href = redirectUrl;
@@ -1265,7 +1265,7 @@ class AuthManager {
         
         if (!this.isAdmin()) {
             alert('Admin access required');
-            window.location.href = '/index.html';
+            window.location.href = 'index.html';
             return false;
         }
         
