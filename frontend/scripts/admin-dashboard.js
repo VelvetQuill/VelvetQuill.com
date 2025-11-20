@@ -1,5 +1,4 @@
 
-
 // admin-dashboard.js
 class AdminDashboard {
     constructor() {
@@ -1345,5 +1344,6 @@ document.addEventListener('DOMContentLoaded', function() {
 The dashboard will now keep all data fresh and up-to-date automatically while maintaining all the existing functionality!
 
 */
+
 
 
