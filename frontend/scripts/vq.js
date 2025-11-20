@@ -1,5 +1,4 @@
 
-
 // vq.js - Refactored with proper backup stories integration
 $(document).ready(function(){
     // Initialize Materialize components
@@ -42,12 +41,12 @@ $(document).ready(function(){
     async function loadFeaturedStories() {
         try {
             //console.log('Loading featured stories from backend...');
-            const response = await window.apiService.getStories({ 
+            const response = await window.apiService.getFeaturedStories(); /*{ 
                 status: 'published',
                 limit: 6,
                 sortBy: 'stats.views',
                 sortOrder: 'desc'
-            });
+            });*/
             
             if (response.success && response.stories && response.stories.length > 0) {
                 //console.log('Backend stories loaded successfully:', response.stories.length);
@@ -114,19 +113,14 @@ $(document).ready(function(){
         ////console.log('Displaying stories:', stories);
         
         // Filter stories to only show featured ones
-        const featuredStories = stories.filter(story => {
-            // Check if story has isFeatured property and it's true
-            const isFeatured = story.isFeatured === true;
-            ////console.log(`Story: ${story.title}, isFeatured: ${story.isFeatured}, Included: ${isFeatured}`);
-            return isFeatured;
-        });
+        const featuredStories = stories.filter(story => story.isFeatured === true);
         
-        ////console.log('Featured stories after filtering:', featuredStories.length);
+        //console.log('Featured stories after filtering:', featuredStories.length);
         
         if (featuredStories.length === 0) {
             ////console.log('No featured stories found, showing all stories');
             // If no featured stories, show first 3 published stories
-            const publishedStories = stories.filter(story => story.status === 'published').slice(0, 3);
+            const publishedStories = stories.filter(story => story.status === 'published');
             if (publishedStories.length > 0) {
                 featuredStories.push(...publishedStories);
             } else {
@@ -152,7 +146,7 @@ $(document).ready(function(){
         // Get author name safely
         const authorName = getAuthorName(story);
         
-        //console.log(`STORY EXCERPT: ${story.excerpt}`);
+        ////console.log(`STORY EXCERPT: ${story.excerpt}`);
         // Get excerpt or create from content
         const excerpt = story.excerpt || (story.content ? story.content.substring(0, 100) + '...' : 'No description available');
         
@@ -346,7 +340,7 @@ function setupReadEventHandler() {
     $(document).on('click', '.read-story, .read-featured-story', async function(e) {
         e.preventDefault();
         const storyId = $(this).data('id');
-        //console.log(`STORY CLICKED ID: ${storyId}`);
+        ////console.log(`STORY CLICKED ID: ${storyId}`);
         
         if (!storyId) {
             console.error('No story ID found');
@@ -362,7 +356,7 @@ function setupReadEventHandler() {
             
             if (response.success && response.story) {
                 storyObj = response.story;
-                //console.log(`Story loaded from backend: ${storyObj.title}`);
+                ////console.log(`Story loaded from backend: ${storyObj.title}`);
             } else {
                 // Fallback to local stories repo
                 storyObj = storiesRepo.find(story => 
@@ -370,9 +364,9 @@ function setupReadEventHandler() {
                 );
                 
                 if (storyObj) {
-                    //console.log(`Story found in local repo: ${storyObj.title}`);
+                    ////console.log(`Story found in local repo: ${storyObj.title}`);
                 } else {
-                    console.error(`Story with ID ${storyId} not found`);
+                    //console.error(`Story with ID ${storyId} not found`);
                     M.toast({html: 'Story not found'});
                     return;
                 }
@@ -380,7 +374,7 @@ function setupReadEventHandler() {
             
             // Store in localStorage for story-read page
             localStorage.setItem("currentStory", JSON.stringify(storyObj));
-            //console.log(`Story stored in localStorage: ${storyObj.title}`);
+            ////console.log(`Story stored in localStorage: ${storyObj.title}`);
             
             // Navigate to story read page
             window.location.href = `story-read.html?id=${storyId}`;
@@ -444,7 +438,7 @@ function setupReadEventHandler() {
     function checkAuthStatus() {
         const currentUser = AuthManager.getCurrentUser();
         if (currentUser) {
-            //console.log('User authenticated:', currentUser.username);
+            ////console.log('User authenticated:', currentUser.username);
         } else {
             //console.log('User not authenticated');
         }
@@ -452,7 +446,7 @@ function setupReadEventHandler() {
     
     // Enhanced updateUserUI function with backend integration
     function updateUserUI(user) {
-        //console.log("Updating UI for user:", user);
+        ////console.log("Updating UI for user:", user);
         
         if (user) {
             // User is logged in - show user menu, hide guest actions
@@ -549,6 +543,7 @@ function setupReadEventHandler() {
     // Initialize the page
     initializePage();
 });
+
 
 
 
