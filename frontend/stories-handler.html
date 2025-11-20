@@ -1,0 +1,133 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Stories Management - VelvetQuill</title>
+    <link href="styles/font/micons.css" rel="stylesheet">
+    <link href="styles/materialize.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles/stories-handler.css">
+</head>
+<body>
+    <div class="admin-container">
+        <!-- Header -->
+        <header class="admin-header">
+            <div class="header-content">
+                <div class="header-title">
+                    <i class="material-icons">menu_book</i>
+                    <h1>Stories Management</h1>
+                </div>
+                <nav class="header-nav">
+                    <a href="admin-dashboard.html" class="nav-btn">
+                        <i class="material-icons">arrow_back</i>
+                        <span>Dashboard</span>
+                    </a>
+                    <button id="refresh-btn" class="nav-btn">
+                        <i class="material-icons">refresh</i>
+                        <span>Refresh</span>
+                    </button>
+                </nav>
+            </div>
+        </header>
+
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="material-icons">library_books</i>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-label">Total Stories</span>
+                    <span class="stat-value" id="totalStories">0</span>
+                </div>
+            </div>
+            <div class="stat-card featured">
+                <div class="stat-icon">
+                    <i class="material-icons">star</i>
+                </div>
+                <div class="stat-info">
+                    <span class="stat-label">Featured Stories</span>
+                    <span class="stat-value" id="featuredStories">0</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <div class="card">
+                <div class="card-header">
+                    <h2>
+                        <i class="material-icons">list_alt</i>
+                        Published Stories
+                    </h2>
+                    <div class="card-actions">
+                        <div class="search-box">
+                            <i class="material-icons">search</i>
+                            <input type="text" id="search-input" placeholder="Search stories...">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-content">
+                    <div class="table-container">
+                        <table id="stories-table" class="stories-table">
+                            <thead>
+                                <tr>
+                                    <th class="sortable" data-sort="title">
+                                        <span>Title</span>
+                                        <i class="material-icons sort-icon">unfold_more</i>
+                                    </th>
+                                    <th class="sortable" data-sort="author">
+                                        <span>Author</span>
+                                        <i class="material-icons sort-icon">unfold_more</i>
+                                    </th>
+                                    <th>Featured Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="stories-tbody">
+                                <!-- Stories will be loaded here -->
+                            </tbody>
+                        </table>
+                    </div>
+
+                    <div id="loading-state" class="loading-state">
+                        <div class="loading-spinner">
+                            <i class="material-icons">auto_stories</i>
+                        </div>
+                        <p>Loading stories...</p>
+                    </div>
+
+                    <div id="empty-state" class="empty-state hidden">
+                        <i class="material-icons">auto_stories</i>
+                        <h3>No Stories Found</h3>
+                        <p>There are no published stories to display.</p>
+                    </div>
+
+                    <div id="error-state" class="error-state hidden">
+                        <i class="material-icons">error_outline</i>
+                        <h3>Error Loading Stories</h3>
+                        <p id="error-message">Failed to load stories. Please try again.</p>
+                        <button id="retry-btn" class="btn btn-primary">
+                            <i class="material-icons">refresh</i>
+                            Retry
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast hidden">
+        <i class="material-icons toast-icon"></i>
+        <span class="toast-message"></span>
+    </div>
+
+    <!-- Scripts -->
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/api-service.js"></script>
+    <script src="scripts/stories-handler.js"></script>
+</body>
+</html>
