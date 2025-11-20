@@ -1,4 +1,6 @@
 
+
+
 // api-service.js - Production Ready API Service for VelvetQuill
 class ApiService {
     
@@ -294,7 +296,7 @@ class ApiService {
     if (!isAuthPage && !isPublicPage) {
         // Store intended destination for post-login redirect
         sessionStorage.setItem('redirect_after_login', window.location.href);
-        window.location.href = 'signin.html';
+        window.location.href = '/signin.html';
     }
 }
 
@@ -581,7 +583,11 @@ async deleteCategory(id) {
 
     async getStories(filters = {}) {
         const queryParams = new URLSearchParams(filters).toString();
-        return this.request(`/stories?${queryParams}`);
+        return this.request(`/stories?${queryParams}`); 
+    }
+
+    async getFeaturedStories(){
+        return this.request('/stories/featured');
     }
 
     async getStory(storyId) {
@@ -592,6 +598,21 @@ async deleteCategory(id) {
         return this.request(`/stories/${storyId}`, {
             method: 'PUT',
             body: storyData
+        });
+    }
+
+    /**
+     * Update story featured status (Admin only)
+     * @param {string} storyId - Story ID
+     * @param {boolean} isFeatured - Whether story should be featured
+     * @returns {Promise<Object>} Response with updated story
+     */
+    async updateStoryFeaturedStatus(storyId, isFeatured) {
+        console.log(`⭐ Updating featured status for story ${storyId} to: ${isFeatured}`);
+
+        return this.request(`/stories/${storyId}/featured`, {
+            method: 'PATCH',
+            body: { isFeatured }
         });
     }
 
@@ -1355,6 +1376,7 @@ function initializeApiService() {
 
 // Initialize the service
 initializeApiService();
+
 
 
 
