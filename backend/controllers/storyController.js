@@ -1,3 +1,4 @@
+
 // storyController.js - UPDATED VERSION
 import Story from '../models/Story.js';
 import User from '../models/User.js';
@@ -421,6 +422,76 @@ async createStory(req, res) {
             });
         }
     },
+
+
+// @desc    Update story featured status (Admin only)
+// @route   PATCH /api/stories/:id/featured
+// @access  Private (Admin only)
+async updateStoryFeaturedStatus(req, res) {
+    try {
+        const { id } = req.params;
+        const { isFeatured } = req.body;
+
+        // Validate input
+        if (typeof isFeatured !== 'boolean') {
+            return res.status(400).json({
+                success: false,
+                message: 'isFeatured must be a boolean value'
+            });
+        }
+
+        // Find the story
+        const story = await Story.findById(id);
+        
+        if (!story) {
+            return res.status(404).json({
+                success: false,
+                message: 'Story not found'
+            });
+        }
+
+        // Check if user is admin
+        const user = await User.findById(req.userId);
+        if (!user || (user.role !== 'admin' && user.role !== 'overallAdmin')) {
+            return res.status(403).json({
+                success: false,
+                message: 'Admin access required to update featured status'
+            });
+        }
+
+        // Update featured status
+        story.isFeatured = isFeatured;
+        
+        // If unfeaturing, clear featuredUntil date
+        if (!isFeatured) {
+            story.featuredUntil = null;
+        }
+        
+        await story.save();
+
+        // Populate author for response
+        await story.populate('author', 'username displayName profile.avatar');
+
+        res.json({
+            success: true,
+            message: `Story ${isFeatured ? 'featured' : 'unfeatured'} successfully`,
+            story: {
+                _id: story._id,
+                title: story.title,
+                isFeatured: story.isFeatured,
+                featuredUntil: story.featuredUntil,
+                author: story.author
+            }
+        });
+
+    } catch (error) {
+        console.error('Update story featured status error:', error);
+        res.status(500).json({
+            success: false,
+            message: 'Failed to update story featured status'
+        });
+    }
+},
 
     // @desc    Delete story
     // @route   DELETE /api/stories/:id
