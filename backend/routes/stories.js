@@ -1,3 +1,4 @@
+
 // backend/routes/stories.js - UPDATED
 import express from 'express';
 import mongoose from 'mongoose';
@@ -148,6 +149,10 @@ router.post('/:id/rate', validateRating, storyController.rateStory);
 router.get('/:id/analytics', storyController.getStoryAnalytics);
 router.get('/:id/user-interactions', storyController.getUserInteractions);
 router.get('/bulk/interactions', storyController.getBulkUserInteractions);
+
+
+// Dedicated featured status update route (Admin only)
+router.patch('/:id/featured', storyController.updateStoryFeaturedStatus);
 
 // ADD: Page management routes (author only)
 router.post('/:id/pages', requireAuthor, validatePage, storyController.addPage);
