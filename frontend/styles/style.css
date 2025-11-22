@@ -1,4 +1,5 @@
 
+
 :root {
             --primary-color: #8B0000;
             --primary-light: #B22222;
@@ -31,6 +32,7 @@
 
         .brand-logo {
             font-family: 'Playfair Display', serif;
+            color: white;
             font-weight: 700;
             margin-left: 15px;
         }
@@ -184,7 +186,7 @@
         }
 
         .hero-section {
-            background: linear-gradient(rgba(139, 0, 0, 0.7), rgba(139, 0, 0, 0.7)), url('assets/VQ3.jpg') no-repeat center center;
+            background: linear-gradient(rgba(139, 0, 0, 0.7), rgba(139, 0, 0, 0.7)), url('../assets/VQ3.jpg') no-repeat center center;
             background-size: cover;
             color: white;
             padding: 100px 0;
@@ -323,4 +325,5 @@
 .overflow-clipped{
   overflow-x: hidden;
 }
+
 
