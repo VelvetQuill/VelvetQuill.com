@@ -7,6 +7,7 @@ class IndexStories {
         this.paginationContainer = document.getElementById('pagination');
         this.maxStories = 20; // Maximum stories for index page
         this.setEventListeners();
+        this.renderCTA();
     }
 
     // Initialize index page stories
@@ -69,7 +70,7 @@ class IndexStories {
                 }
             }, 500);
         });
-        //console.log("INDEX LINKS LISTENERS SET !");
+        console.log("INDEX LINKS LISTENERS SET !");
     }
 
 
@@ -82,7 +83,7 @@ class IndexStories {
             return;
         }
 
-        //console.log(`STORY EXCERPT: ${stories[1].excerpt}`);
+        console.log(`STORY EXCERPT: ${stories[1].excerpt}`);
 
         const storiesHTML = stories.map(story => `
             <div class="story-card" data-story-id="${story.id}">
@@ -122,13 +123,94 @@ class IndexStories {
             .replace(/"/g, "&quot;")
             .replace(/'/g, "&#039;");
     }
+
+
+    // CTA Section Rendering based on user status
+    renderCTA() {
+        const ctaTitle = document.getElementById('cta-title');
+        const ctaSubtitle = document.getElementById('cta-subtitle');
+        const ctaLinkSignup = document.getElementById('cta-link-signup');
+        const ctaLinkSignin = document.getElementById('cta-link-signin');
+        const ctaLinkAuthor = document.getElementById('cta-link-author');
+
+        // Check user status using AuthManager
+        const userStatus = this.getUserStatus();
+
+        switch (userStatus) {
+            case 'visitor':
+                // Visitor - Not registered or not logged in
+                ctaTitle.textContent = 'Create Your User Profile Today';
+                ctaSubtitle.textContent = 'Signup or Login to enjoy all platform features';
+                ctaLinkSignin.classList.remove('w3-hide');
+                ctaLinkSignup.classList.remove('w3-hide');
+                ctaLinkSignin.classList.add('w3-show');
+                ctaLinkSignup.classList.add('w3-show');
+                ctaLinkAuthor.classList.remove('w3-show');
+                ctaLinkAuthor.classList.add('w3-hide');
+                break;
+
+            case 'user':
+                // Registered user but NOT an author
+                ctaTitle.textContent = 'Create and Post Your Stories';
+                ctaSubtitle.textContent = 'Setup your Author profile to get started';
+                ctaLinkSignin.classList.remove('w3-show');
+                ctaLinkSignup.classList.remove('w3-show');
+                ctaLinkSignin.classList.add('w3-hide');
+                ctaLinkSignup.classList.add('w3-hide');
+                ctaLinkAuthor.classList.remove('w3-hide');
+                ctaLinkAuthor.classList.add('w3-show');
+                break;
+
+            case 'author':
+                // Registered user AND author
+                ctaTitle.textContent = 'Winter Quill Writer\'s Contest Coming Soon!';
+                ctaSubtitle.textContent = 'Are You Going To Be Among The Winning 5?!';
+                ctaLinkSignin.classList.remove('w3-show');
+                ctaLinkSignup.classList.remove('w3-show');
+                ctaLinkSignin.classList.add('w3-hide');
+                ctaLinkSignup.classList.add('w3-hide');
+                ctaLinkAuthor.classList.remove('w3-show');
+                ctaLinkAuthor.classList.add('w3-hide');
+                break;
+
+            default:
+                // Fallback to visitor state
+                ctaTitle.textContent = 'Create Your User Profile Today';
+                ctaSubtitle.textContent = 'Signup or Login to enjoy all platform features';
+                ctaLinkSignin.classList.remove('w3-hide');
+                ctaLinkSignup.classList.remove('w3-hide');
+                ctaLinkSignin.classList.add('w3-show');
+                ctaLinkSignup.classList.add('w3-show');
+                ctaLinkAuthor.classList.remove('w3-show');
+                ctaLinkAuthor.classList.add('w3-hide');
+        }
+    }
+
+    // Helper function to determine user status using AuthManager
+    getUserStatus() {
+        // Check if user is authenticated
+        if (!AuthManager.isAuthenticated()) {
+            return 'visitor';
+        }
+
+        // Check if user has author status
+        if (AuthManager.isAuthor()) {
+            return 'author';
+        }
+
+        // User is authenticated but not an author
+        return 'user';
+    }
+
 }
+
 
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', function() {
     const indexStories = new IndexStories();
     indexStories.init();
 });
+
 
 
 
