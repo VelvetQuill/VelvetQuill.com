@@ -18,8 +18,8 @@
 
 @font-face {
     font-family: 'pd-semitalic';
-    src: url('/styles/Playfair/PlayfairDisplay-SemiBold.woff2') format('woff2'),
-        url('/styles/PlayfairDisplay-SemiBoldItalic.woff') format('woff');
+    src: url('styles/Playfair/PlayfairDisplay-SemiBold.woff2') format('woff2'),
+        url('styles/PlayfairDisplay-SemiBoldItalic.woff') format('woff');
     font-weight: 600;
     font-style: italic;
     font-display: swap;
