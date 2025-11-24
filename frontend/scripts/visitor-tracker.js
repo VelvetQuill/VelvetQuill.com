@@ -63,13 +63,13 @@ class VisitorTracker {
                 }
             });
 
-            console.log('✅ Visitor tracked successfully');
+            //console.log('✅ Visitor tracked successfully');
             
             // Track the homepage view
             this.trackPageView('homepage');
             
         } catch (error) {
-            console.warn('Visitor tracking failed:', error);
+            //console.warn('Visitor tracking failed:', error);
         }
     }
 
@@ -112,7 +112,7 @@ function initializeVisitorTracking() {
             window.visitorTracker.trackTimeSpent();
         });
         
-        console.log('✅ Visitor tracking initialized');
+        //console.log('✅ Visitor tracking initialized');
     }
 }
 
@@ -121,4 +121,5 @@ if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', initializeVisitorTracking);
 } else {
     initializeVisitorTracking();
+
 }
