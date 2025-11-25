@@ -232,6 +232,22 @@ userSchema.statics.findTopAuthors = function(limit = 10) {
     .limit(limit);
 };
 
+userSchema.methods.becomeAuthor = function(bio = '') {
+    this.role = 'author';
+    this.isAuthor = true;
+    this.authorApplication = {
+        status: 'approved',
+        autoApproved: true,
+        approvedAt: new Date()
+    };
+    
+    if (bio) {
+        this.profile.bio = bio;
+    }
+    
+    return this.save();
+};
+
 
 export default mongoose.model('User', userSchema);
 
