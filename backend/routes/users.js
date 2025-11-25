@@ -107,6 +107,40 @@ router.get('/profile/public/:identifier', async (req, res) => {
     }
 });
 
+router.post('/become-author', authenticate, async (req, res) => {
+    try {
+        const { bio } = req.body;
+        const user = await User.findById(req.userId);
+        
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'User not found' });
+        }
+
+        if (user.isAuthor) {
+            return res.status(400).json({ success: false, message: 'User is already an author' });
+        }
+
+        // Instant author upgrade
+        await user.becomeAuthor(bio);
+
+        res.json({
+            success: true,
+            message: 'Congratulations! You are now an author.',
+            user: {
+                id: user._id,
+                username: user.username,
+                displayName: user.displayName,
+                isAuthor: user.isAuthor,
+                role: user.role,
+                profile: user.profile
+            }
+        });
+
+    } catch (error) {
+        console.error('Become author error:', error);
+        res.status(500).json({ success: false, message: 'Failed to upgrade to author' });
+    }
+});
 
 // Protected routes
 router.use(authenticate);
