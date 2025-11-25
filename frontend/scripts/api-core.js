@@ -412,6 +412,13 @@ class ApiService {
         });
     }
 
+    async upgradeToAuthor(authorData) {
+        return this.request('/users/become-author', {
+            method: 'POST',
+            body: 
+        });
+    }
+
     async toggleFollow(userId) {
         return this.request(`/users/${userId}/follow`, {
             method: 'POST'
