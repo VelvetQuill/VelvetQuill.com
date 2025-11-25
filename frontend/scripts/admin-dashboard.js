@@ -1,4 +1,6 @@
 
+
+
 // admin-dashboard.js
 class AdminDashboard {
     constructor() {
@@ -63,14 +65,14 @@ class AdminDashboard {
             this.autoReloadData();
         }, 30000); // 30 seconds
         
-        console.log('Auto-reload started: refreshing data every 30 seconds');
+        //console.log('Auto-reload started: refreshing data every 30 seconds');
     }
 
     stopAutoReload() {
         if (this.reloadInterval) {
             clearInterval(this.reloadInterval);
             this.reloadInterval = null;
-            console.log('Auto-reload stopped');
+            //console.log('Auto-reload stopped');
         }
     }
 
@@ -340,7 +342,7 @@ class AdminDashboard {
             const totalStories = backupStories.length;
             const totalUsers = backupUsers.length;
             const totalAuthors = authorUsers.length;
-            const pendingRequests = authorUsers.filter(author => author.status === 'pending').length;
+            ///const pendingRequests = authorUsers.filter(author => author.status === 'pending').length;
 
             this.adminData = {
                 users: regularUsers.slice(0, 50),
@@ -353,7 +355,7 @@ class AdminDashboard {
                     totalStories,
                     totalUsers,
                     totalAuthors,
-                    pendingRequests
+                    //pendingRequests
                 }
             };
 
@@ -462,7 +464,7 @@ class AdminDashboard {
         document.getElementById('total-stories').textContent = stats.totalStories || 0;
         document.getElementById('total-users').textContent = stats.totalUsers || 0;
         document.getElementById('total-authors').textContent = this.adminData.authors.length || 0;
-        document.getElementById('pending-requests').textContent = stats.pendingAuthors || 0;
+        document.getElementById('pending-requests').textContent = 0;
         document.getElementById('total-announcements').textContent = this.adminData.announcements.length || 0;
         document.getElementById('total-contests').textContent = this.adminData.contests.length || 0;
 
@@ -475,7 +477,7 @@ class AdminDashboard {
 
     loadTables() {
         this.loadRecentStories();
-        this.loadRecentUsers();
+        //this.loadRecentUsers();
         this.loadUserManagementTable();
         this.loadAuthorManagementTable();
         this.loadContentManagementTable();
@@ -497,7 +499,7 @@ class AdminDashboard {
         });
     }
 
-    loadRecentUsers() {
+    /*loadRecentUsers() {
         const tbody = document.querySelector('#pending-author-requests-table tbody');
         if (!tbody || !this.adminData.users) return;
         
@@ -509,7 +511,7 @@ class AdminDashboard {
                 tbody.appendChild(row);
             }
         });
-    }
+    }*/
 
     loadUserManagementTable() {
         const tbody = document.querySelector('#user-management-table tbody');
