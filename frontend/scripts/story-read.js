@@ -31,7 +31,12 @@ $(document).ready(function(){
         await loadUserInteractions();
     }
 
-
+function scrollToTop(){
+    $('html, body').animate({
+        scrollTop: 0
+    },300); //300 ms animation duration
+}
+    
 // Function to update navigation avatar with author stats
 async function setAuthorAvatarHeader() {
     if (!currentStory || !currentStory.author) return;
@@ -174,6 +179,7 @@ async function setAuthorAvatarHeader() {
             loadPageFromLocalData();
         } finally {
             showPageLoadingState(false);
+            scrollToTop();
         }
     }
 
@@ -584,6 +590,8 @@ async function setAuthorAvatarHeader() {
         
         currentPage = pageNum;
         await loadCurrentPage();
+
+        scollToTop();
     }
 
     // Update URL with current page
