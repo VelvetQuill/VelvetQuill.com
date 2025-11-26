@@ -41,6 +41,10 @@ body {
     color: var(--text-light);
 }
 
+.star{
+    color: var(--accent-red);
+}
+
 .page-header .material-icons {
     color: var(--accent-red);
     display: block;
