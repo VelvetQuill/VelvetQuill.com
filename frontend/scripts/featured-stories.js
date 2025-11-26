@@ -1,4 +1,6 @@
 
+
+
 /**
  * Main Application Script
  * Handles UI interactions and coordinates with services
@@ -19,7 +21,7 @@ class TopStories{
      * Initialize the application
      */
     init() {
-        console.log('🚀 Initializing Top Stories App...');
+        //console.log('🚀 Initializing Top Stories App...');
         document.addEventListener('DOMContentLoaded', () => {
             this.loadStories();
             this.setupEventListeners();
@@ -31,7 +33,7 @@ class TopStories{
      */
     setupEventListeners() {
         // Add any global event listeners here
-        console.log('🔧 Setting up event listeners...');
+        //console.log('🔧 Setting up event listeners...');
     }
 
     /**
@@ -69,7 +71,7 @@ class TopStories{
             </div>
         `);
         
-        console.log('✅ Stories displayed successfully');
+        //console.log('✅ Stories displayed successfully');
     }
 
     /**
@@ -209,3 +211,4 @@ class TopStories{
 
 // Initialize the application
 const topStories = new TopStories();
+
