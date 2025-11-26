@@ -70,7 +70,7 @@ class IndexStories {
                 }
             }, 500);
         });
-        console.log("INDEX LINKS LISTENERS SET !");
+        //console.log("INDEX LINKS LISTENERS SET !");
     }
 
 
