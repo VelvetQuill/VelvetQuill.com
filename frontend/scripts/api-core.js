@@ -415,7 +415,7 @@ class ApiService {
     async upgradeToAuthor(authorData) {
         return this.request('/users/become-author', {
             method: 'POST',
-            body: 
+            body: authorData
         });
     }
 
