@@ -591,7 +591,7 @@ async function setAuthorAvatarHeader() {
         currentPage = pageNum;
         await loadCurrentPage();
 
-        scollToTop();
+        scrollToTop();
     }
 
     // Update URL with current page
