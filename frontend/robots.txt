@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /scripts/
+Disallow: /styles/
+
+# Crawl-delay: 10  # Optional: wait 10 seconds between requests
+
+Sitemap: https://velvetquill.github.io/VelvetQuill.com/sitemap.xml
