@@ -1,5 +1,7 @@
 
 
+
+
 // story-read.js - COMPLETE REFACTORED VERSION
 $(document).ready(function(){
     // Initialize Materialize components
@@ -101,7 +103,7 @@ async function setAuthorAvatarHeader() {
                 document.getElementById('author-stories-count2').textContent = count;    
             }
             
-            console.log('Author avatar and stats updated for:', displayName);
+            //console.log('Author avatar and stats updated for:', displayName);
         }
     } catch (error) {
         console.error('Error setting author avatar header:', error);
@@ -127,7 +129,7 @@ async function setAuthorAvatarHeader() {
         }
 
         try {
-            console.log(`Loading story ${storyId} from backend...`);
+            //console.log(`Loading story ${storyId} from backend...`);
             
             const response = await window.apiService.getStory(storyId);
             
@@ -135,7 +137,7 @@ async function setAuthorAvatarHeader() {
                 currentStory = response.story;
                 totalPages = currentStory.pages ? currentStory.pages.length : 1;
                 userInteractions = response.userInteractions || {};
-                console.log('Story loaded from backend:', currentStory.title, `(${totalPages} pages)`);
+                //console.log('Story loaded from backend:', currentStory.title, `(${totalPages} pages)`);
             } else {
                 await loadStoryFromFallback(storyId);
             }
@@ -382,7 +384,7 @@ async function setAuthorAvatarHeader() {
         
         const authorId = currentStory.author?.username || currentStory.authorId;
 
-        //console.log(`AUTHOR ID: ${authorId}`);
+        ////console.log(`AUTHOR ID: ${authorId}`);
         if(authorId){
             $('#author-name1').attr('href',`author-room.html?id=${authorId}`);
             $('#author-name2').attr('href',`author-room.html?id=${authorId}`);
@@ -607,7 +609,7 @@ async function setAuthorAvatarHeader() {
         if (!storyId) return;
 
         try {
-            //console.log(`Loading comments for story: ${storyId}`);
+            ////console.log(`Loading comments for story: ${storyId}`);
 
             const response = await window.apiService.getStoryComments(storyId, {
                 page: 1,
@@ -619,7 +621,7 @@ async function setAuthorAvatarHeader() {
 
             if (response.success) {
                 currentComments = response.comments || [];
-                console.log(`Loaded ${currentComments.length} comments`);
+                //console.log(`Loaded ${currentComments.length} comments`);
                 updateCommentsDisplay();
             } else {
                 console.error('Failed to load comments:', response.message);
@@ -664,7 +666,7 @@ async function setAuthorAvatarHeader() {
             container.append(commentHTML);
         });
 
-        //console.log(`Displayed ${sortedComments.length} comments`);
+        ////console.log(`Displayed ${sortedComments.length} comments`);
     }
 
     // Create comment HTML
@@ -937,7 +939,7 @@ async function setAuthorAvatarHeader() {
 
     // Load story from fallback sources
     async function loadStoryFromFallback(storyId) {
-        //console.log('Trying fallback sources for story:', storyId);
+        ////console.log('Trying fallback sources for story:', storyId);
         
         // Try localStorage
         const localStorageStory = localStorage.getItem("currentStory");
@@ -947,7 +949,7 @@ async function setAuthorAvatarHeader() {
                 if (parsedStory._id === storyId || parsedStory.id === storyId) {
                     currentStory = parsedStory;
                     totalPages = currentStory.pages ? currentStory.pages.length : 1;
-                    //console.log('Story loaded from localStorage:', currentStory.title);
+                    ////console.log('Story loaded from localStorage:', currentStory.title);
                     localStorage.removeItem("currentStory");
                     return;
                 }
@@ -964,7 +966,7 @@ async function setAuthorAvatarHeader() {
             if (backupStory) {
                 currentStory = backupStory;
                 totalPages = currentStory.pages ? currentStory.pages.length : 1;
-                //console.log('Story loaded from backup data:', currentStory.title);
+                ////console.log('Story loaded from backup data:', currentStory.title);
                 return;
             }
         }
@@ -1013,6 +1015,3 @@ async function setAuthorAvatarHeader() {
     // Initialize the story read page
     initStoryRead();
 });
-
-
-
