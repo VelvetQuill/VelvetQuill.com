@@ -40,16 +40,16 @@
                 <span id="story-title-breadcrumb" class="w3-bold">Story Title</span>
             </div>
 
-            <h1 id="story-title" class="w3-xxxlarge w3-text-white">Story Title</h1>
+            <h1 id="story-title" class="w3-xxxlarge w3-text-white mobile-story-title">Story Title</h1>
             <div class="author-info">
                 <div class="author-avatar" id="author-avatar">A</div>
                 <div class="author-details">
-                    <h4 id="" class="w3-xlarge w3-text-white bold">
+                    <h4 class="w3-xlarge w3-text-white bold">
                         <a href="author-room.html" id="author-name1" class="w3-text-white">Author Name</a>
                     </h4>
                     <div class="author-stats w3-text-white">
-                        <span class="author-stat w3-text-white" id="">stories&nbsp;<span id="author-stories-count"></span></span>
-                        <span class="author-stat w3-text-white" id="">followers&nbsp;<span id="author-followers-count"></span></span>
+                        <span class="author-stat w3-text-white">stories&nbsp;<span id="author-stories-count"></span></span>
+                        <span class="author-stat w3-text-white">followers&nbsp;<span id="author-followers-count"></span></span>
                     </div>
                 </div>
             </div>
@@ -87,10 +87,10 @@
     <section class="page-navigation-section">
         <div class="container">
             <div class="row">
-                <div class="col s12 m10 offset-m1">
+                <div class="col s12 m10 offset-m1 l8 offset-l2">
                     <div class="page-navigation">
-                        <button class="btn waves-effect waves-light btn-admin-outline" id="prev-page-btn" disabled>
-                            <i class="material-icons left">chevron_left</i> Previous Page
+                        <button class="btn waves-effect waves-light btn-admin-outline mobile-nav-btn" id="prev-page-btn" disabled>
+                            <i class="material-icons left">chevron_left</i> <span class="nav-text">Previous Page</span>
                         </button>
                         
                         <div class="page-indicator">
@@ -99,8 +99,8 @@
                             <span id="total-pages">1</span>
                         </div>
                         
-                        <button class="btn waves-effect waves-light btn-admin" id="next-page-btn">
-                            Next Page <i class="material-icons right">chevron_right</i>
+                        <button class="btn waves-effect waves-light btn-admin mobile-nav-btn" id="next-page-btn">
+                            <span class="nav-text">Next Page</span> <i class="material-icons right">chevron_right</i>
                         </button>
                     </div>
                     
@@ -120,11 +120,11 @@
     </section>
 
     <!-- Story Content -->
-    <section class="w3-container story-content-section" style="margin:0%;padding:0%;">
-        <div class="container" style="margin:0%;padding:0%;">
-            <div class="row" style="margin:0%;padding:0%;">
-                <div class="col s12 m10 offset-m1" >
-                    <article class="story-content" id="story-content" style="margin:0%;padding:0%;">
+    <section class="story-content-section">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m10 offset-m1 l8 offset-l2">
+                    <article class="story-content" id="story-content">
                         <!-- Page content will be loaded here dynamically -->
                         <div class="page-loading">
                             <div class="progress">
@@ -136,34 +136,35 @@
 
                     <!-- Page Navigation (Bottom) -->
                     <div class="page-navigation-bottom">
-                        <button class="btn waves-effect waves-light btn-admin-outline" id="prev-page-bottom" disabled>
-                            <i class="material-icons left">chevron_left</i> Previous Page
+                        <button class="btn waves-effect waves-light btn-admin-outline mobile-nav-btn" id="prev-page-bottom" disabled>
+                            <i class="material-icons left">chevron_left</i> <span class="nav-text">Previous Page</span>
                         </button>
-                        <button class="btn waves-effect waves-light btn-admin" id="next-page-bottom">
-                            Next Page <i class="material-icons right">chevron_right</i>
+                        <button class="btn waves-effect waves-light btn-admin mobile-nav-btn" id="next-page-bottom">
+                            <span class="nav-text">Next Page</span> <i class="material-icons right">chevron_right</i>
                         </button>
                     </div>
 
                     <!-- Quick Page Jump -->
                     <div class="quick-page-jump">
                         <div class="input-field">
-                            <select id="page-selector">
+                            <select id="page-selector" class="mobile-select">
                                 <option value="" disabled selected>Jump to page...</option>
                             </select>
                             <label>Quick Navigation</label>
                         </div>
                     </div>
 
-                    <div style="width: 70vw;margin:0%;padding:0%;" class="w3-container w3-section w3-padding w3-small story-hero">
+                    <!-- Author Info (Bottom) -->
+                    <div class="author-info-bottom w3-section">
                         <div class="author-info">
-                            <div class="author-avatar center-align w3-center" style="padding:0%;" id="author-avatar2">A</div>
+                            <div class="author-avatar center-align" id="author-avatar2">A</div>
                             <div class="author-details">
-                                <h4 id="" class="w3-xlarge w3-text-white bold">
+                                <h4 class="w3-xlarge w3-text-white bold">
                                     <a href="author-room.html" id="author-name2" class="w3-text-white">Author Name</a>
                                 </h4>
                                 <div class="author-stats w3-text-white">
-                                    <span class="author-stat w3-text-white" id="">stories&nbsp;<span id="author-stories-count2"></span></span>
-                                    <span class="author-stat w3-text-white" id="">followers&nbsp;<span id="author-followers-count2"></span></span>
+                                    <span class="author-stat w3-text-white">stories&nbsp;<span id="author-stories-count2"></span></span>
+                                    <span class="author-stat w3-text-white">followers&nbsp;<span id="author-followers-count2"></span></span>
                                 </div>
                             </div>
                         </div>
@@ -220,10 +221,10 @@
                             <h4>Leave a Comment</h4>
                             <form id="comment-form">
                                 <div class="input-field">
-                                    <textarea id="comment-text" class="materialize-textarea" placeholder="Share your thoughts about this story..." required></textarea>
+                                    <textarea id="comment-text" class="materialize-textarea mobile-textarea" placeholder="Share your thoughts about this story..." required></textarea>
                                     <label for="comment-text">Your Comment</label>
                                 </div>
-                                <button type="submit" class="btn waves-effect waves-light" id="submit-comment">
+                                <button type="submit" class="btn waves-effect waves-light mobile-submit-btn" id="submit-comment">
                                     Post Comment
                                 </button>
                                 <div id="comment-login-prompt" style="display: none; margin-top: 15px;">
@@ -233,7 +234,7 @@
                         </div>
 
                         <!-- Comments List -->
-                        <div class="w3-container" id="comments-list" style="margin:0%;padding:0%;">
+                        <div id="comments-list">
                             <!-- Comments will be loaded here -->
                         </div>
                     </div>
@@ -263,7 +264,7 @@
                 <div class="col s12 m8 offset-m2">
                     <h3>Join the VelvetQuill Community</h3>
                     <p>Discover thousands of romance stories, connect with authors, and share your own love stories.</p>
-                    <a class="btn-large waves-effect waves-light white black-text modal-trigger" href="signup.html">
+                    <a class="btn-large waves-effect waves-light white black-text modal-trigger mobile-signup-btn" href="signup.html">
                         Sign Up Free
                     </a>
                     <p style="margin-top: 15px; font-size: 1rem;">
