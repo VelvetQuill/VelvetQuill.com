@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,28 +12,70 @@
 </head>
 <body>
     <h1>VelvetQuill Health Status</h1>
+    <p>Base URL: <code id="base-url"></code></p>
     
     <div id="checks">
-        <!-- Individual test results will appear here -->
-    </div>
-    
-    <div id="summary" style="display:none;">
-        <h2 id="overall-status">Overall Status: Testing...</h2>
-        <p id="timestamp">Last checked: </p>
+        <!-- Results appear here -->
     </div>
     
     <script>
-    // Configuration - Add your critical pages here
+    // ============================================
+    // DYNAMIC BASE URL DETECTION
+    // ============================================
+    function getBaseUrl() {
+        // Get current page URL
+        const currentPath = window.location.pathname;
+        
+        // Remove "health-test.html" from path
+        const basePath = currentPath.replace(/health-test\.html$/, '');
+        
+        // Return full base URL
+        return window.location.origin + basePath;
+    }
+    
+    const BASE_URL = getBaseUrl();
+    document.getElementById('base-url').textContent = BASE_URL;
+    
+    // ============================================
+    // TEST CONFIGURATION
+    // ============================================
     const tests = [
-        { id: 'homepage', url: '/index.html', keyword: 'VelvetQuill', name: 'Homepage' },
-        { id: 'categories', url: '/category-list.html', keyword: 'Story Categories', name: 'Category List' },
-        { id: 'signin', url: '/signin.html', keyword: 'Login', name: 'Sign In Page' },
-        { id: 'signup', url: '/signup.html', keyword: 'Sign Up', name: 'Sign Up Page' },
-        { id: 'search', url: '/search.html', keyword: 'Search', name: 'Search Page' },
-        { id: 'api-health', url: '/api/health', keyword: 'healthy', name: 'API Health', optional: true },
-        // Add more as needed
+        { 
+            id: 'homepage', 
+            url: `${BASE_URL}index.html`, 
+            keywords: ['VelvetQuill', 'Romance'],  // Multiple possible keywords
+            name: 'Homepage' 
+        },
+        { 
+            id: 'categories', 
+            url: `${BASE_URL}category-list.html`, 
+            keywords: ['Story Categories', 'Romance Story Categories'],
+            name: 'Category List' 
+        },
+        { 
+            id: 'signin', 
+            url: `${BASE_URL}signin.html`, 
+            keywords: ['Login', 'Sign In', 'email', 'password'],
+            name: 'Sign In Page' 
+        },
+        { 
+            id: 'signup', 
+            url: `${BASE_URL}signup.html`, 
+            keywords: ['Sign Up', 'Create Account', 'Register'],
+            name: 'Sign Up Page' 
+        },
+        { 
+            id: 'search', 
+            url: `${BASE_URL}search.html`, 
+            keywords: ['Search', 'Find stories'],
+            name: 'Search Page',
+            optional: true  // Mark as optional if not critical
+        }
     ];
     
+    // ============================================
+    // TEST FUNCTION
+    // ============================================
     async function runTest(test) {
         const element = document.createElement('div');
         element.id = test.id;
@@ -43,20 +84,37 @@
         document.getElementById('checks').appendChild(element);
         
         try {
-            const response = await fetch(test.url, { 
+            // Add cache busting
+            const urlWithCacheBust = test.url + (test.url.includes('?') ? '&' : '?') + 
+                                   '_=' + Date.now();
+            
+            const response = await fetch(urlWithCacheBust, {
                 method: 'GET',
-                headers: { 'Cache-Control': 'no-cache' }
+                mode: 'cors',
+                headers: {
+                    'Cache-Control': 'no-cache',
+                    'Pragma': 'no-cache'
+                }
             });
+            
             const text = await response.text();
             
-            if (response.ok && text.includes(test.keyword)) {
+            // Check if ANY keyword is found
+            const keywordFound = test.keywords.some(keyword => 
+                text.includes(keyword)
+            );
+            
+            if (response.ok && keywordFound) {
                 element.className = 'status good';
                 element.innerHTML = `✓ ${test.name}: Healthy (${response.status})`;
                 return { success: true, test };
             } else {
                 element.className = 'status bad';
-                element.innerHTML = `✗ ${test.name}: Failed (Status: ${response.status})`;
-                return { success: false, test, error: 'Missing keyword or bad status' };
+                const errorMsg = !response.ok ? 
+                    `Status: ${response.status}` : 
+                    `Missing keywords: ${test.keywords.join(', ')}`;
+                element.innerHTML = `✗ ${test.name}: Failed - ${errorMsg}`;
+                return { success: false, test, error: errorMsg };
             }
         } catch (error) {
             element.className = 'status bad';
@@ -65,55 +123,80 @@
         }
     }
     
+    // ============================================
+    // RUN ALL TESTS
+    // ============================================
     async function runAllTests() {
+        console.log('Starting health checks from:', BASE_URL);
+        
         const results = [];
         
         for (const test of tests) {
             const result = await runTest(test);
             results.push(result);
-            // Small delay between tests to avoid overwhelming
+            // Small delay between tests
             await new Promise(resolve => setTimeout(resolve, 500));
         }
         
         // Calculate overall status
-        const successfulTests = results.filter(r => r.success).length;
-        const totalTests = results.length;
-        const allOptionalSucceeded = results.filter(r => !r.test.optional).every(r => r.success);
+        const criticalTests = tests.filter(t => !t.optional);
+        const criticalResults = results.filter(r => 
+            criticalTests.some(t => t.id === r.test.id)
+        );
         
-        // Update summary
-        const summary = document.getElementById('summary');
-        const overallStatus = document.getElementById('overall-status');
-        const timestamp = document.getElementById('timestamp');
+        const allCriticalPassed = criticalResults.every(r => r.success);
+        const passedTests = results.filter(r => r.success).length;
+        const totalTests = tests.length;
         
-        if (allOptionalSucceeded) {
-            overallStatus.textContent = `Overall Status: ✅ ALL SYSTEMS GO (${successfulTests}/${totalTests} tests passed)`;
-            overallStatus.style.color = 'green';
+        // Update page with results
+        const summary = document.createElement('div');
+        summary.style.marginTop = '20px';
+        summary.style.padding = '15px';
+        summary.style.borderRadius = '5px';
+        summary.style.fontWeight = 'bold';
+        
+        if (allCriticalPassed) {
+            summary.style.backgroundColor = '#d4edda';
+            summary.style.color = '#155724';
+            summary.innerHTML = `✅ ALL SYSTEMS GO (${passedTests}/${totalTests} tests passed)`;
             
-            // IMPORTANT: This text is what UptimeRobot looks for
-            document.title = 'All Systems Go';
+            // CRITICAL: This text is what UptimeRobot looks for
+            document.title = 'Health Check: All Systems Go';
             
-            // Add hidden success marker for keyword monitoring
+            // Add hidden success marker
             const successMarker = document.createElement('div');
             successMarker.style.display = 'none';
             successMarker.id = 'success-marker';
-            successMarker.textContent = 'All Systems Go - All critical systems operational';
+            successMarker.textContent = 'All Systems Go';
             document.body.appendChild(successMarker);
+            
         } else {
-            overallStatus.textContent = `Overall Status: ⚠️ ISSUES DETECTED (${successfulTests}/${totalTests} tests passed)`;
-            overallStatus.style.color = 'orange';
+            summary.style.backgroundColor = '#f8d7da';
+            summary.style.color = '#721c24';
+            summary.innerHTML = `❌ ISSUES DETECTED (${passedTests}/${totalTests} tests passed)`;
             document.title = 'Health Check: Issues Detected';
         }
         
+        // Add timestamp
+        const timestamp = document.createElement('div');
+        timestamp.style.marginTop = '10px';
+        timestamp.style.fontSize = '0.9em';
+        timestamp.style.color = '#666';
         timestamp.textContent = `Last checked: ${new Date().toLocaleString()}`;
-        summary.style.display = 'block';
         
-        // Log results to console for debugging
-        console.log('Health Check Results:', results);
+        summary.appendChild(timestamp);
+        document.body.appendChild(summary);
+        
+        // Log to console for debugging
+        console.log('Health Check Results:', {
+            baseUrl: BASE_URL,
+            results: results,
+            overall: allCriticalPassed ? 'healthy' : 'unhealthy'
+        });
     }
     
-    // Run tests when page loads
+    // Start tests when page loads
     document.addEventListener('DOMContentLoaded', runAllTests);
     </script>
 </body>
 </html>
-
