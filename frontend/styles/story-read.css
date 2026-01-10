@@ -1,285 +1,202 @@
+/* story-read.css - COMPLETE REFACTOR */
+/* Mobile-first responsive design for VelvetQuill story reading */
 
+/* ===== GLOBAL RESETS & BASE STYLES ===== */
+* {
+    box-sizing: border-box;
+}
 
-        .story-hero {
-            background: linear-gradient(rgba(139, 0, 0, 0.8), rgba(139, 0, 0, 0.8)), url('../assets/VQ3.jpg') no-repeat center center;
-            background-size: cover;
-            color: white;
-            padding: 80px 0;
-            margin-bottom: 40px;
-        }
-        
-        .story-meta {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 20px;
-            margin: 20px 0;
-        }
-        
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .story-content {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 40px;
-        }
-        
-        .story-content p {
-            margin-bottom: 1.5rem;
-        }
-        
-        .reactions-section {
-            background: var(--background-light);
-            padding: 30px;
-            border-radius: 8px;
-            margin: 40px 0;
-            text-align: center;
-        }
-        
-        .reactions-title {
-            margin-bottom: 20px;
-            color: var(--primary-dark);
-        }
-        
-        .reactions-container {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
-        }
-        
-        .reaction-btn {
-            background: white;
-            border: 2px solid #e0e0e0;
-            border-radius: 50px;
-            padding: 15px 25px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 500;
-        }
-        
-        .reaction-btn:hover {
-            border-color: var(--primary-color);
-            transform: translateY(-2px);
-        }
-        
-        .reaction-btn.active {
-            background: var(--primary-color);
-            color: white;
-            border-color: var(--primary-color);
-        }
-        
-        .reaction-count {
-            font-weight: bold;
-            font-size: 1.1rem;
-        }
-        
-        .rating-section {
-            margin-top: 30px;
-        }
-        
-        .star-rating {
-            display: flex;
-            justify-content: center;
-            gap: 5px;
-            margin: 15px 0;
-        }
-        
-        .star {
-            font-size: 2rem;
-            color: #ddd;
-            cursor: pointer;
-            transition: color 0.2s;
-        }
-        
-        .star:hover,
-        .star.active {
-            color: #FFD700;
-        }
-        
-        .comments-section {
-            margin: 60px 0;
-        }
-        
-        .comments-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 30px;
-        }
-        
-        .comment-form {
-            background: var(--background-light);
-            padding: 30px;
-            border-radius: 8px;
-            margin-bottom: 40px;
-        }
-        
-        .comment {
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            box-shadow: var(--shadow);
-        }
-        
-        .comment-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
-        }
-        
-        .comment-author {
-            font-weight: bold;
-            color: var(--primary-dark);
-        }
-        
-        .comment-date {
-            color: #666;
-            font-size: 0.9rem;
-        }
-        
-        .comment-content {
-            line-height: 1.6;
-        }
-        
-        .similar-stories {
-            margin: 60px 0;
-        }
-        
-        .similar-stories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-            margin-top: 30px;
-        }
-        
-        .signup-cta {
-            background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
-            color: white;
-            padding: 80px 0;
-            text-align: center;
-            margin-top: 60px;
-        }
-        
-        .signup-cta h3 {
-            color: white;
-            margin-bottom: 20px;
-        }
-        
-        .signup-cta p {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            opacity: 0.9;
-        }
-        
-        .author-info {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin: 20px 0;
-        }
-        
-        .author-avatar {
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            background: var(--secondary-color);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--primary-color);
-            font-weight: bold;
-            font-size: 1.5rem;
-        }
-        
-        .author-details h4 {
-            margin: 0;
-            color: var(--primary-dark);
-        }
-        
-        .author-stats {
-            display: flex;
-            gap: 15px;
-            margin-top: 5px;
-        }
-        
-        .author-stat {
-            font-size: 0.9rem;
-            color: #666;
-        }
-        
-        .reading-progress {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: #e0e0e0;
-            z-index: 1000;
-        }
-        
-        .reading-progress-bar {
-            height: 100%;
-            background: var(--primary-color);
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-        
-        .chapter-navigation {
-            display: flex;
-            justify-content: space-between;
-            margin: 40px 0;
-            padding: 20px 0;
-            border-top: 1px solid #eee;
-            border-bottom: 1px solid #eee;
-        }
-        
-        .breadcrumb {
-            margin-bottom: 20px;
-        }
-        
-        .breadcrumb a {
-            color: var(--primary-color);
-        }
-        
-        .breadcrumb .separator {
-            margin: 0 10px;
-            color: #666;
-        }
-        
-        @media (max-width: 768px) {
-            .reactions-container {
-                gap: 15px;
-            }
-            
-            .reaction-btn {
-                padding: 10px 15px;
-                font-size: 0.9rem;
-            }
-            
-            .star {
-                font-size: 1.5rem;
-            }
-            
-            .similar-stories-grid {
-                grid-template-columns: 1fr;
-            }
-        }
+html, body {
+    max-width: 100%;
+    overflow-x: hidden;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
 
-/* Multi-Page Navigation Styles */
+/* ===== STORY HERO SECTION ===== */
+.story-hero {
+    background: linear-gradient(rgba(139, 0, 0, 0.8), rgba(139, 0, 0, 0.8)), url('../assets/VQ3.jpg') no-repeat center center;
+    background-size: cover;
+    color: white;
+    padding: 40px 0;
+    margin-bottom: 20px;
+    width: 100%;
+    max-width: 100vw;
+    overflow: hidden;
+}
+
+.breadcrumb {
+    margin-bottom: 15px;
+    font-size: 0.9rem;
+}
+
+.breadcrumb a {
+    color: var(--primary-color);
+}
+
+.breadcrumb .separator {
+    margin: 0 8px;
+    color: #ccc;
+}
+
+/* ===== STORY METADATA ===== */
+.story-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    margin: 15px 0;
+    max-width: 100%;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.9rem;
+}
+
+/* ===== AUTHOR INFO ===== */
+.author-info {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+    max-width: 100%;
+}
+
+.author-avatar {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--secondary-color);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-color);
+    font-weight: bold;
+    font-size: 1.3rem;
+    flex-shrink: 0;
+}
+
+.author-details {
+    flex: 1;
+    min-width: 200px;
+    max-width: 100%;
+}
+
+.author-stats {
+    display: flex;
+    gap: 15px;
+    margin-top: 5px;
+    flex-wrap: wrap;
+}
+
+.author-stat {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.8);
+}
+
+/* ===== MAIN CONTENT AREA ===== */
+.story-content-section {
+    width: 100%;
+    max-width: 100vw;
+    overflow-x: hidden;
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.story-content-section .container,
+.story-content-section .container .row,
+.story-content-section .container .row .col {
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    overflow-x: hidden !important;
+}
+
+.story-content {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+    word-wrap: break-word;
+    padding: 0 15px;
+    margin: 0 auto;
+}
+
+/* ===== PAGE CONTENT STYLES ===== */
+.page-content {
+    max-width: 100%;
+    overflow-x: hidden;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.page-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #e9ecef;
+    width: 100%;
+}
+
+.page-title {
+    font-size: 1.8rem;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+    word-wrap: break-word;
+    max-width: 100%;
+}
+
+.page-meta {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    font-size: 0.9rem;
+    color: #6c757d;
+    flex-wrap: wrap;
+    max-width: 100%;
+}
+
+.page-text {
+    line-height: 1.8;
+    font-size: 1.1rem;
+    color: #2c3e50;
+    max-width: 100%;
+    overflow-x: hidden;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    width: 100%;
+}
+
+.page-text p {
+    margin-bottom: 1.5rem;
+    text-align: justify;
+    max-width: 100%;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    width: 100%;
+}
+
+.page-footer {
+    margin-top: 3rem;
+    padding-top: 1rem;
+    border-top: 1px solid #e9ecef;
+    text-align: center;
+    color: #6c757d;
+    font-size: 0.9rem;
+    width: 100%;
+}
+
+/* ===== PAGE NAVIGATION ===== */
 .page-navigation-section {
     background: #f8f9fa;
     padding: 1rem 0;
     border-bottom: 1px solid #e9ecef;
+    width: 100%;
+    max-width: 100vw;
 }
 
 .page-navigation {
@@ -287,19 +204,20 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
 }
 
 .page-indicator {
     font-weight: 500;
     color: #6c757d;
-}
-
-.page-separator {
-    margin: 0 0.5rem;
+    flex-shrink: 0;
 }
 
 .multi-page-progress {
     margin-top: 1rem;
+    width: 100%;
 }
 
 .progress-labels {
@@ -308,6 +226,7 @@
     margin-bottom: 0.5rem;
     font-size: 0.9rem;
     color: #6c757d;
+    width: 100%;
 }
 
 .progress-bar-container {
@@ -315,6 +234,7 @@
     border-radius: 10px;
     height: 8px;
     overflow: hidden;
+    width: 100%;
 }
 
 .progress-bar {
@@ -330,75 +250,263 @@
     margin: 2rem 0;
     padding-top: 2rem;
     border-top: 1px solid #e9ecef;
+    width: 100%;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
 .quick-page-jump {
     margin: 1rem 0;
     text-align: center;
+    width: 100%;
 }
 
 .quick-page-jump .input-field {
     display: inline-block;
-    width: auto;
+    max-width: 100%;
     min-width: 200px;
 }
 
-/* Page Content Styles */
-.page-content {
-    max-width: 800px;
-    margin: 0 auto;
-}
-
-.page-header {
+/* ===== REACTIONS SECTION ===== */
+.reactions-section {
+    background: var(--background-light);
+    padding: 25px;
+    border-radius: 8px;
+    margin: 30px 0;
     text-align: center;
-    margin-bottom: 2rem;
-    padding-bottom: 1rem;
-    border-bottom: 1px solid #e9ecef;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
 }
 
-.page-title {
-    font-size: 2rem;
-    margin-bottom: 0.5rem;
-    color: #2c3e50;
+.reactions-title {
+    margin-bottom: 20px;
+    color: var(--primary-dark);
+    font-size: 1.5rem;
 }
 
-.page-meta {
+.reactions-container {
     display: flex;
     justify-content: center;
-    gap: 1.5rem;
-    font-size: 0.9rem;
-    color: #6c757d;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+    max-width: 100%;
 }
 
-.page-text {
-    line-height: 1.8;
-    font-size: 1.1rem;
-    color: #2c3e50;
+.reaction-btn {
+    background: white;
+    border: 2px solid #e0e0e0;
+    border-radius: 50px;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+    flex-shrink: 0;
 }
 
-.page-text p {
-    margin-bottom: 1.5rem;
-    text-align: justify;
+.reaction-btn:hover {
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
 }
 
-.page-footer {
-    margin-top: 3rem;
-    padding-top: 1rem;
-    border-top: 1px solid #e9ecef;
-    text-align: center;
-    color: #6c757d;
-    font-size: 0.9rem;
+.reaction-btn.active {
+    background: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
 }
 
-/* Loading and Error States */
-.page-loading,
-.page-error {
-    padding: 3rem 1rem;
-    text-align: center;
+.reaction-count {
+    font-weight: bold;
+    font-size: 1rem;
 }
 
-.page-loading .progress {
+/* ===== RATING SECTION ===== */
+.rating-section {
+    margin-top: 25px;
+    width: 100%;
+}
+
+.star-rating {
+    display: flex;
+    justify-content: center;
+    gap: 5px;
+    margin: 15px 0;
+    flex-wrap: wrap;
+}
+
+.star {
+    font-size: 1.8rem;
+    color: #ddd;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+
+.star:hover,
+.star.active {
+    color: #FFD700;
+}
+
+/* ===== COMMENTS SECTION ===== */
+.comments-section {
+    margin: 40px 0;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.comments-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.comment-form {
+    background: var(--background-light);
+    padding: 25px;
+    border-radius: 8px;
+    margin-bottom: 30px;
+    width: 100%;
+}
+
+.comment.card-panel {
+    position: relative;
     margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+.comment-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.comment-author-info {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.comment-avatar {
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+}
+
+.comment-author-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.comment-author-name {
+    font-weight: 600;
+    color: #333;
+    word-wrap: break-word;
+    max-width: 100%;
+}
+
+.comment-content {
+    margin: 12px 0;
+    line-height: 1.5;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    max-width: 100%;
+}
+
+.comment-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.comment-replies {
+    margin-top: 16px;
+    margin-left: 15px;
+    border-left: 2px solid #e0e0e0;
+    padding-left: 15px;
+    width: calc(100% - 15px);
+    max-width: 100%;
+}
+
+/* ===== SIMILAR STORIES ===== */
+.similar-stories {
+    margin: 40px 0;
+    width: 100%;
+    max-width: 100vw;
+}
+
+.similar-stories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+    margin-top: 25px;
+    width: 100%;
+}
+
+/* ===== SIGNUP CTA ===== */
+.signup-cta {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    padding: 60px 0;
+    text-align: center;
+    margin-top: 40px;
+    width: 100%;
+    max-width: 100vw;
+}
+
+.signup-cta h3 {
+    color: white;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+.signup-cta p {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+    opacity: 0.9;
+    padding: 0 15px;
+}
+
+/* ===== READING PROGRESS BAR ===== */
+.reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background: #e0e0e0;
+    z-index: 1000;
+}
+
+.reading-progress-bar {
+    height: 100%;
+    background: var(--primary-color);
+    width: 0%;
+    transition: width 0.3s ease;
+}
+
+/* ===== LOADING & ERROR STATES ===== */
+.page-loading,
+.page-error,
+.no-comments {
+    padding: 2rem 1rem;
+    text-align: center;
+    width: 100%;
 }
 
 .continue-reading-prompt {
@@ -408,34 +516,331 @@
     padding: 1rem;
     margin-bottom: 1.5rem;
     text-align: center;
+    width: 100%;
 }
 
-.continue-reading-prompt a {
-    color: #1976d2;
-    font-weight: 500;
+/* ===== PINNED COMMENT STYLES ===== */
+.pinned-comment {
+    border-left: 4px solid #26a69a;
 }
 
-/* Responsive Design */
-@media (max-width: 768px) {
-    .page-navigation {
-        flex-direction: column;
-        gap: 1rem;
+.pinned-badge {
+    background: #26a69a;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 8px;
+}
+
+/* ===== RESPONSIVE BREAKPOINTS ===== */
+
+/* Tablet devices */
+@media (min-width: 769px) and (max-width: 1024px) {
+    .story-hero {
+        padding: 60px 0;
     }
     
-    .page-meta {
+    .story-content {
+        padding: 0 20px;
+        max-width: 90%;
+    }
+    
+    .page-title {
+        font-size: 2rem;
+    }
+}
+
+/* Desktop devices */
+@media (min-width: 1025px) {
+    .story-hero {
+        padding: 80px 0;
+        margin-bottom: 40px;
+    }
+    
+    .story-content {
+        padding: 0;
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    
+    .page-title {
+        font-size: 2.2rem;
+    }
+    
+    .reactions-container {
+        gap: 30px;
+    }
+    
+    .reaction-btn {
+        padding: 15px 25px;
+    }
+    
+    .star {
+        font-size: 2rem;
+    }
+}
+
+/* Mobile-specific adjustments */
+@media (max-width: 768px) {
+    /* Hero section adjustments */
+    .story-hero {
+        padding: 30px 15px;
+    }
+    
+    .breadcrumb {
+        font-size: 0.8rem;
+    }
+    
+    /* Meta adjustments */
+    .story-meta {
+        gap: 10px;
+        justify-content: center;
+    }
+    
+    .meta-item {
+        font-size: 0.8rem;
+    }
+    
+    /* Author info adjustments */
+    .author-info {
         flex-direction: column;
-        gap: 0.5rem;
+        text-align: center;
+        gap: 10px;
+    }
+    
+    .author-details {
+        min-width: 100%;
+    }
+    
+    .author-stats {
+        justify-content: center;
+    }
+    
+    /* Content adjustments */
+    .story-content {
+        padding: 0 10px;
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+    
+    .page-text {
+        font-size: 1rem;
+        line-height: 1.6;
+        text-align: left;
+        hyphens: auto;
+    }
+    
+    .page-text p {
+        text-align: left;
+        hyphens: auto;
+    }
+    
+    /* Navigation adjustments */
+    .page-navigation {
+        flex-direction: column;
+        gap: 15px;
     }
     
     .page-navigation-bottom {
         flex-direction: column;
-        gap: 1rem;
+        gap: 15px;
     }
     
-    .page-title {
-        font-size: 1.5rem;
+    /* Reactions adjustments */
+    .reactions-container {
+        gap: 10px;
+    }
+    
+    .reaction-btn {
+        padding: 10px 15px;
+        font-size: 0.85rem;
+    }
+    
+    .reaction-count {
+        font-size: 0.9rem;
+    }
+    
+    .star {
+        font-size: 1.6rem;
+    }
+    
+    /* Comments adjustments */
+    .comments-section,
+    .reactions-section {
+        padding: 20px 15px;
+        margin: 25px 0;
+    }
+    
+    .comment-form {
+        padding: 20px 15px;
+    }
+    
+    .comment-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 5px;
+    }
+    
+    .comment-replies {
+        margin-left: 10px;
+        padding-left: 10px;
+    }
+    
+    /* Grid adjustments */
+    .similar-stories-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+    
+    /* Text alignment */
+    h1, h2, h3, h4 {
+        text-align: center;
+        padding: 0 10px;
+    }
+    
+    /* Ensure all text is properly wrapped */
+    .comment-author-name,
+    .comment-content,
+    .page-title,
+    .reactions-title {
+        word-break: break-word;
+        overflow-wrap: break-word;
     }
 }
 
+/* Extra small devices (phones, less than 480px) */
+@media (max-width: 480px) {
+    .story-hero {
+        padding: 25px 10px;
+    }
+    
+    .story-content {
+        padding: 0 8px;
+    }
+    
+    .story-meta {
+        flex-direction: column;
+        align-items: center;
+        gap: 8px;
+    }
+    
+    .meta-item {
+        font-size: 0.75rem;
+    }
+    
+    .page-title {
+        font-size: 1.4rem;
+        line-height: 1.3;
+    }
+    
+    .reactions-container {
+        justify-content: space-around;
+        width: 100%;
+    }
+    
+    .reaction-btn {
+        flex: 1;
+        min-width: 70px;
+        justify-content: center;
+        padding: 8px 5px;
+        font-size: 0.75rem;
+    }
+    
+    .comments-header {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .comment-actions {
+        justify-content: center;
+    }
+    
+    .comment-replies {
+        margin-left: 5px;
+        padding-left: 8px;
+    }
+    
+    .signup-cta {
+        padding: 40px 15px;
+    }
+    
+    .signup-cta h3 {
+        font-size: 1.5rem;
+    }
+    
+    .signup-cta p {
+        font-size: 1rem;
+    }
+}
 
+/* Very small devices (phones, less than 360px) */
+@media (max-width: 360px) {
+    .story-content {
+        padding: 0 5px;
+        font-size: 0.95rem;
+    }
+    
+    .page-title {
+        font-size: 1.2rem;
+    }
+    
+    .author-avatar {
+        width: 40px;
+        height: 40px;
+        font-size: 1.1rem;
+    }
+    
+    .reaction-btn {
+        padding: 6px 3px;
+        font-size: 0.7rem;
+    }
+    
+    .star {
+        font-size: 1.4rem;
+    }
+    
+    .comments-section,
+    .reactions-section {
+        padding: 15px 10px;
+    }
+}
+
+/* Landscape mode adjustments */
+@media (max-height: 500px) and (orientation: landscape) {
+    .story-hero {
+        padding: 20px 0;
+    }
+    
+    .story-content {
+        padding: 0 10px;
+    }
+    
+    .page-navigation-section {
+        padding: 0.5rem 0;
+    }
+}
+
+/* Accessibility: Increase text size for users who need it */
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+    .story-hero {
+        background: var(--primary-dark);
+    }
+    
+    .reaction-btn {
+        border: 2px solid #000;
+    }
+}
 
