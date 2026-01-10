@@ -261,7 +261,7 @@ const startServer = async () => {
                 backend: 'velvetquill-com.onrender.com',
                 frontend: 'velvetquill.github.io/VelvetQuill',
                 cors: 'Enabled for GitHub Pages & Facebook',
-                status: 'UP'
+                status: 'All Systems Go'
             });
         });
 
