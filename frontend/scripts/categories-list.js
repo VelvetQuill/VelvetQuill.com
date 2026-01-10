@@ -330,7 +330,10 @@ $(document).ready(function(){
     // Initialize poster wall
     function initializePosterWall(){
         const posterWall = document.getElementById('poster-wall');
-        const posters = ["poster1.jpg", "poster2.jpg", "poster3.jpg", "poster4.jpg", "poster6.jpg", "poster7.jpg", "poster8.jpg"];
+        const posters = ["poster1.jpg", "poster2.jpg", "poster3.jpg", "poster4.jpg",
+                         "poster6.jpg", "poster7.jpg", "poster8.jpg","poster10.jpg", 
+                         "poster11.jpg", "poster12.jpg", "poster13.jpg", "poster14.jpg", 
+                         "poster15.jpg", "poster16.jpg", "poster17.jpg", "poster18.jpg", "poster19.jpg"];
         
         if (posterWall && posters.length > 0) {
             const randomIndex = Math.floor(Math.random() * posters.length);
