@@ -90,7 +90,7 @@
             overallStatus.style.color = 'green';
             
             // IMPORTANT: This text is what UptimeRobot looks for
-            document.title = 'Health Check: All Systems Go';
+            document.title = 'All Systems Go';
             
             // Add hidden success marker for keyword monitoring
             const successMarker = document.createElement('div');
@@ -116,47 +116,4 @@
     </script>
 </body>
 </html>
-```
 
-🎯 Alternative: Simpler Version for Better Reliability
-
-If the complex version has issues, use this simpler one:
-
-```html
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="robots" content="noindex, nofollow">
-    <title>Health Check</title>
-</head>
-<body>
-    <div id="status" style="display:none;">ALL_SYSTEMS_GO</div>
-    
-    <script>
-    // Quick check of most critical pages
-    const criticalPages = [
-        '/index.html',
-        '/category-list.html', 
-        '/signin.html',
-        '/signup.html'
-    ];
-    
-    async function quickHealthCheck() {
-        try {
-            // Check homepage quickly
-            const response = await fetch('/index.html');
-            if (!response.ok) throw new Error(`Homepage: ${response.status}`);
-            
-            // If homepage works, assume others are likely fine
-            document.getElementById('status').style.display = 'block';
-            document.title = 'Healthy';
-            
-        } catch (error) {
-            document.title = 'Unhealthy: ' + error.message;
-        }
-    }
-    
-    quickHealthCheck();
-    </script>
-</body>
-</html>
