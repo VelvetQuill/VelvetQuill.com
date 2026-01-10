@@ -1,0 +1,70 @@
+<!-- health-check.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <style>.status { padding: 10px; margin: 5px; } .good { background: #d4edda; } .bad { background: #f8d7da; }</style>
+</head>
+<body>
+    <h1>VelvetQuill Health Status</h1>
+    
+    <div id="checks">
+        <div class="status" id="homepage">Checking homepage...</div>
+        <div class="status" id="categories">Checking category list...</div>
+        <div class="status" id="signin">Checking sign-in page...</div>
+        <div class="status" id="signup">Checking sign-up page...</div>
+        <div class="status" id="category-romance">Checking Contemporary Romance...</div>
+        <div class="status" id="category-loving-wives">Checking Loving Wives...</div>
+        <div class="status" id="category-incest-taboo">Checking Incest Taboo...</div>
+        <div class="status" id="api">Checking API...</div>
+    </div>
+    
+    <script>
+    const checks = [
+        { id: 'homepage', url: '/index.html', keyword: 'VelvetQuill' },
+        { id: 'categories', url: '/category-list.html', keyword: 'Story Categories' },
+        { id: 'signin', url: '/signin.html', keyword: 'Login' },
+        { id: 'signup', url: '/signup.html', keyword: 'Sign Up' },
+        { id: 'category-romance', url: '/category/romance', keyword: 'Romance' },
+        { id: 'category-loving-wives', url: '/category/loving-wives', keyword: 'Loving Wives' },
+        { id: 'category-incest-taboo', url: '/category/incest-taboo', keyword: 'Incest Taboo' }
+    ];
+    
+    async function checkPage(check) {
+        try {
+            const response = await fetch(check.url);
+            const text = await response.text();
+            const element = document.getElementById(check.id);
+            
+            if (text.includes(check.keyword) && response.ok) {
+                element.className = 'status good';
+                element.innerHTML = `✓ ${check.id}: Healthy (${response.status})`;
+                return true;
+            } else {
+                element.className = 'status bad';
+                element.innerHTML = `✗ ${check.id}: Missing keyword (${response.status})`;
+                return false;
+            }
+        } catch (error) {
+            const element = document.getElementById(check.id);
+            element.className = 'status bad';
+            element.innerHTML = `✗ ${check.id}: Error - ${error.message}`;
+            return false;
+        }
+    }
+    
+    async function runAllChecks() {
+        const results = await Promise.all(checks.map(checkPage));
+        const allGood = results.every(r => r);
+        
+        // Update page title with status
+        document.title = `Health Check: ${allGood ? 'All Systems Go' : 'Issues Detected'}`;
+        
+        // Add timestamp
+        const time = new Date().toLocaleTimeString();
+        document.body.innerHTML += `<p><small>Last checked: ${time}</small></p>`;
+    }
+    
+    runAllChecks();
+    </script>
+</body>
+</html>
