@@ -1,1 +1,376 @@
 
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Erotic Stories by Tags & Categories | VelvetQuill</title>
+    
+    <!-- Primary Meta Tags -->
+    <meta name="title" content="Search Erotic Stories by Tags & Categories | VelvetQuill">
+    <meta name="description" content="Discover passionate romance and erotic stories. Search by tags like romance, passion, sensual, love or filter by category. Read captivating tales of desire.">
+    <meta name="keywords" content="erotic stories, romance stories, sensual fiction, adult stories, passion stories, love stories, search stories, erotic fiction, sensual literature">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://velvetquill.github.io/VelvetQuill.com/search.html">
+    <meta property="og:title" content="Search Erotic Stories by Tags & Categories | VelvetQuill">
+    <meta property="og:description" content="Discover passionate romance and erotic stories. Search by tags like romance, passion, sensual, love or filter by category. Read captivating tales of desire.">
+    <meta property="og:image" content="https://velvetquill.github.io/VelvetQuill.com/assets/FB-OG.jpg">
+    <meta property="og:image:alt" content="VelvetQuill Story Search - Find passionate tales">
+    <meta property="og:site_name" content="VelvetQuill">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://velvetquill.github.io/VelvetQuill.com/search.html">
+    <meta property="twitter:title" content="Search Erotic Stories by Tags & Categories | VelvetQuill">
+    <meta property="twitter:description" content="Discover passionate romance and erotic stories. Search by tags like romance, passion, sensual, love or filter by category. Read captivating tales of desire.">
+    <meta property="twitter:image" content="https://velvetquill.github.io/VelvetQuill.com/assets/FB-OG.jpg">
+    <meta property="twitter:image:alt" content="VelvetQuill Story Search - Find passionate tales">
+    
+    <!-- Additional SEO Meta Tags -->
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+    <meta name="author" content="VelvetQuill">
+    <meta name="copyright" content="VelvetQuill">
+    <meta name="language" content="English">
+    <meta name="revisit-after" content="7 days">
+    <meta name="rating" content="adult">
+    <meta name="contentRating" content="R">
+    
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://velvetquill.github.io/VelvetQuill.com/search.html">
+    
+    <!-- Structured Data / Schema.org -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebPage",
+        "name": "Search Erotic Stories by Tags & Categories | VelvetQuill",
+        "description": "Discover passionate romance and erotic stories. Search by tags like romance, passion, sensual, love or filter by category. Read captivating tales of desire.",
+        "url": "https://velvetquill.github.io/VelvetQuill.com/search.html",
+        "publisher": {
+            "@type": "Organization",
+            "name": "VelvetQuill",
+            "logo": {
+                "@type": "ImageObject",
+                "url": "https://velvetquill.github.io/VelvetQuill.com/icons/icon-72x72.png",
+                "width": 200,
+                "height": 60
+            }
+        },
+        "inLanguage": "en-US",
+        "isAccessibleForFree": true,
+        "audience": {
+            "@type": "PeopleAudience",
+            "suggestedMinAge": 18,
+            "suggestedMaxAge": 99
+        },
+        "contentRating": "R",
+        "keywords": "smut, erotic stories, romance stories, sensual fiction, adult stories, passion stories, taboo stories, erotica"
+    }
+    </script>
+    
+    <!-- Additional Structured Data for SearchAction -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "url": "https://velvetquill.github.io/VelvetQuill.com/",
+        "potentialAction": {
+            "@type": "SearchAction",
+            "target": "https://velvetquill.github.io/VelvetQuill.com/search.html?tags={search_term_string}",
+            "query-input": "required name=search_term_string"
+        }
+    }
+    </script>
+    
+    <!-- Google Analytics (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        
+        // Replace with your actual Google Analytics ID
+        gtag('config', 'G-XXXXXXXXXX', {
+            'page_title': 'Search Page',
+            'page_location': window.location.href,
+            'page_path': '/search.html'
+        });
+        
+        // Track search events (will be called from search.js)
+        function trackSearch(searchData) {
+            gtag('event', 'search', {
+                'search_term': searchData.tags.join(', '),
+                'category': searchData.category || 'all',
+                'results_count': searchData.resultsCount
+            });
+        }
+        
+        function trackPageView(pageNumber) {
+            gtag('event', 'page_view', {
+                'page_number': pageNumber,
+                'page_type': 'search_results'
+            });
+        }
+        
+        function trackStoryClick(storyId, storyTitle) {
+            gtag('event', 'select_content', {
+                'content_type': 'story',
+                'content_id': storyId,
+                'content_title': storyTitle
+            });
+        }
+    </script>
+    
+    <!-- Materialize CSS -->
+    <link rel="stylesheet" href="styles/materialize.min.css">
+    <link rel="stylesheet" href="styles/font/micons.css">
+    
+    <!-- Custom CSS for search page -->
+    <link rel="stylesheet" href="styles/search.css">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+    <meta name="theme-color" content="#b71c1c">
+</head>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXXX"
+            height="0" width="0" style="display:none;visibility:hidden">
+        </iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    
+    <!-- Navigation -->
+    <nav class="red darken-3">
+        <div class="nav-wrapper container">
+            <a href="index.html" class="brand-logo" aria-label="VelvetQuill Home">
+                <span class="hide-on-med-and-down">VelvetQuill</span>
+                <span class="hide-on-large-only">VQ</span>
+            </a>
+            <a href="#" data-target="mobile-nav" class="sidenav-trigger" aria-label="Open menu">
+                <i class="material-icons">menu</i>
+            </a>
+            <ul class="right hide-on-med-and-down">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="category-list.html">Categories</a></li>
+                <li><a href="search.html" class="active" aria-current="page">Search</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="signin.html" class="btn white red-text">Sign In</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Mobile Navigation -->
+    <ul class="sidenav" id="mobile-nav">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="category-list.html">Categories</a></li>
+        <li><a href="search.html" class="active" aria-current="page">Search</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="signin.html" class="btn red white-text">Sign In</a></li>
+    </ul>
+
+    <!-- Page Hero -->
+    <header class="hero-section red darken-4" role="banner">
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <h1 class="white-text">Search All Things Romance & Erotica</h1>
+                    <p class="flow-text white-text">Find passionate tales by tags or explore by category</p>
+                    
+                    <!-- Breadcrumb Navigation -->
+                    <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+                        <div class="nav-wrapper">
+                            <div class="col s12">
+                                <a href="index.html" class="breadcrumb">Home</a>
+                                <span class="breadcrumb">Search Stories</span>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main id="main-content" role="main">
+        <!-- Search Section -->
+        <section class="search-container container" aria-labelledby="search-heading">
+            <div class="row">
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <h2 id="search-heading" class="card-title">Search Filters</h2>
+                            
+                            <!-- Search Form -->
+                            <form id="search-form" role="search" aria-label="Story search form">
+                                <div class="row">
+                                    <div class="input-field col s12 m8">
+                                        <i class="material-icons prefix">search</i>
+                                        <input type="text" id="tag-search" name="tags" 
+                                               placeholder="Enter tags separated by commas (e.g., romance, passion, erotic)"
+                                               aria-label="Search by tags">
+                                        <label for="tag-search">Search by Tags</label>
+                                        <span class="helper-text">Enter multiple tags separated by commas. Stories matching any tag will be shown.</span>
+                                    </div>
+                                    
+                                    <!-- Category Dropdown -->
+                                    <div class="input-field col s12 m4">
+                                        <i class="material-icons prefix">category</i>
+                                        <select id="category-filter" name="category" aria-label="Filter by category">
+                                            <option value="" selected>All Categories</option>
+                                            <!-- Categories will be populated by JavaScript -->
+                                        </select>
+                                        <label>Filter by Category</label>
+                                    </div>
+                                </div>
+                                
+                                <!-- Action Buttons -->
+                                <div class="row">
+                                    <div class="col s12">
+                                        <button id="search-btn" type="submit" class="btn red waves-effect waves-light"
+                                                aria-label="Search stories">
+                                            <i class="material-icons left">search</i> Search Stories
+                                        </button>
+                                        <button id="clear-btn" type="button" class="btn-flat waves-effect"
+                                                aria-label="Clear search filters">
+                                            <i class="material-icons left">clear</i> Clear Filters
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Search Results -->
+        <section class="results-container container" aria-labelledby="results-heading">
+            <div class="row">
+                <div class="col s12">
+                    <div class="card">
+                        <div class="card-content">
+                            <h2 id="results-heading" class="card-title">Search Results</h2>
+                            <p class="grey-text results-summary" id="results-summary">
+                                <!-- Results summary will be updated by JavaScript -->
+                            </p>
+                            
+                            <!-- Results Loading Indicator -->
+                            <div id="loading-indicator" class="center-align" style="display: none;" 
+                                 role="alert" aria-live="polite">
+                                <div class="preloader-wrapper big active">
+                                    <div class="spinner-layer spinner-red-only">
+                                        <div class="circle-clipper left">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="gap-patch">
+                                            <div class="circle"></div>
+                                        </div>
+                                        <div class="circle-clipper right">
+                                            <div class="circle"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="grey-text">Searching for sensual stories...</p>
+                            </div>
+                            
+                            <!-- Results Container -->
+                            <div id="results-area" class="row" role="list" aria-label="Search results">
+                                <!-- Results will be populated here by JavaScript -->
+                            </div>
+                            
+                            <!-- No Results Message -->
+                            <div id="no-results" class="center-align" style="display: none;" 
+                                 role="alert" aria-live="polite">
+                                <i class="material-icons large grey-text">search_off</i>
+                                <h3>No Stories Found</h3>
+                                <p class="grey-text">Try different tags or browse all categories</p>
+                            </div>
+                            
+                            <!-- Pagination -->
+                            <nav id="pagination-area" class="center-align" style="display: none;" 
+                                 aria-label="Search results pagination">
+                                <ul class="pagination">
+                                    <!-- Pagination will be populated by JavaScript -->
+                                </ul>
+                            </nav>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Story Template (Hidden) -->
+    <template id="story-template">
+        <div class="col s12 m6 l4 story-card">
+            <div class="card hoverable">
+                <div class="card-image">
+                    <img src="" alt="" class="story-cover">
+                    <span class="card-title story-title"></span>
+                </div>
+                <div class="card-content">
+                    <p class="story-excerpt truncate"></p>
+                    <div class="story-meta">
+                        <span class="category-badge"></span>
+                        <div class="story-stats">
+                            <span><i class="material-icons tiny" aria-hidden="true">remove_red_eye</i> 
+                                  <span class="views"></span>
+                                  <span class="sr-only">views</span>
+                            </span>
+                            <span><i class="material-icons tiny" aria-hidden="true">favorite</i> 
+                                  <span class="likes"></span>
+                                  <span class="sr-only">likes</span>
+                            </span>
+                            <span><i class="material-icons tiny" aria-hidden="true">star</i> 
+                                  <span class="rating"></span>
+                                  <span class="sr-only">rating</span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-action">
+                    <a href="#" class="red-text read-story">Read Story</a>
+                    <span class="right grey-text story-date"></span>
+                </div>
+            </div>
+        </div>
+    </template>
+
+    <!-- Footer -->
+    <footer class="page-footer red darken-4" role="contentinfo">
+        <div class="container">
+            <div class="row">
+                <div class="col s12">
+                    <p class="white-text center-align">
+                        &copy; 2024 VelvetQuill - A Platform for Sensual Storytelling
+                    </p>
+                    <p class="white-text center-align">
+                        <a href="/privacy.html" class="white-text">Privacy Policy</a> | 
+                        <a href="/terms.html" class="white-text">Terms of Service</a> | 
+                        <a href="/contact.html" class="white-text">Contact</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="scripts/jquery.js"></script>
+    <script src="scripts/materialize.min.js"></script>
+    <script src="api-core.js"></script>
+    <script src="scripts/search.js"></script>
+    
+    <!-- JSON-LD for current search (dynamically generated) -->
+    <script id="dynamic-structured-data" type="application/ld+json"></script>
+</body>
+</html>
+
