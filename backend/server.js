@@ -260,7 +260,8 @@ const startServer = async () => {
                 mongodb: 'Atlas Cluster',
                 backend: 'velvetquill-com.onrender.com',
                 frontend: 'velvetquill.github.io/VelvetQuill',
-                cors: 'Enabled for GitHub Pages & Facebook'
+                cors: 'Enabled for GitHub Pages & Facebook',
+                status: 'UP'
             });
         });
 
