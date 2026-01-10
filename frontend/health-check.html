@@ -99,7 +99,7 @@
             
             const text = await response.text();
 
-            console.log(JSON.stringify(text));
+            //console.log(JSON.stringify(text));
             
             // Check if ANY keyword is found
             const keywordFound = test.keywords.some(keyword => 
@@ -163,7 +163,7 @@
             summary.innerHTML = `✅ ALL SYSTEMS GO (${passedTests}/${totalTests} tests passed)`;
             
             // CRITICAL: This text is what UptimeRobot looks for
-            document.title = 'Health Check: All Systems Go';
+            document.title = 'All Systems Go';
             
             // Add hidden success marker
             const successMarker = document.createElement('div');
