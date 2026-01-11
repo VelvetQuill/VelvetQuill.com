@@ -280,24 +280,39 @@ $(document).ready(function() {
             resultsArea.append(storyCard);
         });
     }
-    
-    // Create a story card element
+        
+        // Create a story card element
     function createStoryCard(story) {
         const template = $('#story-template').html();
         const card = $(template).clone();
         
+        // Define category-based image mapping
+        const categoryImages = {
+            'Romance': 'assets/VQ1.jpg',
+            'Erotic': 'assets/VQ2.jpg',
+            'Fetish': 'assets/VQ3.jpg',
+            'Loving Wives': 'assets/VQ1.jpg',
+            'Neighbor': 'assets/VQ2.jpg',
+            'Historical': 'assets/VQ3.jpg',
+            'Incest-Taboo': 'assets/VQ1.jpg',
+            'BDSM': 'assets/VQ2.jpg',
+            'LGBTQ': 'assets/VQ3.jpg',
+            'First Time': 'assets/VQ1.jpg',
+            'Vanilla': 'assets/VQ2.jpg',
+            'default': 'assets/VQ3.jpg'
+        };
+        
+        // Get image based on category, fallback to default
+        const category = story.category || 'Uncategorized';
+        const imagePath = categoryImages[category] || categoryImages['default'];
+        
         // Set story data
-        if (story.coverImage) {
-            card.find('.story-cover').attr('src', story.coverImage);
-        } else {
-            // Default sensual gradient background
-            card.find('.card-image').css('background', 'linear-gradient(45deg, #f8bbd0, #f48fb1)');
-            card.find('.story-cover').remove();
-        }
+        card.find('.story-cover').attr('src', imagePath);
+        card.find('.story-cover').attr('alt', `${story.title} - ${category} Story on VelvetQuill`);
         
         card.find('.story-title').text(story.title);
         card.find('.story-excerpt').text(story.excerpt || 'A captivating tale of passion and desire...');
-        card.find('.category-badge').text(story.category || 'Uncategorized');
+        card.find('.category-badge').text(category);
         card.find('.views').text(story.stats?.views || 0);
         card.find('.likes').text(story.stats?.likesCount || 0);
         card.find('.rating').text(story.stats?.averageRating?.toFixed(1) || '0.0');
@@ -321,6 +336,7 @@ $(document).ready(function() {
         
         return card;
     }
+    
     
     // Update pagination UI
     function updatePagination() {
